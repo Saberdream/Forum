@@ -1,6 +1,0 @@
-PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42S02]: Base table or view not found: 1146 La table 'forum.forum_reports' n'existe pas' in C:\wamp64\www\forum\includes\functions\alert.php:21
-Stack trace:
-#0 C:\wamp64\www\forum\includes\functions\alert.php(21): execute(array)
-#1 C:\wamp64\www\forum\alert.php(20): count_reports(string)
-#2 {main}
-  thrown in C:\wamp64\www\forum\includes\functions\alert.php on line 21

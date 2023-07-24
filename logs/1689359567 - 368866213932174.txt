@@ -1,6 +1,0 @@
-PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42S02]: Base table or view not found: 1146 La table 'forum.forum_participants' n'existe pas' in C:\wamp64\www\forum\includes\functions\pm.php:11
-Stack trace:
-#0 C:\wamp64\www\forum\includes\functions\pm.php(11): execute()
-#1 C:\wamp64\www\forum\pm.php(12): count_rows(array)
-#2 {main}
-  thrown in C:\wamp64\www\forum\includes\functions\pm.php on line 11

@@ -1,7 +1,0 @@
-PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens' in C:\wamp64\www\forum\includes\functions\mod.php:38
-Stack trace:
-#0 C:\wamp64\www\forum\includes\functions\mod.php(38): execute(array)
-#1 C:\wamp64\www\forum\includes\functions\mod.php(50): get_nb_posts(array, string, integer)
-#2 C:\wamp64\www\forum\mod.php(54): delete_restore_topics(array, string, integer)
-#3 {main}
-  thrown in C:\wamp64\www\forum\includes\functions\mod.php on line 38
