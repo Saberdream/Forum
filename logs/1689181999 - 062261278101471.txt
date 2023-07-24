@@ -1,6 +1,0 @@
-PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1366 Incorrect integer value: '' for column 'user_avatarid' at row 1' in C:\wamp64\www\forum\includes\functions\settings.php:20
-Stack trace:
-#0 C:\wamp64\www\forum\includes\functions\settings.php(20): execute(array)
-#1 C:\wamp64\www\forum\settings.php(124): update_user(string, array)
-#2 {main}
-  thrown in C:\wamp64\www\forum\includes\functions\settings.php on line 20

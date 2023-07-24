@@ -1,6 +1,0 @@
-PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42S22]: Column not found: 1054 Champ 'forum_auth_report' inconnu dans field list' in C:\wamp64\www\forum\includes\functions\alert.php:10
-Stack trace:
-#0 C:\wamp64\www\forum\includes\functions\alert.php(10): execute(array)
-#1 C:\wamp64\www\forum\alert.php(14): get_post(string)
-#2 {main}
-  thrown in C:\wamp64\www\forum\includes\functions\alert.php on line 10

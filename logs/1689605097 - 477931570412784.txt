@@ -1,6 +1,0 @@
-PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[22003]: Numeric value out of range: 1690 BIGINT UNSIGNED value is out of range in '(`forum`.`forum_pm`.`pm_nb_participants` - 1)'' in C:\wamp64\www\forum\includes\functions\viewpm.php:172
-Stack trace:
-#0 C:\wamp64\www\forum\includes\functions\viewpm.php(172): execute(array)
-#1 C:\wamp64\www\forum\viewpm.php(89): update_participants(string, string)
-#2 {main}
-  thrown in C:\wamp64\www\forum\includes\functions\viewpm.php on line 172
