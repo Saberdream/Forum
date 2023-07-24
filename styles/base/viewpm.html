@@ -1,0 +1,207 @@
+{include="header"}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-9 col-sm-push-3 col-md-7 col-md-push-4 col-lg-6 col-lg-push-4">
+			<ol class="breadcrumb">
+			  <li><a href="pm">{$lang_menu_top.private_messages}</a></li>
+			  <li class="active">{$lang_viewpm.read_message|display}</li>
+			</ol>
+			{if="$user.user_rank >= USER && $in_pm"}
+			<h4 class="forum-topic-title">{$lang_viewpm.subject} : <span class="text-primary">{$pm.pm_name|display}</span></h4>
+			
+			<div class="row">
+			  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				  <div class="panel panel-default">
+				  <div class="panel-body pm-participants">
+				  <p>{$lang_viewpm.message_author}: <strong>{$pm.user_name|display}</strong></p>
+				  <p>{$lang_viewpm.participants_list}: {loop="participants"}<span class="btn btn-default btn-xs"><span class="username">{$value|display}</span>{if="$pm.pm_closed == 0 && $pm.pm_userid == $user.user_id"} <button type="button" data-user="{$value|display}" class="close btn-exclude" aria-label="Close"><span aria-hidden="true">&times;</span></button>{/if}</span>{/loop}</p>
+				  {if="$pm.pm_closed == 0 && $pm.pm_userid == $user.user_id"}
+					{if="!empty($form_add.error)"}
+					<div class="alert alert-danger">
+					{$lang_viewpm.errors_detected}:
+					<ul>{loop="form_add.error"}<li>{$value}</li>{/loop}</ul>
+					</div>
+					{elseif="!empty($form_add.ok)"}
+					<div class="alert alert-success">{$form_add.ok}</div>
+					{/if}
+					<form class="form-horizontal" method="post" action="viewpm?id={$pm.pm_id}&amp;page={$page}">
+					<div class="form-group">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<label for="participants">{$lang_viewpm.add_participants}</label>
+					<input class="form-control" type="text" name="participants" id="participants" value="{$form_add.participants|display}" placeholder="{$lang_viewpm.participants}" />
+					<button type="submit" class="btn btn-warning">{$lang_viewpm.add}</button>
+					</div>
+					</div>
+					<input type="hidden" name="token" value="{$form_add.token}" />
+					</form>
+				  {/if}
+				  </div>
+				  </div>
+			  </div>
+			</div>
+			
+			<div class="row">
+			  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+			  {if="$nb > 0"}<ul class="forum-pagination">{$pagination}</ul>{/if}
+			  </div>
+			</div>
+			
+			<div class="row forum-buttons">
+			<div class="hidden-xs col-sm-7 col-md-7 col-lg-7">
+			{if="$pm.pm_closed == 0 && $pm.pm_userid == $user.user_id"}<a class="bt-forum btn btn-danger btn-sm" href="viewpm?id={$pm.pm_id}&amp;action=close&amp;token={$token}"><b>{$lang_viewpm.close_discussion|mb_strtoupper}</b></a>{/if}
+			</div>
+			<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5 text-right">
+			{if="$pm.pm_closed == 0"}<a class="btn btn-warning btn-sm" href="viewpm?id={$pm.pm_id}&amp;page={$page}#form_post"><b>{$lang_viewpm.reply|mb_strtoupper}</b></a>{/if}
+			<a class="btn btn-black btn-sm bt-refresh" href="{$current_url}#"><b>{$lang_viewpm.refresh|mb_strtoupper}</b></a>
+			</div>
+			</div>
+
+			{if="$nb > 0"}
+			{loop="rows"}
+			<div id="post_{$value.post_id}" {if="$key % 2 == 1"}class="post post2"{else}class="post post1"{/if}>
+				<div class="row post_header">
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 post_user">
+					{if="!empty($value.user_avatar)"}<a class="user_avatar" href="gallery/avatars/{$value.user_avatar|display}"><img src="/gallery/avatars/thumbnails/{$value.user_avatar|display}" alt="{$lang_viewpm.avatar}" /></a>{else}<a class="user_avatar" href="gallery/avatars/default.png"><img src="/gallery/avatars/default.png" alt="{$lang_viewpm.avatar}" /></a>{/if}
+					<span class="username"><a class="user-profile" href="profil/{$value.post_username|strtolower}"><strong{if="$value.post_rank >= ADMIN && $value.user_rank >= ADMIN"} class="admin"{elseif="$value.post_rank == MODERATOR && $value.user_rank >= MODERATOR"} class="moderator"{/if}>{$value.post_username}</strong></a></span>
+					<span class="userip hidden-xs">{if="$user.user_rank >= ADMIN"}IP : {$value.post_ip}{/if}</span>
+					</div>
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 post_date">
+					<a href="{$current_url}#post_{$value.post_id}#">{$value.post_time|date_formatted} #{$value.post_id}</a>
+					<span class="hidden-xs">
+					{if="$pm.pm_closed == 0 && $pm.pm_userid == $user.user_id && $value.post_userid != $user.user_id"}<a class="bt-topic" title="{$lang_viewpm.exclude_user}" href="viewpm?id={$pm.pm_id}&amp;user={$value.post_username|strtolower}&amp;action=exclude&amp;token={$token}"><img src="images/forum/bt_bann_defi.gif" alt="{$lang_viewpm.exclude}" /></a>{/if}
+					</span>
+					</div>
+				</div>
+				<div class="post_body">{$value.post_text_parsed}</div>
+			</div>
+			{/loop}
+			{else}
+			<div class="alert alert-warning text-center">{$lang_viewpm.no_post}</div>
+			{/if}
+
+			<div id="dialog-confirm" title="{$lang_viewpm.alert}"></div>
+			<script>
+			{if="$pm.pm_closed == 0 && $pm.pm_userid == $user.user_id"}
+			$(document).on('click', '.btn-exclude', function(e){
+				e.preventDefault();
+				var username = $(this).data('user').toLowerCase();
+				var url = site_root + 'viewpm?id={$pm.pm_id}&user=' + username + '&action=exclude&token={$token}';
+				$('#dialog-confirm').text(text_action_confirmation).dialog({
+					buttons: {
+						OK: function(){
+							$(this).dialog('close');
+							$.get(url, function(data){
+								$('#dialog-confirm').text(data).dialog({ buttons: [] }).dialog('open');
+								setTimeout(function(){$('#dialog-confirm').dialog('close');}, 1500);
+							});
+						},
+						Cancel: {
+							text: text_cancel,
+							click: function(){
+								$(this).dialog('close');
+							}
+						}
+					}
+				}).dialog('open');
+			});
+			$(function(){
+				$('#participants').tagit({
+				  singleFieldDelimiter: ';',
+				  placeholderText: '{$lang_viewpm.participants|escape_quotes}'
+				});
+			});
+			{/if}
+			var text_enlarge_image = '{$lang_viewpm.click_to_enlarge|escape_quotes}';
+			var text_action_confirmation = '{$lang_viewpm.confirm_action|escape_quotes}';
+			var text_cancel = '{$lang_viewpm.cancel|escape_quotes}';
+			var text_spoiler_show = '{$lang_viewpm.show|escape_quotes}';
+			var text_spoiler_hide = '{$lang_viewpm.hide|escape_quotes}';
+			</script>
+
+			<div class="row forum-buttons">
+			<div class="hidden-xs col-sm-8 col-md-8 col-lg-8">
+			{if="$pm.pm_closed == 0 && $pm.pm_userid == $user.user_id"}<a class="bt-forum btn btn-danger btn-sm" href="viewpm?id={$pm.pm_id}&amp;action=close&amp;token={$token}"><b>{$lang_viewpm.close_discussion|mb_strtoupper}</b></a>{/if}
+			</div>
+			<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 text-right">
+			<a class="btn btn-black btn-sm bt-refresh" href="{$current_url}#"><b>{$lang_viewpm.refresh|mb_strtoupper}</b></a>
+			</div>
+			</div>
+			
+			<div class="row">
+			  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+			  {if="$nb > 0"}<ul class="forum-pagination">{$pagination}</ul>{/if}
+			  </div>
+			</div>
+			
+			{if="$pm.pm_closed == 0"}
+			<div id="message-preview" class="post post1">
+			  <div class="post_header"><h4>{$lang_viewpm.preview}</h4></div>
+			  <div class="post_body"></div>
+			</div>
+			<input type="hidden" name="token_preview" value="{$preview_token}" />
+			{/if}
+			
+			<div class="panel panel-default">
+			<div class="panel-heading"><b>{$lang_viewpm.reply_to_message}</b></div>
+			<div class="panel-body">
+			{if="$pm.pm_closed == 0"}
+			{if="!empty($form.error)"}
+			<div class="alert alert-danger">
+			{$lang_viewpm.errors_detected}:
+			<ul>{loop="form.error"}<li>{$value}</li>{/loop}</ul>
+			</div>
+			{/if}
+			<form class="form-horizontal" id="form_post" method="post" action="viewpm?id={$pm.pm_id}#form_post">
+			<div class="form-group">
+			<div class="col-sm-12 col-md-12 col-lg-12">
+			<label for="message" class="text-danger">{$lang_viewpm.message}</label>
+			{include="bbcode"}
+			<textarea class="form-control" rows="4" name="message" id="message" placeholder="{$lang_viewpm.type_message}">{$form.message|display}</textarea>
+			</div>
+			</div>
+			{if="$form.captcha"}
+			<div class="form-group">
+			<div class="col-sm-12 col-md-6 col-lg-4">
+			<a class="btn btn-info btn-xs" onclick="document.getElementById('captcha').src=document.getElementById('captcha').src+'?'+Math.random();return false">{$lang_viewpm.request_new_code}</a>
+			</div>
+			</div>
+			<div class="form-group">
+			<div class="col-sm-12 col-md-6 col-lg-4">
+			<img src="/captcha.php" alt="Captcha" id="captcha" />
+			</div>
+			</div>
+			<div class="form-group">
+			<div class="col-sm-12 col-md-6 col-lg-4">
+			<input type="text" class="form-control" name="captcha" placeholder="{$lang_viewpm.copy_code}" autocomplete="off" />
+			</div>
+			</div>
+			{/if}
+			<div class="form-group">
+			<div class="col-sm-12 col-md-6 col-lg-4">
+			<button type="submit" class="btn btn-warning">{$lang_viewpm.post}</button>
+			<button type="button" class="btn btn-primary" id="button-preview"><i class="fa fa-eye"></i> {$lang_viewpm.preview}</button>
+			</div>
+			</div>
+			<input type="hidden" name="token" value="{$form.token}" />
+			<input type="hidden" name="topic" value="{$pm.pm_id}" />
+			</form>
+			{else}
+			<div class="alert alert-warning text-center">{$lang_viewpm.pm_closed}</div>
+			{/if}
+			</div>
+			</div>
+			{else}
+			<div class="alert alert-warning text-center">{$lang_viewpm.not_authorized_access}</div>
+			{/if}
+		</div>
+		
+		<div class="col-sm-3 col-sm-pull-9 col-md-3 col-md-pull-6 col-lg-2 col-lg-pull-4">
+			<div class="list-group">
+			<a class="list-group-item" href="newpm">{$lang_viewpm.new_message}</a>
+			<a class="list-group-item active" href="pm">{$lang_viewpm.mailbox}</a>
+			<a class="list-group-item" href="blacklist">{$lang_viewpm.blacklist}</a>
+			</div>
+		</div>
+	</div>
+</div>
+{include="footer"}

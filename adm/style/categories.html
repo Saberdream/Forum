@@ -1,0 +1,86 @@
+{include="header"}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-9 col-sm-push-3 col-md-7 col-md-push-4 col-lg-6 col-lg-push-4">
+			<ol class="breadcrumb">
+			  <li><a href="adm/index.php">{$lang_menu_top.admin_cp}</a></li>
+			  <li class="active">{$lang_categories.manage_forums}</a></li>
+			  <li class="active">{$lang_categories.categories}</li>
+			</ol>
+			<div class="panel panel-default">
+			<div class="panel-body">
+			<p class="text-muted">{$lang_categories.page_description}</p>
+			{if="$nb > 0"}
+			<table class="table table-striped table-bordered table-hover text-center">
+			<tr>
+			<th>{$lang_categories.name}</th>
+			<th>&nbsp;</th>
+			<th>{$lang_categories.order}</th>
+			<th>{$lang_categories.action}</th>
+			</tr>
+			{loop="rows"}
+			<tr>
+			<td class="name text-left"><a href="adm/forums.php?cat={$value.cat_id|intval}">{$value.cat_name|display}</a></td>
+			<td><a href="adm/categories.php?action=edit&amp;id={$value.cat_id|intval}&amp;token={$token}" class="edit-cat btn btn-success btn-xs" data-toggle="tooltip" title="{$lang_categories.edit_category}"><span class="glyphicon glyphicon-cog"></span></a></td>
+			<td>{$value.cat_order|intval}</td>
+			<td>
+			{if="$value.cat_order >= $nb"}
+			<a href="#" class="btn btn-info btn-xs disabled"><span class="glyphicon glyphicon-triangle-bottom"></span></a>
+			{else}
+			<a href="adm/categories.php?action=order_down&amp;id={$value.cat_id|intval}&amp;token={$token}" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-triangle-bottom"></span></a>
+			{/if}
+			{if="$value.cat_order == 1"}
+			<a href="#" class="btn btn-info btn-xs disabled"><span class="glyphicon glyphicon-triangle-top"></span></a>
+			{else}
+			<a href="adm/categories.php?action=order_up&amp;id={$value.cat_id|intval}&amp;token={$token}" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-triangle-top"></span></a>
+			{/if}
+			<a href="adm/categories.php?action=delete&amp;id={$value.cat_id|intval}&amp;token={$token}" class="delete btn btn-danger btn-xs" data-toggle="tooltip" title="{$lang_categories.delete_category}"><span class="glyphicon glyphicon-remove"></span></a>
+			</td>
+			</tr>
+			{/loop}
+			</table>
+			<script>
+			var text_action_confirmation = '{$lang_categories.confirm_action|escape_quotes}';
+			var text_delete_confirmation = '{$lang_categories.confirm_delete|escape_quotes}';
+			var text_cancel = '{$lang_categories.cancel|escape_quotes}';
+			</script>
+			<div id="dialog-confirm" title="{$lang_categories.alert}"></div>
+			{else}
+			<div class="alert alert-danger">{$lang_categories.no_category}</div>
+			{/if}
+			</div>
+			</div>
+			
+			<div class="panel panel-default">
+			<div class="panel-body">
+			<h4 class="text-primary">{$lang_categories.add_new_category}</h4>
+			{if="!empty($form.error)"}
+			<div class="alert alert-danger">
+			{$lang_categories.errors_occurred}:
+			<ul>{loop="form.error"}<li>{$value}</li>{/loop}</ul>
+			</div>
+			{elseif="!empty($form.ok)"}
+			<div class="alert alert-success">{$form.ok}</div>
+			{/if}
+			<form method="post" action="adm/categories.php">
+			<div class="form-group">
+			<label class="sr-only" for="new_category">{$lang_categories.new_category_name}</label>
+			<input type="text" class="form-control" name="new_category" id="new_category" value="" placeholder="{$lang_categories.enter_newcategory_name}" />
+			</div>
+			<button type="submit" class="btn btn-sm btn-primary">{$lang_categories.add}</button>
+			<input type="hidden" name="token" value="{$form.token}" />
+			</form>
+			</div>
+			</div>
+		</div>
+
+		<div class="col-sm-3 col-sm-pull-9 col-md-3 col-md-pull-6 col-lg-2 col-lg-pull-4">
+			<div class="list-group">
+			<a class="list-group-item active" href="adm/categories.php">{$lang_menu_top.forums}</a>
+			<a class="list-group-item" href="adm/smilies.php">{$lang_categories.smilies}</a>
+			<a class="list-group-item" href="adm/smilies-add.php">{$lang_categories.add_smilies}</a>
+			</div>
+		</div>
+	</div>
+</div>
+{include="footer"}

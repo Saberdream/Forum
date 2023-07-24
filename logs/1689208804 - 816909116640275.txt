@@ -1,0 +1,8 @@
+PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42S02]: Base table or view not found: 1146 La table 'forum.forum_' n'existe pas' in C:\wamp64\www\forum\includes\classes\user.class.php:72
+Stack trace:
+#0 C:\wamp64\www\forum\includes\classes\user.class.php(72): execute(array)
+#1 C:\wamp64\www\forum\includes\classes\user.class.php(42): session_begin()
+#2 C:\wamp64\www\forum\core.php(46): __construct()
+#3 C:\wamp64\www\forum\adm\logs.php(4): include(string)
+#4 {main}
+  thrown in C:\wamp64\www\forum\includes\classes\user.class.php on line 72

@@ -1,0 +1,77 @@
+{include="header"}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-9 col-sm-push-3 col-md-7 col-md-push-4 col-lg-6 col-lg-push-4">
+			<ol class="breadcrumb">
+			  <li class="active"><span class="glyphicon glyphicon-user"></span> {$lang_subscriptions.account}</li>
+			  <li class="active">{$lang_subscriptions.subscriptions}</li>
+			</ol>
+
+			{if="$user.user_rank >= USER"}
+			{if="$nb > 0"}
+			<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-sm-9 col-md-9 col-lg-9"><ul class="pagination">{$pagination}</ul></div>
+					<div class="hidden-xs col-sm-3 col-md-3 col-lg-3 text-right">
+					  <p>{$lang_subscriptions.total} : <strong>{$nb}</strong></p>
+					  <p>{$lang_subscriptions.rows} <strong>{$offset+1} - {$end}</strong></p>
+					</div>
+				</div>
+				
+				<form method="post" action="/subscriptions">
+				<input type="hidden" name="token" value="{$token}" />
+				<div class="form-group">
+				<button class="action-submit btn btn-danger" data-toggle="tooltip" title="{$lang_subscriptions.delete_selection}">{$lang_subscriptions.delete}</button>
+				</div>
+
+				<table class="table table-bordered table-hover text-center">
+				<tr>
+				  <th><input type="checkbox" id="selectall" /></th>
+				  <th>{$lang_subscriptions.topic}</th>
+				</tr>
+				{loop="rows"}
+				<tr>
+				  <td><input class="checkbox-item" type="checkbox" name="sup[]" value="{$value.sub_id}" /></td>
+				  <td class="text-left"><a href="topic/{$value.topic_slug}/{$value.sub_topicid}/1">{function="wordwrap(display($value.topic_name), 25, "\n", true)"}</a></td>
+				</tr>
+				{/loop}
+				</table>
+				</form>
+
+				<div class="row">
+					<div class="col-sm-9 col-md-9 col-lg-9"><ul class="pagination">{$pagination}</ul></div>
+					<div class="hidden-xs col-sm-3 col-md-3 col-lg-3 text-right">
+					  <p>{$lang_subscriptions.total} : <strong>{$nb}</strong></p>
+					  <p>{$lang_subscriptions.rows} <strong>{$offset+1} - {$end}</strong></p>
+					</div>
+				</div>
+
+				<div id="dialog-confirm" title="{$lang_subscriptions.alert}"></div>
+				<script>
+				var text_action_confirmation = '{$lang_subscriptions.confirm_action|escape_quotes}';
+				var text_select_element = '{$lang_subscriptions.select_element|escape_quotes}';
+				var text_select_action = '{$lang_subscriptions.select_action|escape_quotes}';
+				var text_cancel = '{$lang_subscriptions.cancel|escape_quotes}';
+				</script>
+			</div>
+			</div>
+			{else}
+			<div class="alert alert-warning text-center">{$lang_subscriptions.no_topic_followed}</div>
+			{/if}
+			{else}
+			<div class="alert alert-warning text-center">{$lang_subscriptions.not_logged_in}</div>
+			{/if}
+		</div>
+		
+		<div class="col-sm-3 col-sm-pull-9 col-md-3 col-md-pull-6 col-lg-2 col-lg-pull-4">
+			<div class="list-group">
+			<a class="list-group-item" href="settings">{$lang_subscriptions.account}</a>
+			<a class="list-group-item" href="notifications">{$lang_subscriptions.notifications}</a>
+			<a class="list-group-item active" href="subscriptions">{$lang_subscriptions.subscriptions}</a>
+			<a class="list-group-item" href="avatars">{$lang_subscriptions.avatars}</a>
+			</div>
+		</div>
+	</div>
+</div>
+{include="footer"}

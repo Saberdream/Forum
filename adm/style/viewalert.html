@@ -1,0 +1,152 @@
+{include="header"}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-9 col-sm-push-3 col-md-7 col-md-push-4 col-lg-6 col-lg-push-4">
+			<ol class="breadcrumb">
+			  <li><a href="adm/index.php">{$lang_menu_top.admin_cp}</a></li>
+			  <li><a href="adm/alerts.php">{$lang_viewalert.manage_alerts}</a></li>
+			  <li class="active">{$lang_viewalert.view_alert}</li>
+			</ol>
+			<div class="panel panel-default">
+			<div class="panel-body">
+			{if="isset($data.alert_id)"}
+			<p class="text-muted">{$lang_viewalert.page_description}</p>
+			{if="$data.alert_closed == 0"}<p class="text-muted">{$lang_viewalert.actions_description}</p>{/if}
+			{if="!empty($form.error)"}
+			<div class="alert alert-danger">
+			{$lang_viewalert.errors_occurred}:
+			<ul>{loop="form.error"}<li>{$value}</li>{/loop}</ul>
+			</div>
+			{elseif="!empty($form.ok)"}
+			<div class="alert alert-success">{$form.ok}</div>
+			{/if}
+			<h3>{$lang_viewalert.alert_informations}</h3>
+			<table class="table table-bordered">
+			<tr>
+			<td class="text-right" style="background-color:#ecf6ff;width:50%;">{$lang_viewalert.alert_forum}</td>
+			<td style="background-color:#f1f1f1;width:50%;">{$data.forum_name|display}</td>
+			</tr>
+			<tr>
+			<td class="text-right" style="background-color:#ecf6ff;width:50%;">{$lang_viewalert.alert_subject}</td>
+			<td style="background-color:#f1f1f1;width:50%;">{$data.topic_name|display}</td>
+			</tr>
+			<tr>
+			<td class="text-right" style="background-color:#ecf6ff;width:50%;">{$lang_viewalert.alert_reason}</td>
+			<td class="text-danger" style="background-color:#f1f1f1;width:50%;">{$data.alert_reason|display}</td>
+			</tr>
+			<tr>
+			<td class="text-right" style="background-color:#ecf6ff;width:50%;">{$lang_viewalert.alert_author}</td>
+			<td style="background-color:#f1f1f1;width:50%;">{$data.user_name}</td>
+			</tr>
+			<tr>
+			<td class="text-right" style="background-color:#ecf6ff;width:50%;">{$lang_viewalert.alert_date}</td>
+			<td style="background-color:#f1f1f1;width:50%;">{$data.alert_time|date_formatted}</td>
+			</tr>
+			<tr>
+			<td class="text-right" style="background-color:#ecf6ff;width:50%;">{$lang_viewalert.alert_author_ip}</td>
+			<td style="background-color:#f1f1f1;width:50%;">{$data.alert_ip}</td>
+			</tr>
+			<tr>
+			<td class="text-right" style="background-color:#ecf6ff;width:50%;">{$lang_viewalert.alert_author_id}</td>
+			<td style="background-color:#f1f1f1;width:50%;">{$data.alert_userid}</td>
+			</tr>
+			<tr>
+			<td class="text-right" style="background-color:#ecf6ff;width:50%;">{$lang_viewalert.forum_id}</td>
+			<td style="background-color:#f1f1f1;width:50%;">{$data.alert_forumid}</td>
+			</tr>
+			<tr>
+			<td class="text-right" style="background-color:#ecf6ff;width:50%;">{$lang_viewalert.subject_id}</td>
+			<td style="background-color:#f1f1f1;width:50%;">{$data.alert_topicid}</td>
+			</tr>
+			<tr>
+			<td class="text-right" style="background-color:#ecf6ff;width:50%;">{$lang_viewalert.message_id}</td>
+			<td style="background-color:#f1f1f1;width:50%;">{$data.alert_postid}</td>
+			</tr>
+			<tr>
+			<td class="text-right" style="background-color:#ecf6ff;width:50%;">{$lang_viewalert.poster_id}</td>
+			<td style="background-color:#f1f1f1;width:50%;">{$data.post_userid}</td>
+			</tr>
+			</table>
+			
+			<h3>{$lang_viewalert.alert_message}</h3>
+			<p><a href="#" id="post-toggle">{$lang_viewalert.hide_message}</a></p>
+			<div id="post" class="post post1" style="max-height:400px;overflow:auto;">
+			<div class="post_header">
+			<div class="post_user">
+			{if="!empty($data.user_avatar)"}<a href="/gallery/avatars/{$data.user_avatar|display}" class="image-upload"><img src="/gallery/avatars/thumbnails/{$data.user_avatar|display}" class="avatar" /></a>{else}<img src="/gallery/avatars/default.png" class="avatar" />{/if}
+			<span class="username"><a href="adm/user-edit.php?id={$data.post_userid|intval}"><strong{if="$data.post_rank >= MODERATOR"} class="moderator"{/if}>{$data.post_username}</strong></a> IP : <a href="https://whois.domaintools.com/{$data.post_ip}" title="{$lang_viewalert.show_ipadress_whois}" target="_blank">{$data.post_ip}</a></span>
+			</div>
+			<div class="post_date">{$data.post_time|date_formatted} #{$data.alert_postid}</div>
+			</div>
+			<div class="post_body">{function="smileys(bbcode($data.alert_text))"}</div>
+			<div class="post_footer">
+			{if="$data.post_time_edit>0"}<div class="post_edit">Dernière modification le {$data.post_time_edit|date_formatted}</div>{/if}
+			</div>
+			</div>
+			
+			{if="$data.alert_closed == 0"}
+			<h3>Actions</h3>
+			<form class="form-inline" method="post" action="adm/viewalert.php?id={$data.alert_id}">
+			  <div class="form-group">
+				<label for="new_reason">{$lang_viewalert.modify_alert_reason}:</label>
+				<select class="form-control input-sm" name="new_reason" id="new_reason">
+				  <option value=""></option>
+				  {loop="form.reasons"}
+				  <option value="{$key}">{$value}</option>
+				  {/loop}
+				</select>
+				<button class="btn btn-sm btn-primary" type="submit">{$lang_viewalert.validate}</button>
+				<p class="help-block">{$lang_viewalert.modify_reason_description}</p>
+			  </div>
+			  <input type="hidden" name="token" value="{$form.token}" />
+			</form>
+			<p class="text-center">
+			<a href="viewtopic.php?id={$data.alert_topicid}&amp;page={$data.alert_page}&amp;alert={$data.alert_postid}#alert" target="_blank" class="btn btn-default btn-sm">{$lang_viewalert.view_message}</a>
+			<a href="adm/viewalert.php?id={$data.alert_id}&amp;action=close&amp;token={$token}" class="alert-action btn btn-success btn-sm">{$lang_viewalert.do_nothing}</a>
+			<a href="adm/viewalert.php?id={$data.alert_id}&amp;action=delete&amp;token={$token}" class="alert-action btn btn-primary btn-sm">{$lang_viewalert.delete_message}</a>
+			<a href="adm/viewalert.php?id={$data.alert_id}&amp;action=ban-tempo&amp;token={$token}" class="alert-action btn btn-warning btn-sm">{$lang_viewalert.ban_temporarily}</a>
+			<a href="adm/viewalert.php?id={$data.alert_id}&amp;action=ban&amp;token={$token}" class="alert-action btn btn-danger btn-sm">{$lang_viewalert.ban_definitely}</a>
+			</p>
+			<div id="dialog-confirm" title="{$lang_viewalert.alert}"></div>
+			{else}
+			<div class="alert alert-danger text-center">{$lang_viewalert.alert_treated}</div>
+			{/if}
+			<script>
+			var text_enlarge_image = '{$lang_viewalert.click_to_enlarge|escape_quotes}';
+			var text_action_confirmation = '{$lang_viewalert.confirm_action|escape_quotes}';
+			var text_cancel = '{$lang_viewalert.cancel|escape_quotes}';
+			var text_show = '{$lang_viewalert.show_message|escape_quotes}';
+			var text_hide = '{$lang_viewalert.hide_message|escape_quotes}';
+			var text_spoiler_show = '{$lang_viewalert.show|escape_quotes}';
+			var text_spoiler_hide = '{$lang_viewalert.hide|escape_quotes}';
+			
+			$('#post-toggle').on('click', function(e){
+				e.preventDefault();
+				if($('#post').css('display') == 'block') {
+					$('#post').css('display', 'none');
+					$(this).text(text_show);
+				}
+				else {
+					$('#post').css('display', 'block');
+					$(this).text(text_hide);
+				}
+				return false;
+			});
+			</script>
+			{else}
+			<div class="alert alert-danger text-center">{$lang_viewalert.no_alert} <img src="/gallery/smilies/1.gif" alt=":)" /></div>
+			{/if}
+			</div>
+			</div>
+		</div>
+		
+		<div class="col-sm-3 col-sm-pull-9 col-md-3 col-md-pull-6 col-lg-2 col-lg-pull-4">
+			<div class="list-group">
+			<a class="list-group-item active" href="adm/alerts.php">{$lang_menu_top.alerts}</a>
+			<a class="list-group-item" href="adm/alerts.php?mode=closed">{$lang_viewalert.alerts_treated}</a>
+			<a class="list-group-item" href="adm/banlist.php">{$lang_viewalert.banlist}</a>
+			</div>
+		</div>
+	</div>
+</div>
+{include="footer"}

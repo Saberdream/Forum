@@ -1,0 +1,114 @@
+{include="header"}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-9 col-sm-push-3 col-md-7 col-md-push-4 col-lg-6 col-lg-push-4">
+			<ol class="breadcrumb">
+			  <li><a href="pm">{$lang_menu_top.private_messages}</a></li>
+			  <li class="active">{$lang_pm.mailbox}</li>
+			</ol>
+			<div class="panel panel-default">
+			<div class="panel-body">
+			{if="$user.user_rank >= USER"}
+			{if="$total > 0"}
+			<form class="form-inline form-search" method="get" action="pm">
+			  <div class="form-group">
+				<input type="text" name="search" id="search" value="{$search.keywords|display}" class="form-control input-sm" placeholder="{$lang_pm.search}" />
+			  </div>
+			  <div class="form-group">
+				<select class="form-control input-sm" name="type">
+				  {loop="search.types"}
+				  <option value="{$key}"{if="!empty($search.keywords) && $search.type==$key"} selected{/if}>{$value}</option>
+				  {/loop}
+				</select>
+			  </div>
+			  <div class="form-group">
+				<label for="exact"><input type="checkbox" name="exact" id="exact" value="1" {if="!empty($search.keywords) && $search.exact"}checked {/if}/> {$lang_pm.exact}</label>
+			    <button class="btn btn-default btn-sm" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+			  </div>
+			  {if="!empty($search.keywords)"}<a class="btn btn-primary btn-sm pull-right hidden-xs" href="pm?page=1">{$lang_pm.back}</a>{/if}
+			</form>
+
+			{if="$nb > 0"}
+			{if="!empty($search.keywords)"}
+			<div class="alert alert-success text-center">{$lang_pm.search_results}</div>
+			{/if}
+			<div class="row">
+				<div class="col-sm-9 col-md-9 col-lg-9"><ul class="pagination">{$pagination}</ul></div>
+				<div class="hidden-xs col-sm-3 col-md-3 col-lg-3 text-right">
+				  <p>{$lang_pm.total}: <strong>{$nb}</strong></p>
+				  <p>{$lang_pm.rows} <strong>{$offset+1} - {$end}</strong></p>
+				</div>
+			</div>
+
+			<form method="post" action="pm">
+			<input type="hidden" name="token" value="{$token}" />
+			<div class="form-group hidden-xs">
+			<div class="form-inline">
+			<select class="form-control input-sm" name="action">
+			<option>{$lang_pm.action}</option>
+			<option value="mark_read">{$lang_pm.mark_read}</option>
+			<option value="mark_unread">{$lang_pm.mark_unread}</option>
+			<option value="delete">{$lang_pm.delete}</option>
+			</select>
+			<button class="action-submit btn btn-sm btn-success">{$lang_pm.validate}</button>
+			</div>
+			</div>
+
+			<table class="list-topics table text-center">
+			<tr>
+			<th class="check hidden-xs"><input type="checkbox" id="selectall" /></th>
+			<th>{$lang_pm.title}</th>
+			<th class="author hidden-xs">{$lang_pm.author}</th>
+			<th class="last hidden-xs">{$lang_pm.last}</th>
+			<th class="participants hidden-xs">{$lang_pm.participants}</th>
+			</tr>
+			{loop="rows"}
+			<tr{if="$value.participant_read==0"} class="topic_unread"{/if}>
+			<td class="hidden-xs"><input class="checkbox-item" type="checkbox" name="sup[]" value="{$value.participant_pmid}" /></td>
+			<td class="topic-name text-left {if="$value.pm_closed == 1"}topic_lock{else}topic1{/if}"><a href="viewpm?id={$value.participant_pmid}&amp;page=1">{$value.pm_name|display}</a></td>
+			<td class="small hidden-xs"><strong{if="$value.pm_rank >= ADMIN"} class="text-success"{elseif="$value.pm_rank == MODERATOR"} class="text-danger"{else} class="text-muted"{/if}>{$value.pm_username}</strong></td>
+			<td class="small hidden-xs"><a href="viewpm?id={$value.participant_pmid}&amp;page={if="$value.pm_posts>$posts_per_page"}{function="ceil($value.pm_posts/$posts_per_page)"}{else}1{/if}">{function="date('d/m/Y H:i', $value.pm_last)"}</a></td>
+			<td class="small hidden-xs">{function="implode(', ', array_slice(explode(';', $value.pm_participants), 0, 3))"}{if="$value.pm_nb_participants>3"}...{/if} ({$value.pm_nb_participants})</td>
+			</tr>
+			{/loop}
+			</table>
+			</form>
+
+			<div class="row">
+				<div class="col-sm-9 col-md-9 col-lg-9"><ul class="pagination">{$pagination}</ul></div>
+				<div class="hidden-xs col-sm-3 col-md-3 col-lg-3 text-right">
+				  <p>{$lang_pm.total}: <strong>{$nb}</strong></p>
+				  <p>{$lang_pm.rows} <strong>{$offset+1} - {$end}</strong></p>
+				</div>
+			</div>
+
+			<script>
+			var text_action_confirmation = '{$lang_pm.confirm_action|escape_quotes}';
+			var text_select_element = '{$lang_pm.select_element|escape_quotes}';
+			var text_select_action = '{$lang_pm.select_action|escape_quotes}';
+			var text_cancel = '{$lang_pm.cancel|escape_quotes}';
+			</script>
+			<div id="dialog-confirm" title="{$lang_pm.alert}"></div>
+			{elseif="!empty($search.keywords)"}
+			<div class="alert alert-warning text-center">{$lang_pm.search_no_result}</div>
+			{/if}
+			{else}
+			<div class="alert alert-warning text-center">{$lang_pm.no_pm}</div>
+			{/if}
+			{else}
+			<div class="alert alert-warning text-center">{$lang_pm.not_logged_in}</div>
+			{/if}
+			</div>
+			</div>
+		</div>
+
+		<div class="col-sm-3 col-sm-pull-9 col-md-3 col-md-pull-6 col-lg-2 col-lg-pull-4">
+			<div class="list-group">
+			<a class="list-group-item" href="newpm">{$lang_pm.new_message}</a>
+			<a class="list-group-item active" href="pm">{$lang_pm.mailbox}</a>
+			<a class="list-group-item" href="blacklist">{$lang_pm.blacklist}</a>
+			</div>
+		</div>
+	</div>
+</div>
+{include="footer"}

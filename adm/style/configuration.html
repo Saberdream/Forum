@@ -1,0 +1,120 @@
+{include="header"}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-9 col-sm-push-3 col-md-7 col-md-push-4 col-lg-6 col-lg-push-4">
+			<ol class="breadcrumb">
+			  <li><a href="adm/index.php">{$lang_menu_top.admin_cp}</a></li>
+			  <li class="active">{$lang_config.site_configuration}</li>
+			</ol>
+			
+			<div class="panel-group">
+			<p class="text-muted">{$lang_config.page_description}</p>
+			{if="!empty($form.error)"}
+			<div class="alert alert-danger">
+			{$lang_config.errors_occurred}:
+			<ul>{loop="form.error"}<li>{$value}</li>{/loop}</ul>
+			</div>
+			{elseif="!empty($form.ok)"}
+			<div class="alert alert-success">{$form.ok}</div>
+			{/if}
+			<div class="row">
+			  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<form class="form form-horizontal" method="post" action="adm/configuration.php">
+				{loop="config"}
+				{if="!isset($current_cat) || (isset($current_cat) && $value.cat_name != $current_cat)"}
+				{if="isset($current_cat)"}
+				</div>
+				</div>
+				{/if}
+				<div class="panel panel-default">
+				<div class="panel-heading"><a href="javascript:void(0);" onclick="javascript:category_toggle({$value.config_catid});">{$value.cat_name|display} <img src="images/bt_plus.gif" id="button_toggle_{$value.config_catid}" /></a></div>
+				<div class="panel-body" id="configuration_category_{$value.config_catid}" style="display:none;">
+				{$current_cat=$value.cat_name}
+				{/if}
+				{if="$value.config_type == 's'"}
+					{if="$value.config_form_type == 'textarea'"}
+					<div class="form-group">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<label for="{$key}">{$value.config_name|display}</label>
+					<textarea class="form-control" name="config[{$key}]" id="{$key}">{$value.config_value|display}</textarea>
+					{elseif="$value.config_form_type == 'select'"}
+					{$select_value=$value.config_value}
+					<div class="form-group">
+					<div class="col-xs-12 col-sm-8 col-md-6 col-lg-6">
+					<label for="{$key}">{$value.config_name|display}</label>
+					<select class="form-control input-sm" name="config[{$key}]" id="{$key}">
+					{loop="value.config_options"}
+					<option value="{$key}"{if="$select_value == $key"} selected="selected"{/if}>{$value}</option>
+					{/loop}
+					</select>
+					{elseif="$value.config_form_type == 'tag'"}
+					<div class="form-group">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<label for="{$key}">{$value.config_name|display}</label>
+					<input type="text" name="config[{$key}]" id="{$key}" value="{$value.config_value|display}" />
+					{else}
+					<div class="form-group">
+					<div class="col-xs-12 col-sm-8 col-md-6 col-lg-6">
+					<label for="{$key}">{$value.config_name|display}</label>
+					<input type="text" class="form-control input-sm" name="config[{$key}]" id="{$key}" value="{$value.config_value|display}" />
+					{/if}
+				{elseif="$value.config_type == 'd'"}
+					<div class="form-group">
+					<div class="col-xs-12 col-sm-8 col-md-6 col-lg-6">
+					<label for="{$key}">{$value.config_name|display}</label>
+					<input type="text" class="form-control input-sm" name="config[{$key}]" id="{$key}" value="{$value.config_value|display}" />
+				{elseif="$value.config_type == 'b'"}
+					<div class="form-group">
+					<div class="col-xs-12 col-sm-8 col-md-6 col-lg-6">
+					<label for="{$key}">{$value.config_name|display}</label>
+					<select class="form-control input-sm" name="config[{$key}]" id="{$key}">
+					<option value="1"{if="$value.config_value"} selected="selected"{/if}>{$lang_config.yes}</option>
+					<option value="0"{if="!$value.config_value"} selected="selected"{/if}>{$lang_config.no}</option>
+					</select>
+				{/if}
+					{if="!empty($value.config_description)"}<span class="help-block">{$value.config_description|display}</span>{/if}
+					</div>
+					</div>
+				{/loop}
+				</div>
+				</div>
+
+				<div class="panel text-center">
+				<div class="panel-body">
+				  <button type="submit" class="btn btn-success">{$lang_config.save}</button>
+				</div>
+				</div>
+				<input type="hidden" name="token" value="{$form.token}" />
+				</form>
+				<script>
+				function category_toggle(cat_id) {
+					var category = document.getElementById('configuration_category_'+cat_id);
+					var Img = document.getElementById('button_toggle_'+cat_id);
+	
+					if(category.style.display == 'none') {
+						category.style.display = 'block';
+						Img.src = Img.src.replace(/\/style\/images\/bt_plus.gif/g, '/style/images/bt_minus.gif');
+					}
+					else {
+						category.style.display = 'none';
+						Img.src = Img.src.replace(/\/style\/images\/bt_minus.gif/g, '/style/images/bt_plus.gif');
+					}
+
+					return false;
+				}
+				</script>
+			  </div>
+			</div>
+			</div>
+		</div>
+		
+		<div class="col-sm-3 col-sm-pull-9 col-md-3 col-md-pull-6 col-lg-2 col-lg-pull-4">
+			<div class="list-group">
+			<a class="list-group-item active" href="adm/configuration.php">{$lang_config.site_configuration}</a>
+			<a class="list-group-item" href="adm/system.php">{$lang_menu_top.system}</a>
+			<a class="list-group-item" href="adm/logs.php">{$lang_config.error_logs}</a>
+			</div>
+		</div>
+	</div>
+</div>
+{include="footer"}

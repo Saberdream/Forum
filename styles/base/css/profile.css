@@ -1,0 +1,75 @@
+a:hover, a:link, a:focus {
+	text-decoration: none;
+}
+img {
+	vertical-align: 0;
+}
+body {
+	padding: 10px 0;
+}
+.profile_header {
+	height: 34px;
+	padding-top: 5px;
+	border-radius: 3px;
+	border: 1px solid #ddd;
+	font-weight: bold;
+	background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(240,240,240,1) 100%);
+	margin-bottom: 13px;
+}
+.profile_m {
+	color: #00baff;
+}
+.profile_f {
+	color: #f190ff;
+}
+.profile_panel {
+	padding: 10px;
+	border: 1px solid #ddd;
+	margin-bottom: 13px;
+	font-size: 13px;
+}
+.profile_desc img {
+	vertical-align: 0;
+}
+.profile_infos {
+	border-collapse: separate;
+	border-spacing: 1px;
+	background-color: #d8ff00;
+	font-size: 13px;
+}
+.profile_infos td:nth-child(odd) {
+	background-color: #fffd9a;
+	font-weight: bold;
+	text-align: right;
+	width:50%;
+}
+.profile_infos td:nth-child(even) {
+	background-color: #ffffcb;
+}
+.profile_infos td {
+	overflow: hidden;
+}
+.profile_infos tbody > tr > td {
+	border-style: none;
+	line-height: normal;
+	vertical-align: middle;
+}
+.profile_infos tbody > tr > td {
+	padding: 5px;
+}
+.profile_separator {
+	border-bottom: 1px dotted #999;
+	border-width: 1px;
+	margin-bottom: 10px;
+	padding-top: 5px;
+}
+.profile_posts_bar {
+	height: 10px;
+	background: url(../images/profile_posts_empty.gif) left top repeat-x;
+}
+.profile_posts_bar span {
+	height: 10px;
+	display: inline-block;
+	vertical-align: top;
+	background: url(../images/profile_posts_bar.gif) left top repeat-x;
+}

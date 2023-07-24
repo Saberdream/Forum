@@ -1,0 +1,56 @@
+{include="header"}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-9 col-sm-push-3 col-md-7 col-md-push-4 col-lg-6 col-lg-push-4">
+			<ol class="breadcrumb">
+			  <li class="active"><span class="glyphicon glyphicon-home"></span> {$lang_menu_top.home}</li>
+			  <li class="active">{$lang_viewonline.users_connected}</li>
+			</ol>
+			<div class="panel panel-default">
+			<div class="panel-body">
+				{if="$nb > 0"}
+				<p><span class="text-muted">{$lang_viewonline.number_users_connected}</span></p>
+				<div class="row">
+					<div class="col-sm-9 col-md-9 col-lg-9"><ul class="pagination">{$pagination}</ul></div>
+					<div class="hidden-xs col-sm-3 col-md-3 col-lg-3 text-right">
+					  <p>{$lang_viewonline.total}: <strong>{$nb}</strong></p>
+					  <p>{$lang_viewonline.rows} <strong>{$offset+1} - {$end}</strong></p>
+					</div>
+				</div>
+				<table class="table table-bordered table-hover text-center">
+				<tr>
+				  <th>{$lang_viewonline.user}</th>
+				  {if="$user.user_rank >= ADMIN"}<th>{$lang_viewonline.ip}</th>{/if}
+				  <th>{$lang_viewonline.last_time}</th>
+				  <th>{$lang_viewonline.robot}</th>
+				</tr>
+				{loop="rows"}
+				<tr>
+				  <td>{if="$value.user_rank>GUEST"}<a class="user-profile" href="profil/{$value.user_name|strtolower}"><b{if="$value.user_rank>USER"} class="text-danger"{/if}>{$value.user_name}</b></a>{else}{if="!empty($value.connected_robot)"}{$lang_viewonline.robot}{else}{$lang_viewonline.anonymous}{/if}{/if}</td>
+				  {if="$user.user_rank >= ADMIN"}<td><a href="http://www.ip-adress.com/whois/{$value.connected_ip}" target="_blank">{$value.connected_ip}</a></td>{/if}
+				  <td>{function="date('d/m/Y H:i', $value.connected_last)"}</td>
+				  <td>{if="!empty($value.connected_robot)"}<b>{$value.connected_robot}</b>{else}Non{/if}</td>
+				</tr>
+				{/loop}
+				</table>
+				<div class="row">
+					<div class="col-sm-9 col-md-9 col-lg-9"><ul class="pagination">{$pagination}</ul></div>
+					<div class="hidden-xs col-sm-3 col-md-3 col-lg-3 text-right">
+					  <p>{$lang_viewonline.total}: <strong>{$nb}</strong></p>
+					  <p>{$lang_viewonline.rows} <strong>{$offset+1} - {$end}</strong></p>
+					</div>
+				</div>
+				{/if}
+			</div>
+			</div>
+		</div>
+		
+		<div class="col-sm-3 col-sm-pull-9 col-md-3 col-md-pull-6 col-lg-2 col-lg-pull-4">
+			<div class="list-group">
+			<a class="list-group-item" href="index">{$lang_menu_top.home}</a>
+			<a class="list-group-item active" href="viewonline">{$lang_viewonline.users_connected}</a>
+			</div>
+		</div>
+	</div>
+</div>
+{include="footer"}

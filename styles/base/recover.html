@@ -1,0 +1,61 @@
+{include="header"}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-9 col-sm-push-3 col-md-7 col-md-push-4 col-lg-6 col-lg-push-4">
+			<ol class="breadcrumb">
+			  <li class="active"><span class="glyphicon glyphicon-user"></span> {$lang_recover.account}</li>
+			  <li class="active">{$lang_recover.password_recovery}</li>
+			</ol>
+			<div class="panel panel-default">
+			<div class="panel-body">
+			{if="!empty($form.ok)"}
+			<div class="alert alert-success">{$form.ok}</div>
+			{else}
+			{if="!empty($form.error)"}
+			<div class="alert alert-danger">
+			{$lang_recover.errors_occured}:
+			<ul>{loop="form.error"}<li>{$value}</li>{/loop}</ul>
+			</div>
+			{/if}
+			<div class="row">
+				<form class="col-xs-5" method="post" action="recover">
+				<div class="form-group">
+				<label class="sr-only" for="username">{$lang_recover.username}</label>
+				<input type="text" class="form-control" name="username" id="username" value="{$form.username|display}" placeholder="{$lang_recover.enter_username}" />
+				</div>
+				
+				<div class="form-group">
+				<label class="sr-only" for="email">{$lang_recover.email}</label>
+				<input type="text" class="form-control" name="email" id="email" value="{$form.email|display}" placeholder="{$lang_recover.enter_email}" />
+				</div>
+				
+				<div class="form-group">
+				<a class="btn btn-info btn-xs" onclick="document.getElementById('captcha').src=document.getElementById('captcha').src+'?'+Math.random();return false">{$lang_recover.ask_new_code}</a>
+				</div>
+				
+				<div class="form-group">
+				<img src="/captcha.php" alt="Captcha" id="captcha" />
+				</div>
+
+				<div class="form-group">
+				<input type="text" class="form-control" name="captcha" placeholder="{$lang_recover.copy_code}" />
+				</div>
+				
+				<button type="submit" class="btn btn-success">{$lang_recover.validate}</button>
+				<input type="hidden" name="token" value="{$form.token}" />
+				</form>
+			</div>
+			{/if}
+			</div>
+			</div>
+		</div>
+		
+		<div class="col-sm-3 col-sm-pull-9 col-md-3 col-md-pull-6 col-lg-2 col-lg-pull-4">
+			<div class="list-group">
+			<a class="list-group-item" href="index">{$lang_menu_top.home}</a>
+			<a class="list-group-item" href="viewonline">{$lang_recover.users_connected}</a>
+			</div>
+		</div>
+	</div>
+</div>
+{include="footer"}

@@ -1,0 +1,195 @@
+{include="header"}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-9 col-sm-push-3 col-md-7 col-md-push-4 col-lg-6 col-lg-push-4">
+			<ol class="breadcrumb">
+			  <li class="active"><span class="glyphicon glyphicon-user"></span> {$lang_settings.account}</li>
+			  <li class="active">{$lang_settings.edit_settings}</li>
+			</ol>
+			<div class="panel panel-default">
+			<div class="panel-body">
+			{if="!empty($form.ok)"}
+			<div class="alert alert-success">{$form.ok}</div>
+			{else}
+			{if="!empty($form.error)"}
+			<div class="alert alert-danger">
+			{$lang_settings.errors_occured}:
+			<ul>{loop="form.error"}<li>{$value}</li>{/loop}</ul>
+			</div>
+			{/if}
+			<div class="row">
+			  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<form class="form form-horizontal" method="post" action="settings">
+				<div class="form-group">
+				<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+				<label for="password">{$lang_settings.password}</label>
+				<input type="password" class="form-control" name="data[password]" id="password" placeholder="{$lang_settings.enter_password}" />
+				<span class="help-block">{$lang_settings.password_desc}</span>
+				</div>
+				</div>
+				
+				<div class="form-group">
+				<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+				<label for="email">{$lang_settings.email}</label>
+				<input type="text" class="form-control" name="data[email]" id="email" value="{$data.user_email|display}" placeholder="{$lang_settings.enter_email}" />
+				</div>
+				</div>
+				
+				<div class="form-group">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<label for="birth_d">{$lang_settings.birthday}</label>
+					<div class="form-inline">
+						<div class="form-group">
+						<div class="col-xs-12 col-sm-4 col-md-2 col-lg-2">
+						<select class="form-control input-sm" name="data[birth_d]" id="birth_d">
+						<option value="">{$lang_settings.day}</option>
+						{loop="form.birth_days"}
+						<option value="{$value}"{if="!empty($data.user_birth_d) && $value == $data.user_birth_d"} selected{/if}>{$value}</option>
+						{/loop}
+						</select>
+						</div>
+						</div>
+						
+						<div class="form-group">
+						<div class="col-xs-12 col-sm-4 col-md-2 col-lg-2">
+						<select class="form-control input-sm" name="data[birth_m]" id="birth_m">
+						<option value="">{$lang_settings.month}</option>
+						{loop="form.birth_months"}
+						<option value="{$value}"{if="!empty($data.user_birth_m) && $value == $data.user_birth_m"} selected{/if}>{$value}</option>
+						{/loop}
+						</select>
+						</div>
+						</div>
+						
+						<div class="form-group">
+						<div class="col-xs-12 col-sm-4 col-md-2 col-lg-2">
+						<select class="form-control input-sm" name="data[birth_y]" id="birth_y">
+						<option value="">{$lang_settings.year}</option>
+						{loop="form.birth_years"}
+						<option value="{$value}"{if="!empty($data.user_birth_y) && $value == $data.user_birth_y"} selected{/if}>{$value}</option>
+						{/loop}
+						</select>
+						</div>
+						</div>
+					</div>
+				</div>
+				</div>
+				
+				<div class="form-group">
+				<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+				<label for="birth_d">{$lang_settings.sex}:</label>
+				<select class="form-control input-sm" name="data[sex]" id="sex">
+				<option value="">{$lang_settings.not_specified}</option>
+				{loop="form.sexes"}
+				<option value="{$key}"{if="$key == $data.user_sex"} selected{/if}>{$value}</option>
+				{/loop}
+				</select>
+				</div>
+				</div>
+				
+				<div class="form-group">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<label for="sign">{$lang_settings.forum_signature}</label>
+				<textarea class="form-control input-sm" name="data[sign]" id="sign">{$data.user_sign|display}</textarea>
+				<span class="help-block">{$lang_settings.forum_signature_desc}</span>
+				</div>
+				</div>
+				
+				<div class="form-group">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<label for="desc">{$lang_settings.description}</label>
+				<textarea class="form-control input-sm" name="data[desc]" id="desc">{$data.user_desc|display}</textarea>
+				<span class="help-block">{$lang_settings.description_desc}</span>
+				</div>
+				</div>
+
+				<div class="form-group">
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+				<label for="">{$lang_settings.avatar}</label>
+				{if="!empty($data.user_avatar)"}
+				<p><a class="image-upload" href="gallery/avatars/{$data.user_avatar}"><img src="/gallery/avatars/thumbnails/{$data.user_avatar}" class="img-rounded" alt="Avatar" /></a></p>
+				{else}
+				<p><img src="/gallery/avatars/default.png" class="img-rounded" alt="Avatar" /></p>
+				<p class="text-muted">{$lang_settings.no_avatar}</p>
+				{/if}
+				</div>
+				</div>
+				
+				<div class="form-group">
+				<div class="col-xs-12 col-sm-8 col-md-6 col-lg-6">
+				<label for="country">{$lang_settings.country}</label>
+				<input type="text" class="form-control input-sm" name="data[country]" id="country" value="{$data.user_country|display}" />
+				<span class="help-block">{$lang_settings.country_desc}</span>
+				</div>
+				</div>
+
+				<div class="form-group">
+				<div class="col-xs-12 col-sm-8 col-md-6 col-lg-6">
+				<label for="style">{$lang_settings.style}</label>
+				<select class="form-control input-sm" name="data[style]" id="style">
+				<option value=""></option>
+				{loop="form.styles"}
+				<option value="{$key}"{if="$data.user_style == $key"} selected="selected"{/if}>{$value}</option>
+				{/loop}
+				</select>
+				</div>
+				</div>
+
+				<div class="form-group">
+				<div class="col-xs-12 col-sm-8 col-md-6 col-lg-6">
+				<label for="lang">{$lang_settings.lang}</label>
+				<select class="form-control input-sm" name="data[lang]" id="lang">
+				<option value=""></option>
+				{loop="form.langs"}
+				<option value="{$key}"{if="$data.user_lang == $key"} selected="selected"{/if}>{$value}</option>
+				{/loop}
+				</select>
+				</div>
+				</div>
+				
+				<div class="form-group">
+				<div class="col-xs-12 col-sm-8 col-md-6 col-lg-6">
+				<label for="timezone">{$lang_settings.timezone}</label>
+				<select class="form-control input-sm" name="data[timezone]" id="timezone">
+				<option value=""></option>
+				{loop="form.timezones"}
+				<option value="{$key}"{if="$data.user_timezone == $key"} selected="selected"{/if}>{$value}</option>
+				{/loop}
+				</select>
+				</div>
+				</div>
+				
+				<div class="form-group">
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+				<p><a class="btn btn-info btn-xs" onclick="document.getElementById('captcha').src=document.getElementById('captcha').src+'?'+Math.random();return false">Demander un nouveau code</a></p>
+				<p><img src="/captcha.php" alt="Captcha" id="captcha" /></p>
+				</div>
+				</div>
+				
+				<div class="form-group">
+				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+				<input type="text" class="form-control" name="captcha" placeholder="{$lang_settings.copy_code}" />
+				</div>
+				</div>
+				
+				<button type="submit" class="btn btn-success">{$lang_settings.validate}</button>
+				<input type="hidden" name="token" value="{$form.token}" />
+				</form>
+			  </div>
+			</div>
+			{/if}
+			</div>
+			</div>
+		</div>
+		
+		<div class="col-sm-3 col-sm-pull-9 col-md-3 col-md-pull-6 col-lg-2 col-lg-pull-4">
+			<div class="list-group">
+			<a class="list-group-item active" href="settings">{$lang_settings.account}</a>
+			<a class="list-group-item" href="notifications">{$lang_settings.notifications}</a>
+			<a class="list-group-item" href="subscriptions">{$lang_settings.subscriptions}</a>
+			<a class="list-group-item" href="avatars">{$lang_settings.avatars}</a>
+			</div>
+		</div>
+	</div>
+</div>
+{include="footer"}

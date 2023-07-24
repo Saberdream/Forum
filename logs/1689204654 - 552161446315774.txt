@@ -1,0 +1,8 @@
+PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicata du champ '48d4a4fd0f1f06699141bc4dbd34f5ad8dfc1b98ab6ced61981dd5b0de229482' pour la clef 'PRIMARY'' in C:\wamp64\www\forum\includes\classes\user.class.php:81
+Stack trace:
+#0 C:\wamp64\www\forum\includes\classes\user.class.php(81): execute(array)
+#1 C:\wamp64\www\forum\includes\classes\user.class.php(42): session_begin()
+#2 C:\wamp64\www\forum\core.php(46): __construct()
+#3 C:\wamp64\www\forum\avatars.php(3): include(string)
+#4 {main}
+  thrown in C:\wamp64\www\forum\includes\classes\user.class.php on line 81

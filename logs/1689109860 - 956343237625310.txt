@@ -1,0 +1,6 @@
+PHP Fatal error:  Uncaught exception 'RainTpl_NotFoundException' with message 'Template report not found!' in C:\wamp64\www\forum\includes\classes\rain.tpl.class.php:278
+Stack trace:
+#0 C:\wamp64\www\forum\includes\classes\rain.tpl.class.php(171): check_template(string)
+#1 C:\wamp64\www\forum\alert.php(64): draw(string)
+#2 {main}
+  thrown in C:\wamp64\www\forum\includes\classes\rain.tpl.class.php on line 278

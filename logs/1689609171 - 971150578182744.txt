@@ -1,0 +1,6 @@
+PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[22007]: Invalid datetime format: 1292 Truncated incorrect DOUBLE value: 'Array'' in C:\wamp64\www\forum\includes\functions\pm.php:96
+Stack trace:
+#0 C:\wamp64\www\forum\includes\functions\pm.php(96): execute(array)
+#1 C:\wamp64\www\forum\pm.php(41): delete_pm(string, string, array)
+#2 {main}
+  thrown in C:\wamp64\www\forum\includes\functions\pm.php on line 96

@@ -1,0 +1,115 @@
+{include="header"}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-9 col-sm-push-3 col-md-7 col-md-push-4 col-lg-6 col-lg-push-4">
+			<ol class="breadcrumb">
+			  <li><a href="adm/index.php">{$lang_menu_top.admin_cp}</a></li>
+			  <li class="active">{$lang_alerts.manage_alerts}</li>
+			  {if="$mode == 'closed'"}<li class="active">{$lang_alerts.alerts_treated}</li>{/if}
+			</ol>
+			<div class="panel panel-default">
+			<div class="panel-body">
+			{if="$total > 0"}
+			<form class="form-inline form-search" method="get" action="adm/alerts.php?mode={$mode}">
+			  <input type="hidden" name="mode" value="{$mode}" />
+			  <div class="form-group">
+				<input type="text" name="search" id="search" value="{$search.keywords|display}" class="form-control input-sm" placeholder="{$lang_alerts.search}" />
+			  </div>
+			  <div class="form-group">
+				<select class="form-control input-sm" name="type">
+				  {loop="search.types"}
+				  <option value="{$key}"{if="!empty($search.keywords) && $search.type==$key"} selected{/if}>{$value}</option>
+				  {/loop}
+				</select>
+			  </div>
+			  <div class="form-group">
+				<label for="exact"><input type="checkbox" name="exact" id="exact" value="1" {if="!empty($search.keywords) && $search.exact"}checked {/if}/> {$lang_alerts.exact}</label>
+			  </div>
+			  <button class="btn btn-default btn-sm" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+			  {if="!empty($search.keywords)"}<a class="btn btn-primary btn-sm pull-right hidden-xs" href="adm/alerts.php?mode={$mode}&page=1">{$lang_alerts.back}</a>{/if}
+			</form>
+			
+			{if="$nb > 0"}
+			{if="!empty($search.keywords)"}
+			<div class="alert alert-success text-center">{$lang_alerts.search_results}</div>
+			{/if}
+			<div class="row">
+				<div class="col-sm-9 col-md-9 col-lg-9"><ul class="pagination">{$pagination}</ul></div>
+				<div class="hidden-xs col-sm-3 col-md-3 col-lg-3 text-right">
+				  <p>{$lang_alerts.total}: <strong>{$nb}</strong></p>
+				  <p>{$lang_alerts.rows} <strong>{$offset+1} - {$end}</strong></p>
+				</div>
+			</div>
+			<form method="post" action="adm/alerts.php?mode={$mode}">
+			<input type="hidden" name="mode" value="{$mode}" />
+			<input type="hidden" name="token" value="{$token}" />
+			<div class="form-group">
+			<div class="form-inline">
+			<select class="form-control input-sm" name="action">
+			<option>{$lang_alerts.action}</option>
+			{if="$mode == 'new'"}<option value="close">{$lang_alerts.mark_as_treated}</option>{/if}
+			<option value="delete">{$lang_alerts.delete}</option>
+			</select>
+			<button class="action-submit btn btn-sm btn-default">{$lang_alerts.validate}</button>
+			</div>
+			</div>
+			
+			<table class="table table-striped table-bordered table-hover text-center">
+			<tr>
+			<th><input type="checkbox" id="selectall" /></th>
+			<th>{$lang_alerts.id}</th>
+			<th>{$lang_alerts.reason}</th>
+			<th>{$lang_alerts.username}</th>
+			<th>{$lang_alerts.author}</th>
+			<th>{$lang_alerts.date}</th>
+			<th>{$lang_alerts.ip}</th>
+			<th>{$lang_alerts.action}</th>
+			</tr>
+			{loop="rows"}
+			<tr>
+			<td><input class="checkbox-item" type="checkbox" name="sup[]" value="{$value.alert_id|display}" /></td>
+			<td>{$value.alert_id|display}</td>
+			<td>{$value.alert_reason|display}</td>
+			<td>{$value.post_username|display}</td>
+			<td><strong{if="$value.alert_rank>=MODERATOR"} class="moderator"{/if}>{$value.user_name|display}</strong></td>
+			<td>{function="date('d/m/Y H:i', $value.alert_time)"}</td>
+			<td>{$value.alert_ip|display}</td>
+			<td><a data-toggle="tooltip" title="{$lang_alerts.go_to_alert_page}" href="adm/viewalert.php?id={$value.alert_id|display}" class="btn btn-info btn-xs">{$lang_alerts.view}</a></td>
+			</tr>
+			{/loop}
+			</table>
+			</form>
+			<div class="row">
+				<div class="col-sm-9 col-md-9 col-lg-9"><ul class="pagination">{$pagination}</ul></div>
+				<div class="hidden-xs col-sm-3 col-md-3 col-lg-3 text-right">
+				  <p>{$lang_alerts.total}: <strong>{$nb}</strong></p>
+				  <p>{$lang_alerts.rows} <strong>{$offset+1} - {$end}</strong></p>
+				</div>
+			</div>
+			<script>
+			var text_action_confirmation = '{$lang_alerts.confirm_action|escape_quotes}';
+			var text_select_element = '{$lang_alerts.select_element|escape_quotes}';
+			var text_select_action = '{$lang_alerts.select_action|escape_quotes}';
+			var text_cancel = '{$lang_alerts.cancel|escape_quotes}';
+			</script>
+			<div id="dialog-confirm" title="{$lang_alerts.alert}"></div>
+			{elseif="!empty($search.keywords)"}
+			<div class="alert alert-warning text-center">{$lang_alerts.search_no_result}</div>
+			{/if}
+			{else}
+			<div class="alert alert-danger text-center">{$lang_alerts.no_data}</div>
+			{/if}
+			</div>
+			</div>
+		</div>
+		
+		<div class="col-sm-3 col-sm-pull-9 col-md-3 col-md-pull-6 col-lg-2 col-lg-pull-4">
+			<div class="list-group">
+			<a class="list-group-item{if="$mode == 'new'"} active{/if}" href="adm/alerts.php">{$lang_menu_top.alerts}</a>
+			<a class="list-group-item{if="$mode == 'closed'"} active{/if}" href="adm/alerts.php?mode=closed">{$lang_alerts.alerts_treated}</a>
+			<a class="list-group-item" href="adm/banlist.php">{$lang_alerts.banlist}</a>
+			</div>
+		</div>
+	</div>
+</div>
+{include="footer"}

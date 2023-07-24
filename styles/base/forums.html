@@ -1,0 +1,44 @@
+{include="header"}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-9 col-sm-push-3 col-md-7 col-md-push-4 col-lg-6 col-lg-push-4">
+			<ol class="breadcrumb">
+			  <li class="active"><span class="glyphicon glyphicon-th-list"></span> {$lang_forums.forums}</li>
+			</ol>
+			{if="$nb > 0"}
+			{loop="rows"}
+			{if="$counter == 0 || (!empty($current_cat) && $value.cat_name != $current_cat)"}
+			{if="$counter > 0"}</table>{/if}
+			<table class="table table-bordered table-hover text-center">
+			<tr>
+			  <th>&nbsp;</th>
+			  <th>{$value.cat_name|display}</th>
+			  <th>{$lang_forums.topics}</th>
+			  <th>{$lang_forums.posts}</th>
+			  <th>{$lang_forums.last_post}</th>
+			</tr>
+			{$current_cat=$value.cat_name}
+			{/if}
+			<tr>
+			  <td>{if="!empty($value.forum_icon)"}<img src="{$value.forum_icon|display}" />{else}<img src="images/forum/default.png" />{/if}</td>
+			  <td class="text-left"><a href="forum/{$value.forum_slug}/{$value.forum_id}/1">{$value.forum_name|display}</a>{if="$value.forum_closed==1"} <i class="fa fa-lock" aria-hidden="true"></i>{/if}{if="!empty($value.forum_desc)"}<br><small class="text-muted">{$value.forum_desc|display}</small>{/if}</td>
+			  <td>{$value.forum_topics_visible}</td>
+			  <td>{$value.forum_posts_visible}</td>
+			  <td>{function="date('d/m/Y H:i', $value.forum_last)"}</td>
+			</tr>
+			{/loop}
+			</table>
+			{else}
+			<span class="text-center">{$lang_forums.no_forum}</span>
+			{/if}
+		</div>
+		
+		<div class="col-sm-3 col-sm-pull-9 col-md-3 col-md-pull-6 col-lg-2 col-lg-pull-4">
+			<div class="list-group">
+			<a class="list-group-item" href="index">{$lang_menu_top.home}</a>
+			<a class="list-group-item" href="viewonline">{$lang_forums.users_connected}</a>
+			</div>
+		</div>
+	</div>
+</div>
+{include="footer"}

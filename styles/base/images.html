@@ -1,0 +1,88 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-4 col-lg-push-5">
+			<ol class="breadcrumb">
+			  <li><a href="index"><span class="glyphicon glyphicon-home"></span> Index du forum</a></li>
+			  <li class="active">Gallerie d'images</li>
+			</ol>
+			
+			{if="$nb > 0"}
+			<div class="row">
+			<div class="col-md-12">
+			<span class="pull-left"><ul class="pagination">{$pagin}</ul></span>
+			<span class="pull-right"><p>Total : <strong>{$nb}</strong></p>
+			<p>Affichage des lignes <strong>{$offset+1} - {$end}</strong></p></span>
+			</div>
+			</div>
+			
+			{if="$user.rank >= ADMIN"}
+			<form method="post" action="images">
+			<input type="hidden" name="token" value="{$token}" />
+			<div class="form-group">
+			<button type="submit" class="action-submit btn btn-danger" data-toggle="tooltip" title="Supprimer les images définitivement">Supprimer</button>
+			</div>
+			{/if}
+			<table class="table table-bordered table-hover text-center">
+			<tr>
+			  {if="$user.rank >= ADMIN"}<th><input type="checkbox" id="selectall" /></th>{/if}
+			  <th>Image</th>
+			  <th>Lien</th>
+			  <th>Date</th>
+			</tr>
+			{loop="images"}
+			<tr>
+			  {if="$user.rank >= ADMIN"}<td><input class="checkbox-item" type="checkbox" name="sup[]" value="{$value.id}" /></td>{/if}
+			  <td><a class="image-upload" href="{$root}gallery/uploads/{$value.filename|display}"><img src="{$root}gallery/uploads/thumbs/{$value.filename|display}" alt="Miniature" class="img-thumbnail" style="max-width:100px;max-height:100px;" /></a></td>
+			  <td class="text-left"><span class="text-muted small"><a href="{$root}gallery/uploads/{$value.filename|display}" target="_blank">{$value.filename|display}</a></span></td>
+			  <td>{function="date('d/m/Y H:i', $value.time)"}</td>
+			</tr>
+			{/loop}
+			</table>
+			{if="$user.rank >= ADMIN"}
+			</form>
+			{/if}
+			
+			<div class="row">
+			<div class="col-md-12">
+			<span class="pull-left"><ul class="pagination">{$pagin}</ul></span>
+			<span class="pull-right"><p>Total : <strong>{$nb}</strong></p>
+			<p>Affichage des lignes <strong>{$offset+1} - {$end}</strong></p></span>
+			</div>
+			</div>
+			{else}
+			<div class="alert alert-warning text-center">Il n'y a aucune ligne à afficher.</div>
+			{/if}
+			
+			{if="$user.rank >= ADMIN"}
+			<div class="panel panel-default">
+			<div class="panel-heading"><b>Ajouter des images</b></div>
+			<div class="panel-body">
+			{if="!empty($form.error)"}<div class="alert alert-danger">{$form.error}</div>{/if}
+			{if="!empty($form.ok)"}<div class="alert alert-success">{$form.ok}</div>{/if}
+			<form class="form-horizontal" method="post" action="images/{$page}">
+			<div class="form-group">
+			<div class="col-md-12">
+			<label for="message" class="sr-only">Liens (un par ligne)</label>
+			<textarea class="form-control" rows="5" name="images" id="images" placeholder="Mettez ici les liens des images (un lien par ligne)."></textarea>
+			</div>
+			</div>
+			<div class="form-group">
+			<div class="col-md-4">
+			<button type="submit" class="btn btn-success">Envoyer</button>
+			</div>
+			</div>
+			<input type="hidden" name="token" value="{$form.token}" />
+			</form>
+			</div>
+			</div>
+			{/if}
+		</div>
+		
+		<div class="col-lg-2 col-lg-pull-1">
+			<div class="list-group">
+			<a class="list-group-item" href="index">Accueil</a>
+			<a class="list-group-item" href="viewonline">Liste des utilisateurs connectés</a>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,38 @@
+{include="header"}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-9 col-sm-push-3 col-md-7 col-md-push-4 col-lg-6 col-lg-push-4">
+			<ol class="breadcrumb">
+			  <li class="active"><span class="glyphicon glyphicon-home"></span> {$lang_menu_top.home}</li>
+			</ol>
+			<div class="panel panel-default">
+			<div class="panel-body">
+				Bienvenue sur {$site_name|display}{if="$user.user_rank >= USER"}, <b class="text-primary">{$user.user_name}</b>{/if}.
+			</div>
+			</div>
+			
+			<table class="table table-bordered table-striped">
+				{loop="user"}
+				<tr>
+					<td>{$key}</td>
+					<td>{if="$key=='sessionid'"}{$value|md5}{else}{$value}{/if}</td>
+				</tr>
+				{/loop}
+				{loop="debug"}
+				<tr>
+					<td>{$key}</td>
+					<td>{$value}</td>
+				</tr>
+				{/loop}
+			</table>
+		</div>
+		
+		<div class="col-sm-3 col-sm-pull-9 col-md-3 col-md-pull-6 col-lg-2 col-lg-pull-4">
+			<div class="list-group">
+			<a class="list-group-item active" href="index">{$lang_menu_top.home}</a>
+			<a class="list-group-item" href="viewonline">{$lang_index.users_connected}</a>
+			</div>
+		</div>
+	</div>
+</div>
+{include="footer"}

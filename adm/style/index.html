@@ -1,0 +1,25 @@
+{include="header"}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-10 col-sm-push-1 col-md-8 col-md-push-2 col-lg-8 col-lg-push-2">
+			<ol class="breadcrumb">
+			  <li><a href="adm/index.php">{$lang_menu_top.admin_cp}</a></li>
+			  <li class="active">{$lang_menu_top.home}</li>
+			</ol>
+			<div class="panel panel-default">
+			<div class="panel-body">
+				<p class="text-muted">{$lang_index.welcome_message}</p>
+				<h4>{$lang_index.rapid_links}:</h4>
+				<div class="list-group">
+				   <a class="list-group-item" href="adm/pictures-upload.php"><span class="glyphicon glyphicon-level-up"></span> {$lang_index.send_images}</a>
+				   <a class="list-group-item" href="adm/users.php"><span class="glyphicon glyphicon-user"></span> {$lang_index.members_list}</a>
+				   <a class="list-group-item" href="adm/alerts.php"><span class="glyphicon glyphicon-exclamation-sign"></span> {$lang_index.alerts_list}</a>
+				   <a class="list-group-item" href="adm/configuration.php"><span class="glyphicon glyphicon-cog"></span> {$lang_index.site_configuration}</a>
+				   <a class="list-group-item" href="adm/system.php"><span class="glyphicon glyphicon-wrench"></span> {$lang_index.server_informations}</a>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+{include="footer"}

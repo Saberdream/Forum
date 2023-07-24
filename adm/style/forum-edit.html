@@ -1,0 +1,144 @@
+{include="header"}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-9 col-sm-push-3 col-md-7 col-md-push-4 col-lg-6 col-lg-push-4">
+			<ol class="breadcrumb">
+			  <li><a href="adm/index.php">{$lang_menu_top.admin_cp}</a></li>
+			  <li class="active">{$lang_forum_edit.manage_forums}</li>
+			  <li class="active"><a href="adm/categories.php">{$lang_forum_edit.categories}</a></li>
+			  <li><a href="adm/forums.php?cat={$data.forum_catid|intval}">{$data.cat_name|display}</a></li>
+			  <li class="active">{$lang_forum_edit.edit_forum}</li>
+			</ol>
+			<div class="panel panel-default">
+			<div class="panel-body">
+			{if="$data"}
+			{if="!empty($form.error)"}
+			<div class="alert alert-danger">
+			{$lang_forum_edit.error_occurred}:
+			<ul>{loop="form.error"}<li>{$value}</li>{/loop}</ul>
+			</div>
+			{elseif="!empty($form.ok)"}<div class="alert alert-success">{$form.ok}</div>
+			{/if}
+			<div class="row">
+			  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<form class="form form-horizontal" method="post" action="adm/forum-edit.php?id={$data.forum_id}">
+				<h4>{$lang_forum_edit.forum}: <span class="text-primary">{$data.forum_name|display}</span></h4>
+				
+				<div class="form-group">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<label for="name">{$lang_forum_edit.forum_name}</label>
+				<input type="text" class="form-control input-sm" name="data[name]" id="name" value="{$data.forum_name}" />
+				</div>
+				</div>
+				
+				<div class="form-group">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<label for="catid">{$lang_forum_edit.category}</label>
+				{if="!empty($cats)"}
+				<select class="form-control input-sm" name="data[catid]" id="catid">
+				{loop="cats"}
+				<option value="{$value.cat_id|intval}"{if="$data.forum_catid == $value.cat_id"} selected="selected"{/if}>{$value.cat_name|display}</option>
+				{/loop}
+				</select>
+				{else}
+				<span class="help-block">{$lang_forum_edit.no_category_created}</span>
+				{/if}
+				</div>
+				</div>
+				
+				<div class="form-group">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<label for="desc">{$lang_forum_edit.description}</label>
+				<input type="text" class="form-control input-sm" name="data[desc]" id="desc" value="{$data.forum_desc}" />
+				<span class="help-block">{$lang_forum_edit.description_desc}</span>
+				</div>
+				</div>
+				
+				<div class="form-group">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<label for="icon">{$lang_forum_edit.icon}</label>
+				<input type="text" class="form-control input-sm" name="data[icon]" id="icon" value="{$data.forum_icon}" />
+				<span class="help-block">{$lang_forum_edit.icon_desc}</span>
+				</div>
+				</div>
+				
+				<div class="form-group">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<label for="rules">{$lang_forum_edit.rules}</label>
+				<textarea class="form-control input-sm" name="data[rules]" id="rules">{$data.forum_rules}</textarea>
+				<span class="help-block">{$lang_forum_edit.rules_desc}</span>
+				</div>
+				</div>
+				
+				<div class="form-group">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<label for="alerts">{$lang_forum_edit.alerts}</label>
+				<select class="form-control input-sm" name="data[alerts]" id="alerts">
+				<option value="1"{if="$data.forum_alerts == 1"} selected="selected"{/if}>Oui</option>
+				<option value="0"{if="$data.forum_alerts == 0"} selected="selected"{/if}>Non</option>
+				</select>
+				</div>
+				</div>
+				
+				<div class="form-group">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<label for="moderators">{$lang_forum_edit.moderators}</label>
+				<input type="text" name="data[moderators]" id="moderators" value="{$data.forum_moderators|display}" />
+				</div>
+				</div>
+				
+				<label for="forum_auth">{$lang_forum_edit.auths}</label>
+				<span class="help-block">{$lang_forum_edit.auth_desc}</span>
+				<table class="table table-bordered table-striped text-center">
+				<tr>
+				  <th></th>
+				  <th>{$lang_forum_edit.auth_guests}</th>
+				  <th>{$lang_forum_edit.auth_users}</th>
+				  <th>{$lang_forum_edit.auth_moderators}</th>
+				  <th>{$lang_forum_edit.auth_admins}</th>
+				</tr>
+				{loop="forum_auth"}
+				<tr>
+				  <th scope="row" class="text-left">{$value.name}</th>
+				  <td class="bg-success"><input type="radio" name="data[{$key}]" value="{#GUEST#}"{if="$value.auth_min > GUEST"} disabled{elseif="$value.auth == GUEST"} checked{/if} /></td>
+				  <td class="bg-info"><input type="radio" name="data[{$key}]" value="{#USER#}"{if="$value.auth_min > USER"} disabled{elseif="$value.auth == USER"} checked{/if} /></td>
+				  <td class="bg-warning"><input type="radio" name="data[{$key}]" value="{#MODERATOR#}"{if="$value.auth_min > MODERATOR"} disabled{elseif="$value.auth == MODERATOR"} checked{/if} /></td>
+				  <td class="bg-danger"><input type="radio" name="data[{$key}]" value="{#ADMIN#}"{if="$value.auth == ADMIN"} checked{/if} /></td>
+				</tr>
+				{/loop}
+				</table>
+				
+				<div class="form-group">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<label for="alerts">{$lang_forum_edit.closed}</label>
+				<select class="form-control input-sm" name="data[closed]" id="closed">
+				<option value="1"{if="$data.forum_closed == 1"} selected="selected"{/if}>Oui</option>
+				<option value="0"{if="$data.forum_closed == 0"} selected="selected"{/if}>Non</option>
+				</select>
+				</div>
+				</div>
+				
+				<div class="text-center">
+				  <button type="submit" class="btn btn-success">{$lang_forum_edit.save}</button>
+				</div>
+				<input type="hidden" name="token" value="{$form.token}" />
+				</form>
+			  </div>
+			</div>
+			{else}
+			<div class="alert alert-danger text-center">{$lang_forum_edit.forum_not_exists}</div>
+			{/if}
+			</div>
+			</div>
+		</div>
+		
+		<div class="col-sm-3 col-sm-pull-9 col-md-3 col-md-pull-6 col-lg-2 col-lg-pull-4">
+			<div class="list-group">
+			<a class="list-group-item active" href="adm/categories.php">{$lang_menu_top.forums}</a>
+			<a class="list-group-item" href="adm/smilies.php">{$lang_forum_edit.smilies}</a>
+			<a class="list-group-item" href="adm/smilies-add.php">{$lang_forum_edit.add_smilies}</a>
+			</div>
+		</div>
+	</div>
+</div>
+{include="footer"}

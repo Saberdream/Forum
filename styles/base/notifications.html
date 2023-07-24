@@ -1,0 +1,64 @@
+{include="header"}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-9 col-sm-push-3 col-md-7 col-md-push-4 col-lg-6 col-lg-push-4">
+			<ol class="breadcrumb">
+			  <li class="active"><span class="glyphicon glyphicon-user"></span> {$lang_notifications.account}</li>
+			  <li class="active">{$lang_notifications.notifications}</li>
+			</ol>
+			
+			{if="$user.user_rank >= USER"}
+			<div class="panel panel-default">
+			<div class="panel-body">
+				{if="$nb > 0"}
+				<p><a class="bt-forum btn btn-success btn-sm" href="notifications?reset=1&amp;token={$token}">{$lang_notifications.reset_notifications}</a></p>
+				
+				<div class="row">
+					<div class="col-sm-9 col-md-9 col-lg-9"><ul class="pagination">{$pagination}</ul></div>
+					<div class="hidden-xs col-sm-3 col-md-3 col-lg-3 text-right">
+					  <p>{$lang_notifications.total} : <strong>{$nb}</strong></p>
+					  <p>{$lang_notifications.rows} <strong>{$offset+1} - {$end}</strong></p>
+					</div>
+				</div>
+				
+				<table class="table table-bordered table-hover text-center">
+				<tr>
+				  <th>{$lang_notifications.notification}</th>
+				  <th>{$lang_notifications.date}</th>
+				</tr>
+				{loop="rows"}
+				<tr{if="$value.notif_viewed == 0"} class="warning"{/if}>
+				  <td>{if="!empty($value.notif_url)"}<a href="{$value.notif_url|display}">{$value.notif_name|display}</a>{else}{$value.notif_name|display}{/if}{if="!empty($value.notif_desc)"}<br><span class="text-muted small">{$value.notif_desc|display}</span>{/if}</td>
+				  <td>{function="date('d/m/Y H:i', $value.notif_time)"}</td>
+				</tr>
+				{/loop}
+				</table>
+				
+				<div class="row">
+					<div class="col-sm-9 col-md-9 col-lg-9"><ul class="pagination">{$pagination}</ul></div>
+					<div class="hidden-xs col-sm-3 col-md-3 col-lg-3 text-right">
+					  <p>{$lang_notifications.total} : <strong>{$nb}</strong></p>
+					  <p>{$lang_notifications.rows} <strong>{$offset+1} - {$end}</strong></p>
+					</div>
+				</div>
+				{else}
+				<div class="text-center">{$lang_notifications.no_notification}</div>
+				{/if}
+			</div>
+			</div>
+			{else}
+			<div class="alert alert-warning text-center">{$lang_notifications.not_logged_in}</div>
+			{/if}
+		</div>
+		
+		<div class="col-sm-3 col-sm-pull-9 col-md-3 col-md-pull-6 col-lg-2 col-lg-pull-4">
+			<div class="list-group">
+			<a class="list-group-item" href="settings">{$lang_notifications.account}</a>
+			<a class="list-group-item active" href="notifications">{$lang_notifications.notifications}</a>
+			<a class="list-group-item" href="subscriptions">{$lang_notifications.subscriptions}</a>
+			<a class="list-group-item" href="avatars">{$lang_notifications.avatars}</a>
+			</div>
+		</div>
+	</div>
+</div>
+{include="footer"}

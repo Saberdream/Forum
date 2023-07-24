@@ -1,0 +1,104 @@
+{include="header"}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-9 col-sm-push-3 col-md-7 col-md-push-4 col-lg-6 col-lg-push-4">
+			<ol class="breadcrumb">
+			  <li><a href="adm/index.php">{$lang_menu_top.admin_cp}</a></li>
+			  <li class="active">{$lang_banlist.manage_banlist}</li>
+			</ol>
+			<div class="panel panel-default">
+			<div class="panel-body">
+			{if="$total > 0"}
+			<form class="form-inline form-search" method="get" action="adm/banlist.php">
+			  <div class="form-group">
+				<input type="text" name="search" id="search" value="{$search.keywords|display}" class="form-control input-sm" placeholder="{$lang_banlist.search}" />
+			  </div>
+			  <div class="form-group">
+				<select class="form-control input-sm" name="type">
+				  {loop="search.types"}
+				  <option value="{$key}"{if="!empty($search.keywords) && $search.type==$key"} selected{/if}>{$value}</option>
+				  {/loop}
+				</select>
+			  </div>
+			  <div class="form-group">
+				<label for="exact"><input type="checkbox" name="exact" id="exact" value="1" {if="!empty($search.keywords) && $search.exact"}checked {/if}/> {$lang_banlist.exact}</label>
+			  </div>
+			  <button class="btn btn-default btn-sm" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+			  {if="!empty($search.keywords)"}<a class="btn btn-primary btn-sm pull-right hidden-xs" href="adm/banlist.php?page=1"><b>{$lang_banlist.back}</b></a>{/if}
+			</form>
+			
+			{if="$nb > 0"}
+			{if="!empty($search.keywords)"}
+			<div class="alert alert-success text-center">{$lang_banlist.search_results}</div>
+			{/if}
+			<div class="row">
+				<div class="col-sm-9 col-md-9 col-lg-9"><ul class="pagination">{$pagination}</ul></div>
+				<div class="hidden-xs col-sm-3 col-md-3 col-lg-3 text-right">
+				  <p>{$lang_banlist.total}: <strong>{$nb}</strong></p>
+				  <p>{$lang_banlist.rows} <strong>{$offset+1} - {$end}</strong></p>
+				</div>
+			</div>
+			<form method="post" action="adm/banlist.php">
+			<input type="hidden" name="token" value="{$token}" />
+			<input type="hidden" name="action" value="delete" />
+			<div class="form-group">
+			<button class="action-submit btn btn-danger" data-toggle="tooltip" title="{$lang_banlist.unban_selection}">{$lang_banlist.delete}</button>
+			</div>
+			
+			<table class="table table-striped table-bordered table-hover text-center">
+			<tr>
+			<th><input type="checkbox" id="selectall" /></th>
+			<th>{$lang_banlist.username}</th>
+			<th>{$lang_banlist.email}</th>
+			<th>{$lang_banlist.ip}</th>
+			<th>{$lang_banlist.reason}</th>
+			<th>{$lang_banlist.start}</th>
+			<th>{$lang_banlist.end}</th>
+			</tr>
+			{loop="rows"}
+			<tr>
+			<td><input class="checkbox-item" type="checkbox" name="sup[]" value="{$value.ban_id|display}" /></td>
+			<td><strong>{$value.user_name|display}</strong></td>
+			<td nowrap="nowrap"><span title="{$value.ban_email}">{$value.ban_email|display}</span></td>
+			<td>{$value.ban_ip|display}</td>
+			<td>{$value.ban_reason|display}</td>
+			<td>{function="date('d/m/Y H:i', $value.ban_start)"}</td>
+			<td>{if="$value.ban_end>0"}{function="date('d/m/Y H:i', $value.ban_end)"}<br />({function="ceil(($value.ban_end-$value.ban_start)/86400)"} {$lang_banlist.days}/{if="$value.ban_end-time() > 0"}{function="ceil(($value.ban_end-time())/86400)"} {$lang_banlist.remaining}{else}<span class="text-success">{$lang_banlist.ended}</span>{/if}){else}<span class="text-danger">{$lang_banlist.definitive}</span>{/if}</td>
+			</tr>
+			{/loop}
+			</table>
+			</form>
+			<div class="row">
+				<div class="col-sm-9 col-md-9 col-lg-9"><ul class="pagination">{$pagination}</ul></div>
+				<div class="hidden-xs col-sm-3 col-md-3 col-lg-3 text-right">
+				  <p>{$lang_banlist.total}: <strong>{$nb}</strong></p>
+				  <p>{$lang_banlist.rows} <strong>{$offset+1} - {$end}</strong></p>
+				</div>
+			</div>
+			<script>
+			var text_action_confirmation = '{$lang_banlist.confirm_action|escape_quotes}';
+			var text_select_element = '{$lang_banlist.select_element|escape_quotes}';
+			var text_select_action = '{$lang_banlist.select_action|escape_quotes}';
+			var text_cancel = '{$lang_banlist.cancel|escape_quotes}';
+			</script>
+			<div id="dialog-confirm" title="{$lang_banlist.alert}"></div>
+			{elseif="!empty($search.keywords)"}
+			<div class="alert alert-warning text-center">{$lang_banlist.search_no_result}</div>
+			{/if}
+			{else}
+			<div class="alert alert-danger text-center">{$lang_banlist.no_data}</div>
+			{/if}
+			</div>
+			</div>
+		</div>
+		
+		<div class="col-sm-3 col-sm-pull-9 col-md-3 col-md-pull-6 col-lg-2 col-lg-pull-4">
+			<div class="list-group">
+			<a class="list-group-item" href="adm/users.php">{$lang_menu_top.users}</a>
+			<a class="list-group-item active" href="adm/banlist.php">{$lang_banlist.banlist}</a>
+			<a class="list-group-item" href="adm/avatars.php">{$lang_banlist.avatars}</a>
+			</div>
+		</div>
+	</div>
+</div>
+{include="footer"}

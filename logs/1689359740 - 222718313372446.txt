@@ -1,0 +1,6 @@
+PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42S22]: Column not found: 1054 Champ 'user_id' inconnu dans order clause' in C:\wamp64\www\forum\includes\functions\pm.php:32
+Stack trace:
+#0 C:\wamp64\www\forum\includes\functions\pm.php(32): execute()
+#1 C:\wamp64\www\forum\pm.php(86): get_rows(integer, integer, array, string)
+#2 {main}
+  thrown in C:\wamp64\www\forum\includes\functions\pm.php on line 32

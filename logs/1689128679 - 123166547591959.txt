@@ -1,0 +1,6 @@
+PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42S02]: Base table or view not found: 1146 La table 'forum.subscriptions' n'existe pas' in C:\wamp64\www\forum\includes\functions\subscriptions.php:6
+Stack trace:
+#0 C:\wamp64\www\forum\includes\functions\subscriptions.php(6): execute(array)
+#1 C:\wamp64\www\forum\subscriptions.php(10): count_rows()
+#2 {main}
+  thrown in C:\wamp64\www\forum\includes\functions\subscriptions.php on line 6

@@ -1,0 +1,21 @@
+ErrorDocument 404 /not_found
+ErrorDocument 500 /internal_error
+
+<IfModule mod_rewrite.c>
+	Options +FollowSymLinks -MultiViews
+	RewriteEngine On
+	RewriteRule ^forum/([a-z0-9-]*)/([0-9]*)/([0-9]*)$ viewforum.php?slug=$1&id=$2&page=$3 [L]
+	RewriteRule ^topic/([a-z0-9-]*)/([0-9]*)/([0-9]*)$ viewtopic.php?slug=$1&id=$2&page=$3 [L]
+	RewriteRule ^articles/([a-z0-9-]*)/([0-9]*)/([0-9]*)$ articles.php?slug=$1&id=$2&page=$3 [L]
+	RewriteRule ^article/([a-z0-9-]*)/([0-9]*)$ viewarticle.php?slug=$1&id=$2 [L]
+	RewriteRule ^profil/([a-z0-9-]*)$ viewprofile.php?user=$1 [L]
+	RewriteRule ^(index|forums|viewonline|not_found|internal_error|posting|articles|register|login|recover|logout|settings|notifications|subscriptions|alert|avatars|smileys|pm|viewpm|newpm|blacklist)$ $1.php [L]
+</IfModule>
+<Files "config.php">
+	Order Allow,Deny
+	Deny from All
+</Files>
+<Files "core.php">
+	Order Allow,Deny
+	Deny from All
+</Files>

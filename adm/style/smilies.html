@@ -1,0 +1,83 @@
+{include="header"}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-9 col-sm-push-3 col-md-7 col-md-push-4 col-lg-6 col-lg-push-4">
+			<ol class="breadcrumb">
+			  <li><a href="adm/index.php">{$lang_menu_top.admin_cp}</a></li>
+			  <li><a href="adm/forums.php">{$lang_smilies.manage_forums}</a></li>
+			  <li class="active">{$lang_smilies.smilies}</li>
+			</ol>
+			<div class="panel panel-default">
+			<div class="panel-body">
+			<p class="text-muted">{$lang_smilies.page_description}</p>
+			{if="$nb > 0"}
+			<form method="post" action="adm/smilies.php">
+			<input type="hidden" name="token" value="{$token2}" />
+			<div class="form-group">
+			<div class="form-inline">
+			<select class="form-control input-sm" name="action">
+			<option>{$lang_smilies.action}</option>
+			<option value="set_order">{$lang_smilies.modify_order}</option>
+			<option value="delete">{$lang_smilies.remove}</option>
+			</select>
+			<button class="action-submit btn btn-sm btn-success">{$lang_smilies.validate}</button>
+			</div>
+			</div>
+			<table class="table table-striped table-bordered table-hover text-center">
+			<tr>
+			  <th><input type="checkbox" id="selectall" /></th>
+			  <th>{$lang_smilies.smiley}</th>
+			  <th>{$lang_smilies.code}</th>
+			  <th>&nbsp;</th>
+			  <th>{$lang_smilies.name}</th>
+			  <th>{$lang_smilies.organise}</th>
+			  <th>{$lang_smilies.order}</th>
+			</tr>
+			{loop="rows"}
+			<tr>
+			  <td><input class="checkbox-item" type="checkbox" name="sup[]" value="{$value.smiley_id|intval}" /></td>
+			  <td><img src="/gallery/smilies/{$value.smiley_filename|display}" alt="{$value.smiley_code|display}" /></td>
+			  <td class="code">{$value.smiley_code|display}</td>
+			  <td><a href="adm/smilies.php?action=edit&amp;id={$value.smiley_id|intval}&amp;token={$token}" class="edit-code btn btn-success btn-xs" data-toggle="tooltip" title="{$lang_smilies.edit_code}"><span class="glyphicon glyphicon-cog"></span></a></td>
+			  <td>{$value.smiley_filename|display}</td>
+			  <td>
+			    {if="$value.smiley_order >= $nb"}
+				<a href="#" class="btn btn-info btn-xs disabled"><span class="glyphicon glyphicon-triangle-bottom"></span></a>
+				{else}
+				<a href="adm/smilies.php?id={$value.smiley_id|intval}&amp;action=order_down&amp;token={$token}" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-triangle-bottom"></span></a>
+				{/if}
+				{if="$value.smiley_order == 1"}
+				<a href="#" class="btn btn-info btn-xs disabled"><span class="glyphicon glyphicon-triangle-top"></span></a>
+				{else}
+				<a href="adm/smilies.php?id={$value.smiley_id|intval}&amp;action=order_up&amp;token={$token}" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-triangle-top"></span></a>
+				{/if}
+			  </td>
+			  <td><input class="form-control input-sm" type="text" name="order[{$value.smiley_id|intval}]" value="{$value.smiley_order|intval}" /></td>
+			</tr>
+			{/loop}
+			</table>
+			</form>
+			<script>
+			var text_action_confirmation = '{$lang_smilies.confirm_action|escape_quotes}';
+			var text_select_element = '{$lang_smilies.select_element|escape_quotes}';
+			var text_select_action = '{$lang_smilies.select_action|escape_quotes}';
+			var text_cancel = '{$lang_smilies.cancel|escape_quotes}';
+			</script>
+			<div id="dialog-confirm" title="{$lang_smilies.alert}"></div>
+			{else}
+			<div class="alert alert-warning text-center">{$lang_smilies.no_smiley}</div>
+			{/if}
+			</div>
+			</div>
+		</div>
+
+		<div class="col-sm-3 col-sm-pull-9 col-md-3 col-md-pull-6 col-lg-2 col-lg-pull-4">
+			<div class="list-group">
+			<a class="list-group-item" href="adm/categories.php">{$lang_menu_top.forums}</a>
+			<a class="list-group-item active" href="adm/smilies.php">{$lang_smilies.smilies}</a>
+			<a class="list-group-item" href="adm/smilies-add.php">{$lang_smilies.add_smilies}</a>
+			</div>
+		</div>
+	</div>
+</div>
+{include="footer"}

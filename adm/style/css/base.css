@@ -1,0 +1,143 @@
+a:hover, a:link, a:focus {
+	text-decoration: none;
+}
+label {
+	cursor: pointer;
+}
+th {
+	text-align: center;
+}
+textarea {
+	min-width: 100%;
+	max-width: 100%;
+}
+body {
+	font: 13px Arial;
+}
+footer {
+	margin-bottom: 10px;
+	text-align: center;
+	font-size: 11px;
+	color: #333;
+}
+/* bootstrap additional rules */
+.form-search {
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+	border-bottom: solid 1px #EEE;
+}
+.moderator {
+	color: #d00;
+}
+.image-upload {
+	max-width:100px;
+	max-height:100px;
+}
+/* forums posts style */
+.post {
+	margin-bottom: 13px;
+	padding: 10px;
+}
+.post1 {
+	background-color: #f9f9f9;
+	border: solid 1px #ddd;
+}
+.post2 {
+	background-color: #eef5fc;
+	border: solid 1px #bcd2e9;
+}
+.post_invisible {
+	background-color: #b6bdc8;
+	border: solid 1px #969daa;
+}
+.post_alert {
+	background-color: #fff;
+	border: solid 3px #f00;
+}
+.post_alert_invisible {
+	background-color: #b6bdc8;
+	border: solid 3px #f00;
+}
+.post .post_header {
+	padding-bottom: 3px;
+	margin-bottom: 3px;
+	border-bottom: 1px dotted #999;
+	border-width: 1px;
+}
+.post .post_body {
+	padding: 5px 0;
+}
+.post .post_footer {
+	padding-top: 3px;
+}
+.post .post_user {
+	display: inline-block;
+}
+.post .avatar {
+	width: 50px;
+	border: solid 3px #fff;
+	vertical-align: 0;
+}
+.post .username, .post input[type="checkbox"] {
+	vertical-align: 35px;
+}
+.post .username strong {
+	color: #000;
+}
+.post .username strong.moderator {
+	color: #d00;
+}
+.post .username strong.admin {
+	color: #d00;
+}
+.post .post_date {
+	display: inline-block;
+	float: right;
+	text-align: right;
+}
+.post .post_edit {
+	background: url(./styles/base/images/separator_grey.png) left top repeat-x;
+	font-style: italic;
+	color: #666;
+}
+/* posts bbcode stylization */
+.post .post_body blockquote {
+	font: 13px Arial;
+	border: 1px solid #DDD;
+	background-color: #FBFBFB;
+	padding: 10px;
+}
+.post .post_body .spoiler {
+	border: 1px solid #DDD;
+	background-color: #FBFBFB;
+	padding: 10px;
+}
+.post .post_body .spoiler-top {
+	font-weight: bold;
+}
+.post .post_body .spoiler-box {
+	padding-top: 5px;
+}
+.post .post_body .spoiler-visible {
+	display: block;
+}
+.post .post_body .spoiler-hidden {
+	display: none;
+}
+/* jquery plugins */
+.form-edit input {
+	width: 100%;
+}
+#queue {
+	border: 1px solid #E5E5E5;
+	height: 250px;
+	overflow: auto;
+	margin-bottom: 10px;
+	padding: 0 3px 3px;
+}
+#captcha {
+	border: solid 1px #ddd;
+}
+input[type=file] {
+	cursor: pointer;
+}

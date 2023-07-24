@@ -1,0 +1,6 @@
+PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42S22]: Column not found: 1054 Champ 'forum_pm.pm_name' inconnu dans where clause' in C:\wamp64\www\forum\includes\functions\pm.php:13
+Stack trace:
+#0 C:\wamp64\www\forum\includes\functions\pm.php(13): execute()
+#1 C:\wamp64\www\forum\pm.php(69): count_rows(string, array, string, boolean)
+#2 {main}
+  thrown in C:\wamp64\www\forum\includes\functions\pm.php on line 13

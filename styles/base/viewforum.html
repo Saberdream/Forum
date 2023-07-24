@@ -1,0 +1,194 @@
+{include="header"}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-9 col-sm-push-3 col-md-7 col-md-push-4 col-lg-6 col-lg-push-4">
+			<ol class="breadcrumb">
+			  <li><a href="forums"><span class="glyphicon glyphicon-th-list"></span> {$lang_forum.forums}</a></li>
+			  <li class="active">{$forum.cat_name|display}</li>
+			  {if="$user.user_rank >= $forum.forum_auth_view"}<li class="active"><a href="forum/{$forum.forum_slug}/{$forum.forum_id}/1">{$lang_forum.forum} {$forum.forum_name|display}</a></li>{/if}
+			</ol>
+			{if="$user.user_rank >= $forum.forum_auth_view"}
+			<h4 class="text-primary">{$lang_forum.forum} : {$forum.forum_name|display}</h4>
+			
+			<div class="row">
+				<div class="hidden-xs col-sm-2 col-md-2 col-lg-2">
+					{if="!empty($search.keywords)"}
+					<a class="btn btn-black btn-sm pull-left" href="forum/{$forum.forum_slug}/{$forum.forum_id}/1"><b>{$lang_forum.back|mb_strtoupper}</b></a>
+					{elseif="$user.user_rank >= $forum.forum_auth_topic"}
+					<a class="btn btn-black btn-sm pull-left" href="{$current_url}#form_post#"><b>{$lang_forum.new|mb_strtoupper}</b></a>
+					{/if}
+				</div>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 text-center">
+					{if="$total > 0"}
+					<form class="form-inline forum-form-search" method="get" action="viewforum.php?id={$forum.forum_id}">
+					<input type="hidden" name="id" value="{$forum.forum_id}" />
+					  <div class="form-group">
+						<input type="text" name="search" id="search" value="{$search.keywords|display}" class="form-control input-sm" placeholder="{$lang_forum.search}" />
+					  </div>
+					  <div class="form-group">
+						<select class="form-control input-sm" name="type">
+						  {loop="search.types"}
+						  <option value="{$key}"{if="!empty($search.keywords) && $search.type==$key"} selected{/if}>{$value}</option>
+						  {/loop}
+						</select>
+					  </div>
+					  <div class="form-group">
+						<label for="exact"><input type="checkbox" name="exact" id="exact" value="1" {if="!empty($search.keywords) && $search.exact"}checked {/if}/> {$lang_forum.exact}</label>
+					    <button class="btn btn-primary btn-sm" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+					  </div>
+					</form>
+					{/if}
+				</div>
+				<div class="hidden-xs col-sm-2 col-md-2 col-lg-2 text-right">
+					<a class="btn btn-black btn-sm pull-right" href="{$current_url}#"><b>{$lang_forum.refresh|mb_strtoupper}</b></a>
+				</div>
+			</div>
+			<div class="forum-separator"></div>
+			
+			{if="$nb > 0"}
+			{if="!empty($search.keywords)"}
+			<p class="text-center">{$lang_forum.search_nb_results}</p>
+			{/if}
+			<div class="text-center"><ul class="forum-pagination">{$pagination}</ul></div>
+			{if="$moderator"}
+			<form method="post" class="moder-form" action="mod.php?forum={$forum.forum_id}&amp;token={$token}">
+			<div class="navbar-fixed-bottom text-center" style="display:none;background-color:#eee;opacity:0.9;padding:10px;">
+			<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<div class="form-inline">
+				<div class="form-group">
+					<select class="form-control input-sm" name="action">
+					<option value="">{$lang_forum.action}</option>
+					{if="$user.user_rank >= $forum.forum_auth_delete_topic"}<option value="delete">{$lang_forum.delete}</option>{/if}
+					{if="$user.user_rank >= $forum.forum_auth_lock_topic"}<option value="lock">{$lang_forum.lock}</option>
+					<option value="unlock">{$lang_forum.unlock}</option>{/if}
+					{if="$user.user_rank >= $forum.forum_auth_stick_topic"}<option value="stick">{$lang_forum.stick}</option>
+					<option value="unstick">{$lang_forum.unstick}</option>{/if}
+					{if="$user.user_rank >= $forum.forum_auth_restore_topic"}<option value="restore">{$lang_forum.restore}</option>{/if}
+					{if="$user.user_rank >= $forum.forum_auth_ban"}<option value="ban">{$lang_forum.ban}</option>{/if}
+					</select>
+				</div>
+				<div class="form-group">
+					<button class="action-submit btn btn-sm btn-primary">{$lang_forum.validate}</button>
+				</div>
+			</div>
+			</div>
+			{/if}
+			<table class="list-topics table text-center">
+			<tr>
+			{if="$moderator"}<th class="check"><input type="checkbox" id="selectall" /></th>{/if}
+			{if="$moderator && ($user.user_rank >= $forum.forum_auth_delete_topic || $user.user_rank >= $forum.forum_auth_restore_topic)"}<th class="bt hidden-xs">&nbsp;</th>{/if}
+			<th>{$lang_forum.subject}</th>
+			{if="$moderator && $user.user_rank >= $forum.forum_auth_ban"}<th class="bt hidden-xs">&nbsp;</th>{/if}
+			<th class="author hidden-xs">{$lang_forum.author}</th>
+			<th class="nb hidden-xs">{$lang_forum.number}</th>
+			<th class="last hidden-xs">{$lang_forum.last}</th>
+			</tr>
+			{loop="rows"}
+			<tr{if="$value.topic_invisible == 1"} class="topic_invisible"{/if}>
+			{if="$moderator"}<td><input class="checkbox-item" type="checkbox" name="topic[]" value="{$value.topic_id}" /></td>{/if}
+			{if="$moderator && ($user.user_rank >= $forum.forum_auth_delete_topic || $user.user_rank >= $forum.forum_auth_restore_topic)"}<td class="hidden-xs">{if="$value.topic_invisible == 0 && $user.user_rank >= $forum.forum_auth_delete_topic"}<a class="bt-forum" href="mod.php?forum={$forum.forum_id}&amp;topic={$value.topic_id}&amp;action=delete-topic&amp;token={$token}" title="{$lang_forum.delete_topic}"><img src="images/forum/bt_delete.gif" alt="{$lang_forum.delete}" /></a>{elseif="$user.user_rank >= $forum.forum_auth_restore_topic"}<a class="bt-forum" href="mod.php?forum={$forum.forum_id}&amp;topic={$value.topic_id}&amp;action=restore-topic&amp;token={$token}" title="{$lang_forum.restore_topic}"><img src="images/forum/bt_visible.gif" alt="{$lang_forum.restore}" /></a>{/if}</td>{/if}
+			<td class="topic-name text-left {if="$value.topic_invisible == 1"}topic_invisible{else}{if="$value.topic_sticky == 1"}{if="$value.topic_lock == 1"}topic_sticky_lock{else}topic_sticky{/if}{else}{if="$value.topic_lock == 1"}topic_lock{else}{if="$value.topic_posts >= 20"}topic2{else}topic1{/if}{/if}{/if}{/if}"><a href="topic/{$value.topic_slug}/{$value.topic_id}/1">{$value.topic_name|display}</a></td>
+			{if="$moderator && $user.user_rank >= $forum.forum_auth_ban"}<td class="hidden-xs"><a class="bt-forum" href="mod.php?forum={$forum.forum_id}&amp;topic={$value.topic_id}&amp;userid={$value.topic_userid}&amp;action=ban-user&amp;token={$token}" title="{$lang_forum.ban_user}"><img src="images/forum/bt_bann_defi.gif" alt="{$lang_forum.ban}" /></a></td>{/if}
+			<td class="small hidden-xs">{if="$value.topic_rank >= ADMIN && $value.user_rank >= ADMIN"}<span class="admin">{$value.topic_username|display}</span>{elseif="$value.topic_rank == MODERATOR && $value.user_rank >= MODERATOR"}<span class="moderator">{$value.topic_username|display}</span>{else}{$value.topic_username|display}{/if}</td>
+			<td class="small hidden-xs">{$value.topic_posts_visible-1}</td>
+			<td class="small hidden-xs"><a href="topic/{$value.topic_slug}/{$value.topic_id}/{if="$moderator && $user.user_rank>=$forum.forum_auth_restore_post"}{if="$value.topic_posts>$posts_per_page"}{function="ceil($value.topic_posts/$posts_per_page)"}{else}1{/if}{else}{if="$value.topic_posts_visible>$posts_per_page"}{function="ceil($value.topic_posts_visible/$posts_per_page)"}{else}1{/if}{/if}" data-toggle="tooltip" data-placement="right" title="Accéder à la dernière page">{function="date('d/m/Y H:i', $value.topic_last)"}</a></td>
+			</tr>
+			{/loop}
+			</table>
+			{if="$moderator"}
+			</form>
+			{/if}
+			<div id="dialog-confirm" title="{$lang_forum.alert}"></div>
+			<script>
+			var text_enlarge_image = '{$lang_forum.click_to_enlarge|escape_quotes}';
+			var text_action_confirmation = '{$lang_forum.confirm_action|escape_quotes}';
+			var text_select_element = '{$lang_forum.select_element|escape_quotes}';
+			var text_select_action = '{$lang_forum.select_action|escape_quotes}';
+			var text_cancel = '{$lang_forum.cancel|escape_quotes}';
+			var text_spoiler_show = '{$lang_forum.show|escape_quotes}';
+			var text_spoiler_hide = '{$lang_forum.hide|escape_quotes}';
+			</script>
+			<div class="text-center"><ul class="forum-pagination">{$pagination}</ul></div>
+			<div class="forum-separator"></div>
+			{elseif="!empty($search.keywords)"}
+			<div class="alert alert-warning text-center">{$lang_forum.search_no_results}</div>
+			{else}
+			<div class="alert alert-warning text-center">{$lang_forum.no_topic}</div>
+			{/if}
+
+			{if="$user.user_rank >= $forum.forum_auth_topic"}
+			<div id="message-preview" class="post post1">
+			  <div class="post_header"><h4>{$lang_forum.preview}</h4></div>
+			  <div class="post_body"></div>
+			</div>
+			<input type="hidden" name="token_preview" value="{$preview_token}" />
+			{/if}
+
+			<div class="panel panel-default">
+			<div class="panel-heading"><b>{$lang_forum.create_new_topic}</b></div>
+			<div class="panel-body">
+			{if="$user.user_rank >= $forum.forum_auth_topic"}
+			<form class="form-horizontal" id="form_post" method="post" action="posting">
+			<div class="form-group">
+			<div class="col-sm-12 col-md-12 col-lg-12">
+			<label for="subject" class="sr-only">{$lang_forum.subject}</label>
+			<input class="form-control" type="text" name="subject" id="subject" placeholder="{$lang_forum.type_subject}" />
+			</div>
+			</div>
+			<div class="form-group">
+			<div class="col-sm-12 col-md-12 col-lg-12">
+			<label for="message" class="text-danger">{$lang_forum.message}</label>
+			{include="bbcode"}
+			<textarea class="form-control" rows="4" name="message" id="message" placeholder="{$lang_forum.message_rules}"></textarea>
+			</div>
+			</div>
+			{if="$form.captcha"}
+			<div class="form-group">
+			<div class="col-sm-12 col-md-6 col-lg-4">
+			<a class="btn btn-info btn-xs" onclick="document.getElementById('captcha').src=document.getElementById('captcha').src+'?'+Math.random(); return false">{$lang_forum.request_new_code}</a>
+			</div>
+			</div>
+			<div class="form-group">
+			<div class="col-sm-12 col-md-6 col-lg-4">
+			<img src="/captcha.php" alt="Captcha" id="captcha" />
+			</div>
+			</div>
+			<div class="form-group">
+			<div class="col-sm-12 col-md-6 col-lg-4">
+			<input type="text" class="form-control" name="captcha" placeholder="{$lang_forum.copy_code}" autocomplete="off" />
+			</div>
+			</div>
+			{/if}
+			<div class="form-group">
+			<div class="col-sm-12 col-md-6 col-lg-4">
+			<button type="submit" class="btn btn-warning">{$lang_forum.post}</button>
+			<button type="button" class="btn btn-primary" id="button-preview"><i class="fa fa-eye"></i> {$lang_forum.preview}</button>
+			</div>
+			</div>
+			<input type="hidden" name="token" value="{$form.token}" />
+			<input type="hidden" name="forum" value="{$forum.forum_id}" />
+			<input type="hidden" name="mode" value="new" />
+			</form>
+			{elseif="$user.user_rank == GUEST"}
+			<div class="alert alert-warning text-center">{$lang_forum.login_required}</div>
+			{else}
+			<div class="alert alert-warning text-center">{$lang_forum.not_authorized_new_topic}</div>
+			{/if}
+			</div>
+			</div>
+			{else}
+			<div class="alert alert-warning text-center">{$lang_forum.not_authorized_access}</div>
+			{/if}
+		</div>
+		
+		<div class="col-sm-3 col-sm-pull-9 col-md-3 col-md-pull-6 col-lg-2 col-lg-pull-4">
+			<div class="list-group">
+			<a class="list-group-item" href="index">{$lang_menu_top.home}</a>
+			<a class="list-group-item" href="forums">{$lang_forum.all_forums}</a>
+			<a class="list-group-item" href="subscriptions">{$lang_forum.followed_topics}</a>
+			<a class="list-group-item" href="viewonline">{$lang_forum.users_connected}</a>
+			</div>
+		</div>
+	</div>
+</div>
+{include="footer"}

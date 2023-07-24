@@ -1,0 +1,99 @@
+{include="header"}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-9 col-sm-push-3 col-md-7 col-md-push-4 col-lg-6 col-lg-push-4">
+			<ol class="breadcrumb">
+			  <li><a href="forums"><span class="glyphicon glyphicon-th-list"></span> {$lang_posting.forums}</a></li>
+			  <li class="active">{$forum.cat_name|display}</li>
+			  {if="$user.user_rank >= $forum.forum_auth_view"}<li class="active"><a href="forum/{$forum.forum_slug}/{$forum.forum_id}/1">{$lang_posting.forum} {$forum.forum_name|display}</a></li>{/if}
+			</ol>
+			{if="$user.user_rank >= $forum.forum_auth_view"}
+			{if="$user.user_rank == GUEST"}
+			<div class="alert alert-warning text-center">{$lang_posting.not_logged_in}</div>
+			{elseif="$forum.forum_auth_topic > $user.user_rank && $mode == 'new'"}
+			<div class="alert alert-warning text-center">{$lang_posting.not_authorized_newtopic}</div>
+			{elseif="$forum.forum_auth_reply > $user.user_rank && $mode == 'reply'"}
+			<div class="alert alert-warning text-center">{$lang_posting.not_authorized_reply}</div>
+			{else}
+			<div id="message-preview" class="post post1">
+			  <div class="post_header"><h4>{$lang_posting.preview}</h4></div>
+			  <div class="post_body"></div>
+			</div>
+			<input type="hidden" name="token_preview" value="{$preview_token}" />
+
+			<div class="panel panel-default">
+			<div class="panel-heading"><b>{if="$mode == 'new'"}{$lang_posting.create_new_topic}{elseif="$mode == 'reply'"}{$lang_posting.reply_topic}{/if}</b></div>
+			<div class="panel-body">
+			{if="!empty($form.error)"}
+			<div class="alert alert-danger">
+			{$lang_posting.errors_detected}:
+			<ul>{loop="form.error"}<li>{$value}</li>{/loop}</ul>
+			</div>
+			{/if}
+			<form class="form-horizontal" method="post" action="posting">
+			{if="$mode == 'new'"}
+			<div class="form-group">
+			<div class="col-sm-12 col-md-12 col-lg-12">
+			<label for="subject" class="sr-only">{$lang_posting.subject}</label>
+			<input class="form-control" type="text" name="subject" id="subject" value="{$form.subject|display}" placeholder="{$lang_posting.type_subject}" />
+			</div>
+			</div>
+			{/if}
+			<div class="form-group">
+			<div class="col-sm-12 col-md-12 col-lg-12">
+			<label for="message" class="text-danger">{$lang_posting.message}</label>
+			{include="bbcode"}
+			<textarea class="form-control" rows="4" name="message" id="message" placeholder="{$lang_posting.message_rules}">{$form.message|display}</textarea>
+			</div>
+			</div>
+			{if="$form.captcha"}
+			<div class="form-group">
+			<div class="col-sm-12 col-md-6 col-lg-4">
+			<a class="btn btn-info btn-xs" onclick="document.getElementById('captcha').src=document.getElementById('captcha').src+'?'+Math.random(); return false">{$lang_posting.request_new_code}</a>
+			</div>
+			</div>
+			<div class="form-group">
+			<div class="col-sm-12 col-md-6 col-lg-4">
+			<img src="/captcha.php" alt="Captcha" id="captcha" />
+			</div>
+			</div>
+			<div class="form-group">
+			<div class="col-sm-12 col-md-6 col-lg-4">
+			<input type="text" class="form-control" name="captcha" placeholder="{$lang_posting.copy_code}" autocomplete="off" />
+			</div>
+			</div>
+			{/if}
+			<div class="form-group">
+			<div class="col-sm-12 col-md-6 col-lg-6">
+			<button type="submit" class="btn btn-warning">{$lang_posting.post}</button>
+			<button type="button" class="btn btn-primary" id="button-preview"><i class="fa fa-eye"></i> {$lang_posting.preview}</button>
+			<a class="btn btn-black" href="{if="$mode == 'new'"}forum/{$forum.forum_slug}/{$forum.forum_id}/1{elseif="$mode == 'reply' && !empty($topic)"}topic/{$topic.topic_slug}/{$topic.topic_id}/{$last_page}{else}forums{/if}">{$lang_posting.back}</a>
+			</div>
+			</div>
+			<input type="hidden" name="token" value="{$form.token}" />
+			<input type="hidden" name="mode" value="{$mode}" />
+			<input type="hidden" name="forum" value="{$forum.forum_id}" />
+			{if="$mode == 'reply' && !empty($topic)"}
+			<input type="hidden" name="topic" value="{$topic.topic_id}" />
+			<input type="hidden" name="page" value="{$last_page}" />
+			{/if}
+			</form>
+			</div>
+			</div>
+			{/if}
+			{else}
+			<div class="alert alert-warning text-center">{$lang_posting.not_authorized_access}</div>
+			{/if}
+		</div>
+		
+		<div class="col-sm-3 col-sm-pull-9 col-md-3 col-md-pull-6 col-lg-2 col-lg-pull-4">
+			<div class="list-group">
+			<a class="list-group-item" href="index">{$lang_menu_top.home}</a>
+			<a class="list-group-item" href="forums">{$lang_posting.all_forums}</a>
+			<a class="list-group-item" href="subscriptions">{$lang_posting.followed_topics}</a>
+			<a class="list-group-item" href="viewonline">{$lang_posting.users_connected}</a>
+			</div>
+		</div>
+	</div>
+</div>
+{include="footer"}

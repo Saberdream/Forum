@@ -1,0 +1,6 @@
+PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[22001]: String data, right truncated: 1406 Data too long for column 'user_password' at row 1' in C:\wamp64\www\forum\includes\functions\adm\user-edit.php:22
+Stack trace:
+#0 C:\wamp64\www\forum\includes\functions\adm\user-edit.php(22): execute(array)
+#1 C:\wamp64\www\forum\adm\user-edit.php(87): update_user(string, array)
+#2 {main}
+  thrown in C:\wamp64\www\forum\includes\functions\adm\user-edit.php on line 22

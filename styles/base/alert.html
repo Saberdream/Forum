@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="{$site_lang}">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{$lang_alert.report_post} - {$site_name|display}</title>
+<meta name="description" content="" />
+<link rel="icon" type="image/png" href="/favicon.ico" />
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+<style type="text/css">
+a:hover, a:link, a:focus {
+	text-decoration: none;
+}
+th {
+	text-align: center;
+}
+form {
+	margin-bottom: 10px;
+}
+body {
+	padding: 10px 0;
+}
+</style>
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<div class="panel panel-default">
+				<div class="panel-heading">{$lang_alert.notify_administrator}</div>
+				<div class="panel-body">
+				{if="$user.user_rank >= $forum.auth_view && $user.user_rank >= $forum.auth_alert"}
+				{if="$topic.invisible == 0 && $post.invisible == 0"}
+				{if="$nb == 0"}
+				{if="!empty($form.ok)"}
+				<div class="alert alert-success text-center">{$form.ok}</div>
+				{else}
+				{if="!empty($form.error)"}<div class="alert alert-danger text-center">{$form.error}</div>{/if}
+				<p class="text-muted">{$lang_alert.alert_info}</p>
+				<form class="form-inline" method="post" action="alert?postid={$post.id}">
+				<div class="form-group">
+				<label class="sr-only" for="reason">{$lang_alert.reason}:</label>
+				<select class="form-control input-sm" name="reason" id="reason">
+				<option value="">{$lang_alert.choose_reason}</option>
+				{loop="reasons"}
+				<option value="{$value.reason_id}">{$value.reason_name|display}</option>
+				{/loop}
+				</select>
+				</div>
+				<button type="submit" class="btn btn-sm btn-default">{$lang_alert.validate}</button>
+				<input type="hidden" name="token" value="{$form.token}" />
+				</form>
+				
+				<table class="table table-striped table-bordered table-hover text-center">
+				<tr>
+				  <th>{$lang_alert.reason}</th>
+				  <th>{$lang_alert.description}</th>
+				</tr>
+				{loop="reasons"}
+				<tr>
+				  <td>{$value.reason_name|display}</td>
+				  <td class="text-left">{$value.reason_desc|display}</td>
+				</tr>
+				{/loop}
+				</table>
+				{/if}
+				{else}
+				<div class="alert alert-danger text-center">{$lang_alert.post_already_reported}</div>
+				{/if}
+				{else}
+				<div class="alert alert-danger text-center">{$lang_alert.post_not_exists}</div>
+				{/if}
+				{else}
+				<div class="alert alert-danger text-center">{$lang_alert.not_authorized_report}</div>
+				{/if}
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,6 @@
+PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Le champ 'file_ip' ne peut être vide (null)' in C:\wamp64\www\forum\includes\functions\avatars.php:104
+Stack trace:
+#0 C:\wamp64\www\forum\includes\functions\avatars.php(104): execute(array)
+#1 C:\wamp64\www\forum\avatars.php(68): insert_rows(string, string, integer, integer, integer, string, integer, NULL)
+#2 {main}
+  thrown in C:\wamp64\www\forum\includes\functions\avatars.php on line 104
