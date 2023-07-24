@@ -48,6 +48,7 @@ $lang['cat_names'] = array (
 */
 $lang['config_names'] = array (
 	'site_name'					=> 'Nom du site',
+	'site_description'			=> 'Description du site',
 	'domain_name'				=> 'Domaine du site',
 	'site_mail'					=> 'Email du site',
 	'default_style'				=> 'Style par défaut',
@@ -209,6 +210,7 @@ $lang['config_errors'] = array(
 	'site_closed_reason'		=> 'La raison de la fermeture est trop longue.',
 	'site_mail'					=> 'L\'email du site est invalide, l\'email doit être au format exemple@domaine.com.',
 	'site_name'					=> 'Vous devez entrer le nom du site, celui-ci doit comporter 100 caractères ou moins.',
+	'site_description'			=> 'La description du site doit comporter moins de 1000 caractères.',
 	'site_open'					=> 'Les paramètres de fermeture du site sont invalides.',
 	'topics_per_page'			=> 'Le nombre de sujets par page doit être un nombre valide.',
 	'topic_flood_time'			=> 'Le temps de flood des sujets doit être un nombre valide.',

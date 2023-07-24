@@ -12,6 +12,7 @@ $lang['menu_top'] = array (
 	'users'						=> 'Utilisateurs',
 	'images'					=> 'Images',
 	'system'					=> 'Système',
+	'configuration'				=> 'Configuration',
 	'alerts'					=> 'Alertes',
 	'welcome'					=> 'Bievenue',
 	'modify_account'			=> 'Modifier votre compte',

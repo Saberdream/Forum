@@ -25,6 +25,14 @@ class RainTPL{
 
 
 		/**
+		 * Parent template directory if the template is inherited of another template
+		 *
+		 * @var string
+		 */
+		static $parent_tpl_dir = null;
+
+
+		/**
 		 * Cache directory. Is the directory where RainTPL will compile the template and save the cache
 		 *
 		 * @var string
@@ -268,10 +276,18 @@ class RainTPL{
 			$tpl_basedir                        = strpos($tpl_name,"/") ? dirname($tpl_name) . '/' : null;						// template basedirectory
 			$this->tpl['template_directory']    = self::$tpl_dir . $tpl_basedir;								// template directory
 			$this->tpl['tpl_filename']          = self::$root_dir . $this->tpl['template_directory'] . $tpl_basename . '.' . self::$tpl_ext;    // template filename
+
+
+			if(self::$parent_tpl_dir != null && !file_exists($this->tpl[tpl_filename])) {
+				$this->tpl['template_directory'] = self::$parent_tpl_dir . $tpl_basedir;
+				$this->tpl['tpl_filename']		= self::$root_dir . $this->tpl['template_directory'] . $tpl_basename . '.' . self::$tpl_ext; // inherited template filename
+			}
+			
+
 			$temp_compiled_filename             = self::$root_dir . self::$cache_dir . $tpl_basename . "." . md5( $this->tpl['template_directory'] . serialize(self::$config_name_sum));
 			$this->tpl['compiled_filename']     = $temp_compiled_filename . '.rtpl.php';	// cache filename
 			$this->tpl['cache_filename']        = $temp_compiled_filename . '.s_' . $this->cache_id . '.rtpl.php';	// static cache filename
-                        $this->tpl['checked']               = true;
+            $this->tpl['checked']               = true;
                         
 			// if the template doesn't exist and is not an external source throw an error
 			if( self::$check_template_update && !file_exists( $this->tpl['tpl_filename'] ) && !preg_match('/http/', $tpl_name) ){

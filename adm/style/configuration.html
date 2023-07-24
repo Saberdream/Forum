@@ -31,7 +31,15 @@
 				<div class="panel-body" id="configuration_category_{$value.config_catid}" style="display:none;">
 				{$current_cat=$value.cat_name}
 				{/if}
-				{if="$value.config_type == 's'"}
+				{if="$value.config_type == 'b'"}
+					<div class="form-group">
+					<div class="col-xs-12 col-sm-8 col-md-6 col-lg-6">
+					<label for="{$key}">{$value.config_name|display}</label>
+					<select class="form-control input-sm" name="config[{$key}]" id="{$key}">
+					<option value="1"{if="$value.config_value"} selected="selected"{/if}>{$lang_config.yes}</option>
+					<option value="0"{if="!$value.config_value"} selected="selected"{/if}>{$lang_config.no}</option>
+					</select>
+				{else}
 					{if="$value.config_form_type == 'textarea'"}
 					<div class="form-group">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -58,19 +66,6 @@
 					<label for="{$key}">{$value.config_name|display}</label>
 					<input type="text" class="form-control input-sm" name="config[{$key}]" id="{$key}" value="{$value.config_value|display}" />
 					{/if}
-				{elseif="$value.config_type == 'd'"}
-					<div class="form-group">
-					<div class="col-xs-12 col-sm-8 col-md-6 col-lg-6">
-					<label for="{$key}">{$value.config_name|display}</label>
-					<input type="text" class="form-control input-sm" name="config[{$key}]" id="{$key}" value="{$value.config_value|display}" />
-				{elseif="$value.config_type == 'b'"}
-					<div class="form-group">
-					<div class="col-xs-12 col-sm-8 col-md-6 col-lg-6">
-					<label for="{$key}">{$value.config_name|display}</label>
-					<select class="form-control input-sm" name="config[{$key}]" id="{$key}">
-					<option value="1"{if="$value.config_value"} selected="selected"{/if}>{$lang_config.yes}</option>
-					<option value="0"{if="!$value.config_value"} selected="selected"{/if}>{$lang_config.no}</option>
-					</select>
 				{/if}
 					{if="!empty($value.config_description)"}<span class="help-block">{$value.config_description|display}</span>{/if}
 					</div>

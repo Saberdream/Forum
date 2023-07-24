@@ -8,10 +8,8 @@ function encrypt($str) {
 }
 
 function read_config_file() {
-	global $root_path;
-	
-	$config_file = $root_path.'cache/config.dat.ini';
-	
+	$config_file = dirname(__DIR__).'/cache/config.dat.ini';
+
 	if(file_exists($config_file)) {
 		if(!filesize($config_file))
 			die('Error while reading the configuration file.');
@@ -198,12 +196,10 @@ function date_formatted($time) {
 }
 
 function exception_handler($exception) {
-	global $root_path;
-	
     // these are our templates
     $traceline = "#%s %s(%s): %s(%s)";
     $msg = "PHP Fatal error:  Uncaught exception '%s' with message '%s' in %s:%s\nStack trace:\n%s\n  thrown in %s on line %s";
-	$dir = $root_path.'logs/';
+	$dir = dirname(__DIR__).'/logs/';
 	
     // alter your trace as you please, here
     $trace = $exception->getTrace();

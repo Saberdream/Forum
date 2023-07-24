@@ -92,10 +92,10 @@ function bbcode_code($match) {
 }
 
 function smileys($str) {
-	global $dbh, $config, $root_path;
+	global $dbh, $config;
 	
-	$pattern = file_get_contents($root_path.'cache/smilies-pattern.dat');
-	$json = json_decode(file_get_contents($root_path.'gallery/smilies/smilies.json'), true);
+	$pattern = file_get_contents(dirname(dirname(__DIR__)).'/cache/smilies-pattern.dat');
+	$json = json_decode(file_get_contents(dirname(dirname(__DIR__)).'/gallery/smilies/smilies.json'), true);
 	$list = array();
 
 	foreach($json as $key => $value)

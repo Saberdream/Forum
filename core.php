@@ -1,9 +1,9 @@
 <?php
-require $root_path.'includes/constants.php';
-require $root_path.'config.php';
-require $root_path.'includes/functions.php';
-require $root_path.'includes/functions_adm.php';
-require $root_path.'includes/autoload.php';
+require __DIR__.'/includes/constants.php';
+require __DIR__.'/config.php';
+require __DIR__.'/includes/functions.php';
+require __DIR__.'/includes/functions_adm.php';
+require __DIR__.'/includes/autoload.php';
 
 $config = read_config_file();
 $config['table_prefix'] = !empty($config['table_prefix']) ? $config['table_prefix'] : '';
@@ -41,6 +41,9 @@ user::set_settings(array(
 	'table_prefix' => $config['table_prefix']
 ));
 
+if(!isset($in_admin))
+	$in_admin = false;
+
 user::set_dbh($dbh);
 
 $user = new user();
@@ -48,19 +51,19 @@ $user = new user();
 $lang_path = !empty($user->data['user_lang']) ? 'lang/'.$user->data['user_lang'].'/' : 'lang/fr/';
 $style = ($user->data['user_style'] != null && $config['user_style'] == true) ? $user->data['user_style'] : $config['default_style'];
 
+if(!$in_admin)
+	$style_config = parse_ini_file(__DIR__.'/styles/'.$style.'/style.cfg');
+
 if(!empty($user->data['user_timezone']))
 	date_default_timezone_set($user->data['user_timezone']);
 elseif(!empty($config['default_timezone']))
 	date_default_timezone_set($config['default_timezone']);
 
-if(!isset($in_admin))
-	$in_admin = false;
-
 if(($user->data['user_rank'] < ADMIN || !$user->data['admin']) && $in_admin)
 	die(header('Location: ../login?mode=admin'));
 
-include $root_path.$lang_path.($in_admin ? 'adm/' : '').'header.php';
-include $root_path.$lang_path.($in_admin ? 'adm/' : '').'footer.php';
+include __DIR__.'/'.$lang_path.($in_admin ? 'adm/' : '').'header.php';
+include __DIR__.'/'.$lang_path.($in_admin ? 'adm/' : '').'footer.php';
 
 $lang['footer']['developped_by'] = sprintf($lang['footer']['developped_by'], 'Saberdream');
 $lang['footer']['contact'] = sprintf($lang['footer']['contact'], $config['site_mail']);
@@ -68,8 +71,9 @@ $lang['footer']['contact'] = sprintf($lang['footer']['contact'], $config['site_m
 RainTPL::configure(array(
 	'base_url' => $config['server_protocol'].$config['domain_name'].'/',
 	'tpl_dir' => $in_admin ? 'adm/style/' : 'styles/'.$style.'/',
+	// 'parent_tpl_dir' => $in_admin ? 'adm/style/' : 'styles/'.$style.'/',
 	'cache_dir' => 'cache/tpl/',
-	'root_dir' => $root_path,
+	'root_dir' => __DIR__.'/',
 	'path_replace_list' => array('a', 'img', 'link', 'script', 'input', 'form')
 ));
 
@@ -81,6 +85,7 @@ $lang['menu_top']['session_time_left'] = sprintf($lang['menu_top']['session_time
 $tpl->assign(array(
 	'domain_name' => $config['domain_name'],
 	'site_name' => $config['site_name'],
+	'site_description' => $config['site_description'],
 	'site_lang' => !empty($user->data['user_lang']) ? $user->data['user_lang'] : $config['default_lang'],
 	'lang_menu_top' => $lang['menu_top'],
 	'lang_footer' => $lang['footer'],

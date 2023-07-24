@@ -115,6 +115,9 @@ if(!empty($_POST['config']) && is_array($_POST['config'])) {
 			if(isset($_POST['config']['site_name']) && (empty($_POST['config']['site_name']) || mb_strlen($_POST['config']['site_name'], 'UTF-8') > 100))
 				$error[] = $lang['config_errors']['site_name'];
 			
+			if(isset($_POST['config']['site_description']) && !empty($_POST['config']['site_description']) && mb_strlen($_POST['config']['site_description'], 'UTF-8') > 1000)
+				$error[] = $lang['config_errors']['site_description'];
+			
 			if(isset($_POST['config']['cookies_name']) && !preg_match('/^\w{1,1000}$/', $_POST['config']['cookies_name']))
 				$error[] = $lang['config_errors']['cookies_name'];
 			

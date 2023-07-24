@@ -1,8 +1,7 @@
 <?php
-$root_path = '../';
 $in_admin = true;
-include $root_path.'core.php';
-include $root_path.$lang_path.'adm/index.php';
+include __DIR__.'/../core.php';
+include __DIR__.'/../'.$lang_path.'adm/index.php';
 
 header('Content-Type: text/html; charset=utf-8');
 

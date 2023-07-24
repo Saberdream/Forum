@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{if="!empty($title)"}{$title|display} - {/if}{$site_name|display}</title>
-<meta name="description" content="Prototype de page html contenant un design évolutif et adaptable aux différentes machines." />
+{if="!empty($site_description)"}<meta name="description" content="{$site_description|display}" />{/if}
 <link rel="icon" type="image/png" href="/favicon.ico" />
 <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
 <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
