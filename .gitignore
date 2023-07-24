@@ -1,0 +1,18 @@
+# ignore the template cache folder
+cache/tpl/
+
+# ignore the debug folder
+debug/
+
+# ignore the error logs files
+logs/*.txt
+
+# ignore gallery files
+gallery/avatars/
+gallery/avatars/thumbnails/
+!gallery/avatars/index.php
+!gallery/avatars/thumbnails/index.php
+gallery/uploads/
+gallery/uploads/thumbnails/
+!gallery/uploads/index.php
+!gallery/uploads/thumbnails/index.php
