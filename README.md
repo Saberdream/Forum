@@ -20,6 +20,7 @@ When you run the script for the first time, there should normally be 3 different
 * And the robot account, which is for the robots and crawlers such as Google.
 
 The connection identifiants for the founder account are:
-Username: Admin
-Password: admin
+* Username: Admin
+* Password: admin
+
 It is strongly recommended to change the password immediately after the first connection in order to avoid security issue.
