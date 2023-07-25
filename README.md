@@ -3,10 +3,10 @@ This is an evolutive and web responsive PHP forum script, to be more precise it 
 # Requirments
 This script works fine on > PHP 5 but DO NOT work for the moment with PHP 7 or higher, mainly due to conflicts issue with novel functions of higher versions of PHP.
 # Features
-* Different time zones with automatic time adjustment according to user region, which guarantees the universality of the script and that it could be used in the whole world
 * Different features for the users with notably a forum system with categories, subforums, private messages...
+* Different time zones with automatic time adjustment according to user region, which guarantees the universality of the script and that it could be used in the whole world
 * A convenient template system management and template engine (RainTPL) with a cache system, guaranteeing speed and allowing to separate the logic from the front end
-* Management of permissions and various site features via the administration panel.
+* Management of permissions and various site features via the administration panel
 * Reliability guaranteed by object-oriented programming, and security guaranteed by the use of the PDO interface for connecting to the database (especially against SQL injections), as well as a whole bunch of protection against CSRF flaws thanks to CSRF token system and referer checking, and against common flaws such as XSS flaws
 * Different languages at a site and user level (there are currently NOT traduction in english, I'm looking for a volunteer to translate the script from french to english)...
 # How to use
@@ -18,6 +18,7 @@ When you run the script for the first time, there should normally be 3 different
 * The founder account, which have the total access to the forum and can enter to the administrator panel.
 * The anonymous account, which every user that is not logged in and is visiting the site for the first time is connected to.
 * And the robot account, which is for the robots and crawlers such as Google.
+
 The connection identifiants for the founder account are:
 Username: Admin
 Password: admin
