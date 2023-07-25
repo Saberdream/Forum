@@ -669,7 +669,7 @@ CREATE TABLE IF NOT EXISTS `forum_users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 INSERT INTO `forum_users` (`user_id`, `user_name`, `user_password`, `user_email`, `user_ip`, `user_time`, `user_last`, `user_rank`, `user_posts`, `user_avatar`, `user_avatarid`, `user_sex`, `user_birthday`, `user_sign`, `user_desc`, `user_country`, `user_style`, `user_lang`, `user_timezone`) VALUES
-(1, 'Webmaster', 'a', 'webmaster@domain.com', '::1', 111111111, 1690299193, 5, 10249, '', 0, '', '', '', '', 'France', 'base', 'fr', 'Europe/Paris'),
+(1, 'Admin', 'admin', 'webmaster@domain.com', '::1', 111111111, 1690299193, 5, 10249, '', 0, '', '', '', '', 'France', 'base', 'fr', 'Europe/Paris'),
 (2, 'anonymous', '', '', '', 0, 1578861085, 1, 0, '', 0, '', '', '', '', '', '', '', ''),
 (3, 'robot', '', '', '', 0, 0, 1, 0, '', 0, '', '', '', '', '', '', '', '');
 
