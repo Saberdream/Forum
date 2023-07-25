@@ -2,6 +2,10 @@
 This is an evolutive and web responsive PHP forum script, to be more precise it is a CMS. The initial idea is strongly inspired by phpBB but the whole script is noticeably different, in particular due to the many optimizations in terms of speed and security of the script, and thanks to the MVC architecture which guarantees great stability and scalability of the script.
 # Requirments
 This script works fine on > PHP 5 but DO NOT work for the moment with PHP 7 or higher, mainly due to conflicts issue with novel functions of higher versions of PHP.
+The url rewrite mod must be enabled, as well as GD library and PDO kernel.
+Running the script in PHP > 5.6 is HIGHLY recommanded.
+You must have write permissions (chmod 0777) on certain folders, such as the image gallery, the cache folder or the logs folder.
+Finally, some functions such as password recovery require that a correct SMTP server is entered in the forum parameters (for sending emails).
 # Features
 * Different features for the users with notably a forum system with categories, subforums, private messages...
 * Different time zones with automatic time adjustment according to user region, which guarantees the universality of the script and that it could be used in the whole world
