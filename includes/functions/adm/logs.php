@@ -1,13 +1,12 @@
 <?php
 function get_logs() {
-	global $root_path;
-
-	$rd = scandir($root_path.'logs/');
+	$root_dir = dirname(dirname(dirname(__DIR__))).'/logs/';
+	$rd = scandir($root_dir);
 	$logs = array();
 	$i = 0;
 
 	foreach($rd as $filename) {
-		if(!is_dir($root_path.'logs/'.$filename) && $filename != '.' && $filename != '..')
+		if(!is_dir($root_dir.$filename) && $filename != '.' && $filename != '..')
 			if(preg_match('/^(.+)\.txt$/', $filename)) {
 				$logs[] = array('file_id' => $i, 'file_name' => $filename);
 				$i++;
@@ -20,8 +19,6 @@ function get_logs() {
 }
 
 function delete_logs($files) {
-	global $root_path;
-	
 	if(count(array_filter($files, 'file_exists')) > 0)
 		array_map('unlink', array_filter($files, 'file_exists'));
 

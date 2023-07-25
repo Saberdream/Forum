@@ -1,12 +1,13 @@
 <?php
-$root_path = '../';
 $in_admin = true;
-include $root_path.'core.php';
-include $root_path.'includes/functions/adm/logs.php';
-include $root_path.$lang_path.'adm/logs.php';
+
+include '../core.php';
+include '../includes/functions/adm/logs.php';
+include '../'.$lang_path.'adm/logs.php';
 
 header('Content-Type: text/html; charset=utf-8');
 
+$root_dir = dirname(__DIR__).'/logs/';
 $limit = 25;
 $logs = get_logs();
 $nb = count($logs);
@@ -28,7 +29,7 @@ if($nb > 0) {
 		
 		foreach($ids as $value) {
 			if(isset($logs[$value]))
-				$files[] = $root_path.'logs/'.$logs[$value]['file_name'];
+				$files[] = $root_dir.$logs[$value]['file_name'];
 		}
 		
 		unset($value);
@@ -47,13 +48,13 @@ if($nb > 0) {
 	$offset	= ($page-1)*$limit;
 	$pagination = pagination($page, $nbpages, $url);
 	$rows = array_slice($logs, $offset, $limit);
-	
+
 	foreach($rows as $key => $value) {
-		$rows[$key]['file_time'] = filemtime($root_path.'logs/'.$value['file_name']);
-		$rows[$key]['file_size'] = filesize($root_path.'logs/'.$value['file_name']);
-		$rows[$key]['file_text'] = file_get_contents($root_path.'logs/'.$value['file_name']);
+		$rows[$key]['file_time'] = filemtime($root_dir.$value['file_name']);
+		$rows[$key]['file_size'] = filesize($root_dir.$value['file_name']);
+		$rows[$key]['file_text'] = file_get_contents($root_dir.$value['file_name']);
 	}
-	
+
 	unset($key, $value);
 
 	$token = new token('adm_logs');

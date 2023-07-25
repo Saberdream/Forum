@@ -210,7 +210,7 @@ function delete_user($pmid, $userid) {
 function update_participants($pmid, $participants) {
 	global $dbh, $config;
 	
-	$sth = $dbh->prepare('UPDATE '.$config['table_prefix'].'pm SET pm_nb_participants = pm_nb_participants-1, pm_participants = ? WHERE pm_id = ?');
+	$sth = $dbh->prepare('UPDATE '.$config['table_prefix'].'pm SET pm_nb_participants = pm_nb_participants-1, pm_participants = ? WHERE pm_id = ? AND pm_nb_participants <> 0');
 	$sth->execute(array($participants, $pmid));
 	unset($sth);
 	

@@ -4,9 +4,10 @@
  *  RainTPL
  *  -------
  *  Realized by Federico Ulfo & maintained by the Rain Team
+ *  Custom heritability of styles by Saberdream https://github.com/Saberdream
  *  Distributed under the MIT license http://www.opensource.org/licenses/mit-license.php
  *
- *  @version 2.7.2
+ *  @version 2.7.2-custom
  */
 
 
@@ -22,6 +23,20 @@ class RainTPL{
 		 * @var string
 		 */
 		static $tpl_dir = "tpl/";
+
+
+		/**
+		 * Template urls directory (only if path_replace is set to true)
+		 * If not null, urls are replaced by this directory instead of template directory.
+		 * This option is useful in the case of the templates are not in the root of the template directory but in a subfolder, example:
+		 * ./
+		 * style/css
+		 * style/images
+		 * style/templates (with .html files inside)
+		 *
+		 * @var string
+		 */
+		static $tpl_url_dir = null;
 
 
 		/**
@@ -278,11 +293,13 @@ class RainTPL{
 			$this->tpl['tpl_filename']          = self::$root_dir . $this->tpl['template_directory'] . $tpl_basename . '.' . self::$tpl_ext;    // template filename
 
 
-			if(self::$parent_tpl_dir != null && !file_exists($this->tpl[tpl_filename])) {
+			// if the template inherits of a parents template, we first check if the child template exists, if not then we switch to the parent template
+			// (if the parent template itself do not exists too, then a normal error will be thrown like usual)
+			if(self::$parent_tpl_dir != null && !file_exists($this->tpl['tpl_filename'])) {
 				$this->tpl['template_directory'] = self::$parent_tpl_dir . $tpl_basedir;
 				$this->tpl['tpl_filename']		= self::$root_dir . $this->tpl['template_directory'] . $tpl_basename . '.' . self::$tpl_ext; // inherited template filename
 			}
-			
+
 
 			$temp_compiled_filename             = self::$root_dir . self::$cache_dir . $tpl_basename . "." . md5( $this->tpl['template_directory'] . serialize(self::$config_name_sum));
 			$this->tpl['compiled_filename']     = $temp_compiled_filename . '.rtpl.php';	// cache filename
@@ -691,7 +708,7 @@ class RainTPL{
 		}
 
 		// Regex for URLs that need only base url (and not template dir)
-		$base_only = '/^\//';
+		$base_only = '/^\//'; // regex to check if the url begins by a /, except for the case of the "a" and "form" which url is replaced by base_url anyway
 		if ( $tag == 'a' or $tag == 'form' ) {
 			$base_only = '//';
 		}
@@ -736,7 +753,11 @@ class RainTPL{
 
 		if( self::$path_replace ){
 
-			$tpl_dir = self::$base_url . self::$tpl_dir . $tpl_basedir;
+			// this clause permits to define a different root dir for styles urls and for the template itself
+			if(self::$tpl_url_dir != null)
+				$tpl_dir = self::$base_url . self::$tpl_url_dir . $tpl_basedir;	// http://www.domain.com/styles/foo/
+			else
+				$tpl_dir = self::$base_url . self::$tpl_dir . $tpl_basedir;		// http://www.domain.com/styles/foo/template/
 
 			// Prepare reduced path not to compute it for each link
 			$this->path = $this->reduce_path( $tpl_dir );

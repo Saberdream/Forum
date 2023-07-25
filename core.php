@@ -49,10 +49,11 @@ user::set_dbh($dbh);
 $user = new user();
 
 $lang_path = !empty($user->data['user_lang']) ? 'lang/'.$user->data['user_lang'].'/' : 'lang/fr/';
-$style = ($user->data['user_style'] != null && $config['user_style'] == true) ? $user->data['user_style'] : $config['default_style'];
 
-if(!$in_admin)
+if(!$in_admin) {
+	$style = ($user->data['user_style'] != null && $config['user_style'] == true) ? $user->data['user_style'] : $config['default_style'];
 	$style_config = parse_ini_file(__DIR__.'/styles/'.$style.'/style.cfg');
+}
 
 if(!empty($user->data['user_timezone']))
 	date_default_timezone_set($user->data['user_timezone']);
@@ -70,8 +71,9 @@ $lang['footer']['contact'] = sprintf($lang['footer']['contact'], $config['site_m
 
 RainTPL::configure(array(
 	'base_url' => $config['server_protocol'].$config['domain_name'].'/',
-	'tpl_dir' => $in_admin ? 'adm/style/' : 'styles/'.$style.'/',
-	// 'parent_tpl_dir' => $in_admin ? 'adm/style/' : 'styles/'.$style.'/',
+	'tpl_dir' => $in_admin ? 'adm/style/template/' : 'styles/'.$style.'/template/',
+	'tpl_url_dir' => $in_admin ? 'adm/style/' : 'styles/'.$style.'/',
+	'parent_tpl_dir' => !empty($style_config['parent']) ? 'styles/'.$style_config['parent'].'/template/' : null,
 	'cache_dir' => 'cache/tpl/',
 	'root_dir' => __DIR__.'/',
 	'path_replace_list' => array('a', 'img', 'link', 'script', 'input', 'form')

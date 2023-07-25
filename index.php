@@ -1,7 +1,6 @@
 <?php
-$root_path = './';
-include $root_path.'core.php';
-include $root_path.$lang_path.'index.php';
+include './core.php';
+include './'.$lang_path.'index.php';
 
 header('Content-Type: text/html; charset=utf-8');
 

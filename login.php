@@ -1,7 +1,7 @@
 <?php
-include __DIR__.'/core.php';
-include __DIR__.'/includes/functions/login.php';
-include __DIR__.'/'.$lang_path.'login.php';
+include './core.php';
+include './includes/functions/login.php';
+include './'.$lang_path.'login.php';
 
 header('Content-Type: text/html; charset=utf-8');
 

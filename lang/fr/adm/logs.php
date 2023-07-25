@@ -18,6 +18,7 @@ $lang['logs'] = array (
 	
 	// left menu
 	'site_configuration'		=> 'Configuration du site',
+	'styles'					=> 'Styles',
 	'error_logs'				=> 'Logs des erreurs',
 	
 	// javascript
@@ -26,17 +27,14 @@ $lang['logs'] = array (
 	'select_element'			=> 'Vous devez sélectionner au moins un élément.',
 	'alert'						=> 'Alerte',
 	'cancel'					=> 'Annuler',
-	'user_deleted'				=> 'L\'utilisateur a bien été supprimé.',
 	'action_success'			=> 'L\'action a bien été effectuée sur les éléments sélectionnés.',
 	
 	// errors and form messages
 	'invalid_form'				=> 'Le formulaire est invalide, veuillez retenter.',
 	'incorrect_ids'				=> 'Les ids sont incorrects.',
-	'incorrect_category_id'		=> 'L\'id de la catégorie est incorrect.',
 	'incorrect_token'			=> 'Le jeton est expiré ou incorrect.',
 	'error_occurred'			=> 'Une erreur est survenue',
 	'files_not_deleted'			=> 'Les fichiers n\'ont pas pu être supprimés.',
 	'no_files'					=> 'Il n\'y a aucun fichier à afficher.',
 	'files_not_exists'			=> 'Les fichiers n\'existent pas.',
-
 );

@@ -30,6 +30,7 @@ $data = get_config();
 
 // replace config categories keys and config keys by their translated names, and put config options to the config fields
 foreach($data as $key => $value) {
+	$data[$key]['cat_key'] = $data[$key]['cat_name'];
 	$data[$key]['cat_name'] = !empty($lang['cat_names'][$value['cat_name']]) ? $lang['cat_names'][$value['cat_name']] : $value['cat_name'];
 	$data[$key]['config_name'] = !empty($lang['config_names'][$key]) ? $lang['config_names'][$key] : $key;
 	

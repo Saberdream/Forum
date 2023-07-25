@@ -32,6 +32,11 @@ function write_config_file($data_config) {
 	$data = array();
 	
 	foreach($data_config as $key => $value) {
+		if(!isset($config_category) || (isset($config_category) && $config_category != $value['cat_key'])) {
+			$data[] = '['.$value['cat_key'].']';
+			$config_category = $value['cat_key'];
+		}
+		
 		switch($value['config_type']) {
 			case 'b':
 				$data[] = $key.'='.intval($value['config_value']);

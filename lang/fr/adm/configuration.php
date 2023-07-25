@@ -21,6 +21,7 @@ $lang['config'] = array (
 	
 	// left menu
 	'error_logs'				=> 'Logs des erreurs',
+	'styles'					=> 'Styles',
 	
 	// auths
 	'visitors'					=> 'Visiteurs',
