@@ -77,9 +77,9 @@ function deban_users($ids) {
 }
 
 function delete_users($ids) {
-	global $dbh, $root_path, $config, $lang;
+	global $dbh, $config, $lang;
 	
-	$upload_dir = 'gallery/avatars/';
+	$upload_dir = dirname(dirname(dirname(__DIR__))).'/gallery/avatars/';
 	
 	// delete avatars files and rows in db
 	$sth = $dbh->prepare('SELECT file_name FROM '.$config['table_prefix'].'avatars WHERE file_userid IN('.placeholders('?', sizeof($ids)).')');
@@ -93,7 +93,7 @@ function delete_users($ids) {
 		$files = array();
 		
 		foreach($avatars as $value)
-			array_push($files, $root_path.$upload_dir.$value['file_name'], $root_path.$upload_dir.'thumbs/'.$value['file_name']);
+			array_push($files, $upload_dir.$value['file_name'], $upload_dir.'thumbs/'.$value['file_name']);
 		
 		unset($value);
 		

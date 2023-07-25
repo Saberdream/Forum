@@ -1,11 +1,9 @@
 <?php
 function get_files() {
-	global $root_path;
-
 	$extensions = array('gif', 'jpg', 'png');
 	$files = array();
 
-	if($handle = opendir($root_path.'gallery/smilies/')) {
+	if($handle = opendir(dirname(dirname(dirname(__DIR__))).'/gallery/smilies/')) {
 		while(($entry = readdir($handle)) !== false) {
 			if(!is_dir($entry) && in_array(strtolower(substr(strrchr($entry, '.'), 1)), $extensions))
 				$files[] = $entry;

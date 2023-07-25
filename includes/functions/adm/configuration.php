@@ -27,8 +27,6 @@ function update_config($values) {
 }
 
 function write_config_file($data_config) {
-	global $root_path;
-	
 	$data = array();
 	
 	foreach($data_config as $key => $value) {
@@ -55,20 +53,20 @@ function write_config_file($data_config) {
 	
 	unset($key, $value);
 
-	if(file_put_contents($root_path.'cache/config.dat.ini', implode("\n", $data)))
+	if(file_put_contents(dirname(dirname(dirname(__DIR__))).'/cache/config.dat.ini', implode("\n", $data)))
 		return true;
 
 	return false;
 }
 
 function get_styles() {
-	global $root_path;
+	$root_dir = dirname(dirname(dirname(__DIR__))).'/styles/';
 	
-	$rd = scandir($root_path.'styles/');
+	$rd = scandir($root_dir);
 	$styles = array();
 	
 	foreach($rd as $dir) {
-		if(is_dir($root_path.'styles/'.$dir) && $dir != '.' && $dir != '..')
+		if(is_dir($root_dir.$dir) && $dir != '.' && $dir != '..')
 			$styles[$dir] = $dir;
 	}
 	
@@ -78,13 +76,13 @@ function get_styles() {
 }
 
 function get_langs() {
-	global $root_path;
+	$root_dir = dirname(dirname(dirname(__DIR__))).'/lang/';
 	
-	$rd = scandir($root_path.'lang/');
+	$rd = scandir($root_dir);
 	$langs = array();
 	
 	foreach($rd as $dir) {
-		if(is_dir($root_path.'lang/'.$dir) && $dir != '.' && $dir != '..')
+		if(is_dir($root_dir.$dir) && $dir != '.' && $dir != '..')
 			$langs[$dir] = $dir;
 	}
 	

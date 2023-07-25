@@ -26,13 +26,13 @@ function update_user($userid, $values) {
 }
 
 function get_langs() {
-	global $root_path;
+	$root_dir = dirname(dirname(dirname(__DIR__))).'/lang/';
 
-	$rd = scandir($root_path.'lang/');
+	$rd = scandir($root_dir);
 	$langs = array();
 
 	foreach($rd as $dir) {
-		if(is_dir($root_path.'lang/'.$dir) && $dir != '.' && $dir != '..')
+		if(is_dir($root_dir.$dir) && $dir != '.' && $dir != '..')
 			$langs[] = $dir;
 	}
 
@@ -42,13 +42,13 @@ function get_langs() {
 }
 
 function get_styles() {
-	global $root_path;
+	$root_dir = dirname(dirname(dirname(__DIR__))).'/styles/';
 
-	$rd = scandir($root_path.'styles/');
+	$rd = scandir($root_dir);
 	$styles = array();
 
 	foreach($rd as $dir) {
-		if(is_dir($root_path.'styles/'.$dir) && $dir != '.' && $dir != '..')
+		if(is_dir($root_dir.$dir) && $dir != '.' && $dir != '..')
 			$styles[] = $dir;
 	}
 

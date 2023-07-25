@@ -110,8 +110,6 @@ function update_code($value, $id) {
 }
 
 function create_json() {
-	global $root_path;
-	
 	$rows = get_rows();
 	$data = '{}';
 	
@@ -127,15 +125,13 @@ function create_json() {
 		$data = json_encode($json, JSON_FORCE_OBJECT);
 	}
 
-	if(file_put_contents($root_path.'gallery/smilies/smilies.json', $data))
+	if(file_put_contents(dirname(dirname(dirname(__DIR__))).'/gallery/smilies/smilies.json', $data))
 		return true;
 	
 	return false;
 }
 
 function create_pattern() {
-	global $root_path;
-	
 	$rows = get_rows();
 	$pattern = '';
 	
@@ -150,7 +146,7 @@ function create_pattern() {
 		$pattern = implode('|', array_map('preg_quote', array_keys($list)));
 	}
 	
-	if(file_put_contents($root_path.'cache/smilies-pattern.dat', $pattern))
+	if(file_put_contents(dirname(dirname(dirname(__DIR__))).'/cache/smilies-pattern.dat', $pattern))
 		return true;
 	
 	return false;
