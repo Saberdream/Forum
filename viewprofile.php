@@ -1,9 +1,8 @@
 <?php
-$root_path = './';
-include $root_path.'core.php';
-include $root_path.'includes/functions/viewprofile.php';
-include $root_path.'includes/functions/bbcode.php';
-include $root_path.$lang_path.'viewprofile.php';
+include __DIR__.'/core.php';
+include __DIR__.'/includes/functions/viewprofile.php';
+include __DIR__.'/includes/functions/bbcode.php';
+include __DIR__.'/'.$lang_path.'viewprofile.php';
 
 header('Content-Type: text/html; charset=utf-8');
 

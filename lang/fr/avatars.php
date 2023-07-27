@@ -47,6 +47,9 @@ $lang['avatars'] = array (
 	'invalid_form'				=> 'Le formulaire est invalide, veuillez retenter.',
 	'incorrect_token'			=> 'Le jeton est expiré ou incorrect.',
 	'error_occurred'			=> 'Une erreur est survenue',
+	'incorrect_ids'				=> 'Les ids sont incorrects.',
+	'used_avatar'				=> 'Vous ne pouvez pas supprimer un avatar en cours d\'utilisation, réinitialisez votre avatar puis retentez.',
+	
 	'files_not_deleted'			=> 'Les fichiers n\'ont pas pu être supprimés.',
 	'error_loading_file'		=> 'Erreur dans le chargement du fichier.',
 	'file_already_exists'		=> 'Le fichier existe déjà.',

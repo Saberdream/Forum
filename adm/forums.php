@@ -1,9 +1,8 @@
 <?php
-$root_path = '../';
 $in_admin = true;
-include $root_path.'core.php';
-include $root_path.'includes/functions/adm/forums.php';
-include $root_path.$lang_path.'adm/forums.php';
+include dirname(__DIR__).'/core.php';
+include dirname(__DIR__).'/includes/functions/adm/forums.php';
+include dirname(__DIR__).'/'.$lang_path.'adm/forums.php';
 
 header('Content-Type: text/html; charset=utf-8');
 

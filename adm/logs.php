@@ -1,9 +1,8 @@
 <?php
 $in_admin = true;
-
-include '../core.php';
-include '../includes/functions/adm/logs.php';
-include '../'.$lang_path.'adm/logs.php';
+include dirname(__DIR__).'/core.php';
+include dirname(__DIR__).'/includes/functions/adm/logs.php';
+include dirname(__DIR__).'/'.$lang_path.'adm/logs.php';
 
 header('Content-Type: text/html; charset=utf-8');
 

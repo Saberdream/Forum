@@ -49,19 +49,22 @@ function update_avatar($userid, $filename, $fileid) {
 	return true;
 }
 
-function delete_avatars($userid, $ids, $uploadDir) {
-	global $dbh, $config;
+function delete_avatars($userid, $ids, $upload_dir) {
+	global $dbh, $config, $user;
 
-	$files = $array();
+	$values = array($userid);
+	$values = array_merge($values, $ids);
 
-	$sth = $dbh->prepare('SELECT file_name FROM '.$config['table_prefix'].'avatars WHERE file_id = ? AND file_userid IN ('.placeholders('?', sizeof($ids)).')');
-	$sth->execute(array_values($ids));
+	$sth = $dbh->prepare('SELECT file_name FROM '.$config['table_prefix'].'avatars WHERE file_userid = ? AND file_id IN ('.placeholders('?', sizeof($ids)).')');
+	$sth->execute(array_values($values));
 	$data = $sth->fetchAll(PDO::FETCH_ASSOC);
 	unset($sth);
 
+	$files = array();
+
 	if($data) {
 		foreach($data as $value)
-				array_push($files, $upload_dir.$value['file_name'], $upload_dir.'thumbnails/'.$value['file_name']);
+			array_push($files, $upload_dir.$value['file_name'], $upload_dir.'thumbnails/'.$value['file_name']);
 
 		unset($value);
 

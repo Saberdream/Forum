@@ -1,11 +1,10 @@
 <?php
-$root_path = './';
-include $root_path.'core.php';
-include $root_path.'includes/functions/newpm.php';
-include $root_path.'includes/functions/bbcode.php';
-include $root_path.$lang_path.'newpm.php';
-include $root_path.$lang_path.'bbcode.php';
-include $root_path.$lang_path.'preview.php';
+include __DIR__.'/core.php';
+include __DIR__.'/includes/functions/newpm.php';
+include __DIR__.'/includes/functions/bbcode.php';
+include __DIR__.'/'.$lang_path.'newpm.php';
+include __DIR__.'/'.$lang_path.'bbcode.php';
+include __DIR__.'/'.$lang_path.'preview.php';
 
 header('Content-Type: text/html; charset=utf-8');
 

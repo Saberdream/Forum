@@ -1,9 +1,8 @@
 <?php
-$root_path = '../';
 $in_admin = true;
-include $root_path.'core.php';
-include $root_path.'includes/functions/adm/avatars.php';
-include $root_path.$lang_path.'adm/avatars.php';
+include dirname(__DIR__).'/core.php';
+include dirname(__DIR__).'/includes/functions/adm/avatars.php';
+include dirname(__DIR__).'/'.$lang_path.'adm/avatars.php';
 
 header('Content-Type: text/html; charset=utf-8');
 
@@ -27,7 +26,7 @@ if($total > 0) {
 		if(count($ids) == 0 || count($ids) > $limit)
 			die($lang['avatars']['incorrect_ids']);
 
-		if(delete_avatars($ids, $root_path.$upload_dir)) {
+		if(delete_avatars($ids, dirname(__DIR__).'/'.$upload_dir)) {
 			token::destroy('adm_avatars');
 
 			die($lang['avatars']['action_success']);

@@ -1,7 +1,6 @@
 <?php
-$root_path = './';
-include $root_path.'core.php';
-include $root_path.$lang_path.'internal_error.php';
+include __DIR__.'/core.php';
+include __DIR__.'/'.$lang_path.'internal_error.php';
 
 header('Content-Type: text/html; charset=utf-8');
 

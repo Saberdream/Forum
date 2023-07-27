@@ -1,10 +1,9 @@
 <?php
-$root_path = '../';
 $in_admin = true;
-include $root_path.'core.php';
-include $root_path.'includes/functions/adm/smilies.php';
-include $root_path.'includes/functions/adm/smilies-add.php';
-include $root_path.$lang_path.'adm/smilies-add.php';
+include dirname(__DIR__).'/core.php';
+include dirname(__DIR__).'/includes/functions/adm/smilies.php';
+include dirname(__DIR__).'/includes/functions/adm/smilies-add.php';
+include dirname(__DIR__).'/'.$lang_path.'adm/smilies-add.php';
 
 header('Content-Type: text/html; charset=utf-8');
 

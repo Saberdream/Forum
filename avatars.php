@@ -1,12 +1,12 @@
 <?php
-$root_path = './';
-include $root_path.'core.php';
-include $root_path.'includes/functions/avatars.php';
-include $root_path.'includes/functions/imagethumb.php';
-include $root_path.$lang_path.'avatars.php';
+include __DIR__.'/core.php';
+include __DIR__.'/includes/functions/avatars.php';
+include __DIR__.'/includes/functions/imagethumb.php';
+include __DIR__.'/'.$lang_path.'avatars.php';
 
 if($user->data['user_rank'] >= USER && $config['activate_avatar'] == 1) {
 	$limit = 10;
+	$root_dir		= __DIR__.'/';
 	$uploadDir		= 'gallery/avatars/';
 	$typesAllowed	= explode(';', $config['avatar_allowed_types']);
 	$maxWidth		= (int) $config['avatar_max_width'];
@@ -34,10 +34,10 @@ if($user->data['user_rank'] >= USER && $config['activate_avatar'] == 1) {
 		$extension	= strtolower(substr(strrchr($_FILES['Filedata']['name'], '.'), 1));
 		$newName	= remove_spec((strlen($nameFile)>30 ? substr($nameFile, 0, 30):$nameFile), '_').'_'.$time.'_'.random_int(10).'.'.$extension;
 
-		if(!is_dir($root_path.$uploadDir) || !is_dir($root_path.$uploadDir.'thumbnails/'))
+		if(!is_dir($root_dir.$uploadDir) || !is_dir($root_dir.$uploadDir.'thumbnails/'))
 			die($lang['avatars']['directory_not_exists']);
 
-		if(file_exists($root_path.$uploadDir.$newName))
+		if(file_exists($root_dir.$uploadDir.$newName))
 			die($lang['avatars']['file_already_exists']);
 
 		if(!in_array($extension, $typesAllowed))
@@ -64,7 +64,7 @@ if($user->data['user_rank'] >= USER && $config['activate_avatar'] == 1) {
 				die(sprintf($lang['avatars']['file_limit_exceeded'], $nb2, $waitTime));
 		}
 
-		if(imagethumb($tempFile, $root_path.$uploadDir.'thumbnails/'.$newName, 100, true) && move_uploaded_file($tempFile, $root_path.$uploadDir.$newName))
+		if(imagethumb($tempFile, $root_dir.$uploadDir.'thumbnails/'.$newName, 100, true) && move_uploaded_file($tempFile, $root_dir.$uploadDir.$newName))
 			if(insert_rows($user->data['user_id'], $newName, $width, $height, $filesize, $size['mime'], $time, $user->data['ip']))
 				die('1');
 		
@@ -81,8 +81,11 @@ if($user->data['user_rank'] >= USER && $config['activate_avatar'] == 1) {
 
 			if(count($ids) == 0 || count($ids) > $limit)
 				die($lang['avatars']['incorrect_ids']);
+			
+			if(in_array($user->data['user_avatarid'], $ids))
+				die($lang['avatars']['used_avatar']);
 
-			if(delete_avatars($user->data['user_id'], $ids, $root_path.$uploadDir)) {
+			if(delete_avatars($user->data['user_id'], $ids, $root_dir.$uploadDir)) {
 				token::destroy('avatars_delete');
 
 				die($lang['avatars']['avatars_deleted']);
@@ -109,7 +112,7 @@ if($user->data['user_rank'] >= USER && $config['activate_avatar'] == 1) {
 			}
 			
 			if(update_avatar($user->data['user_id'], $filename, $_GET['use'])) {
-				$user->session_create($user->data['user_id'], $user->data['admin'], $user->data['autologin']);
+				$user->session_create($user->data['user_id'], $user->data['admin']);
 
 				die($lang['avatars']['avatar_updated_successful']);
 			}

@@ -1,10 +1,9 @@
 <?php
-$root_path = '../';
 $in_admin = true;
-include $root_path.'core.php';
-include $root_path.'includes/functions/adm/configuration.php';
-include $root_path.'includes/timezones.php';
-include $root_path.$lang_path.'adm/configuration.php';
+include dirname(__DIR__).'/core.php';
+include dirname(__DIR__).'/includes/functions/adm/configuration.php';
+include dirname(__DIR__).'/includes/timezones.php';
+include dirname(__DIR__).'/'.$lang_path.'adm/configuration.php';
 
 $styles = get_styles();
 $langs = get_langs();

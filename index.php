@@ -1,6 +1,6 @@
 <?php
-include './core.php';
-include './'.$lang_path.'index.php';
+include __DIR__.'/core.php';
+include __DIR__.'/'.$lang_path.'index.php';
 
 header('Content-Type: text/html; charset=utf-8');
 

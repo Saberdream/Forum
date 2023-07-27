@@ -1,8 +1,7 @@
 <?php
-$root_path = './';
-include $root_path.'core.php';
-include $root_path.'includes/functions/pm.php';
-include $root_path.$lang_path.'pm.php';
+include __DIR__.'/core.php';
+include __DIR__.'/includes/functions/pm.php';
+include __DIR__.'/'.$lang_path.'pm.php';
 
 header('Content-Type: text/html; charset=utf-8');
 

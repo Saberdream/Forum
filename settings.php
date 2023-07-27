@@ -1,9 +1,8 @@
 <?php
-$root_path = './';
-include $root_path.'core.php';
-include $root_path.'includes/functions/settings.php';
-include $root_path.'includes/timezones.php';
-include $root_path.$lang_path.'settings.php';
+include __DIR__.'/core.php';
+include __DIR__.'/includes/functions/settings.php';
+include __DIR__.'/includes/timezones.php';
+include __DIR__.'/'.$lang_path.'settings.php';
 
 header('Content-Type: text/html; charset=utf-8');
 

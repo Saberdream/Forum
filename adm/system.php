@@ -1,8 +1,7 @@
 <?php
-$root_path = '../';
 $in_admin = true;
-include $root_path.'core.php';
-include $root_path.$lang_path.'adm/system.php';
+include dirname(__DIR__).'/core.php';
+include dirname(__DIR__).'/'.$lang_path.'adm/system.php';
 
 $system_modules = array(
 	'php_version' => phpversion(),

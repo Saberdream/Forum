@@ -48,7 +48,7 @@ user::set_dbh($dbh);
 
 $user = new user();
 
-$lang_path = !empty($user->data['user_lang']) ? 'lang/'.$user->data['user_lang'].'/' : 'lang/fr/';
+$lang_path = !empty($user->data['user_lang']) ? 'lang/'.$user->data['user_lang'].'/' : 'lang/en/';
 
 if(!$in_admin) {
 	$style = ($user->data['user_style'] != null && $config['user_style'] == true) ? $user->data['user_style'] : $config['default_style'];

@@ -1,8 +1,7 @@
 <?php
-$root_path = './';
-include $root_path.'core.php';
-include $root_path.'includes/functions/notifications.php';
-include $root_path.$lang_path.'notifications.php';
+include __DIR__.'/core.php';
+include __DIR__.'/includes/functions/notifications.php';
+include __DIR__.'/'.$lang_path.'notifications.php';
 
 header('Content-Type: text/html; charset=utf-8');
 

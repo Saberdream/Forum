@@ -1,10 +1,9 @@
 <?php
-$root_path = '../';
 $in_admin = true;
-include $root_path.'core.php';
-include $root_path.'includes/functions/adm/viewalert.php';
-include $root_path.'includes/functions/bbcode.php';
-include $root_path.$lang_path.'adm/viewalert.php';
+include dirname(__DIR__).'/core.php';
+include dirname(__DIR__).'/includes/functions/adm/viewalert.php';
+include dirname(__DIR__).'/includes/functions/bbcode.php';
+include dirname(__DIR__).'/'.$lang_path.'adm/viewalert.php';
 
 header('Content-Type: text/html; charset=utf-8');
 

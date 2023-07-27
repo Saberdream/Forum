@@ -1,8 +1,7 @@
 <?php
-$root_path = './';
-include $root_path.'core.php';
-include $root_path.'includes/functions/recover.php';
-include $root_path.$lang_path.'recover.php';
+include __DIR__.'/core.php';
+include __DIR__.'/includes/functions/recover.php';
+include __DIR__.'/'.$lang_path.'recover.php';
 
 header('Content-Type: text/html; charset=utf-8');
 
