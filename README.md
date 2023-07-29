@@ -11,10 +11,10 @@ This is an evolutive and web responsive PHP forum script, to be more precise it 
 * A convenient template system management and template engine (RainTPL) with a cache system, guaranteeing speed and allowing to separate the logic from the front end
 * Management of permissions and various site features via the administration panel
 * Reliability guaranteed by object-oriented programming, and security guaranteed by the use of the PDO interface for connecting to the database (especially against SQL injections), as well as a whole bunch of protection against CSRF flaws thanks to CSRF token system and referer checking, and against common flaws such as XSS flaws
-* Different languages at a site and user level (there are currently NOT traduction in english, I'm looking for a volunteer to translate the script from french to english)...
+* Different languages at a site and user level (French, English, Spanish, German, Chinese...)
 # How to use
-1. Upload the structure.sql file via the phpmyadmin interface of your host (or your PHP software if you are local) to create the forum tables.
-2. Fill the config.php file at the root of the script with your SQL connection informations (db name, password...) otherwise the script will not be able run.
+1. Connect to the phpMyAdmin interface of your host (or of your local server)  and upload the structure.sql file to create the forum tables.
+2. Fill the config.php file at the root of the script with your SQL connection informations (db name, password...).
 3. Upload all the files from the root of the script to the root of your server via an FTP client such as FileZilla.
 4. Go to the root of your site via your web browser; if the script runs correctly, the home page should appear. Go to the login page via the menu on top and log to the admin account (see below for administrator account credentials).
 When you run the script for the first time, there should normally be 3 different users:
