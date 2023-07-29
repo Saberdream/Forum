@@ -3,49 +3,41 @@ if(empty($lang) || !is_array($lang))
 	$lang = array();
 
 /*
- * categories
+ * categories.php
 */
-$lang['categories'] = array (
-	'page_description'			=> 'Vous pouvez créer des catégories pour classer et regrouper vos forums. Vous pouvez paramétrer l\'ordre dans lequel les catégories s\'afficheront.',
-	'categories'				=> 'Catégories',
-	'add'						=> 'Ajouter',
-	'new_category_name'			=> 'Nom de la nouvelle catégorie',
-	'add_new_category'			=> 'Ajouter une nouvelle catégorie',
-	'no_category'				=> 'Il n\'y a aucune catégorie à afficher.',
-	'name'						=> 'Nom',
-	'order'						=> 'Ordre',
-	'action'					=> 'Action',
-	'modify_title'				=> 'Modifier le titre',
-	'enter_newforum_name'		=> 'Entrez le nom du nouveau forum ici',
-	'enter_newcategory_name'	=> 'Entrez le nom de la nouvelle catégorie ici',
-	'manage_categories'			=> 'Gestion des catégories',
-	'edit_category'				=> 'Editer la catégorie',
-	'delete_category'			=> 'Supprimer la catégorie',
-
-	// javascript
-	'confirm_action'			=> 'Êtes-vous sûr(e) de vouloir réaliser cette action sur les éléments sélectionnés ?',
-	'confirm_delete'			=> 'Êtes-vous sûr(e) de vouloir supprimer cet élément ?',
-	'alert'						=> 'Alerte',
-	'cancel'					=> 'Annuler',
-	'category_deleted'			=> 'La catégorie a bien été supprimée.',
-
-	// errors
-	'invalid_form'				=> 'Le formulaire est invalide, veuillez retenter.',
-	'incorrect_id'				=> 'L\'id est incorrect.',
-	'incorrect_category_id'		=> 'L\'id de la catégorie est incorrect.',
-	'category_not_exists'		=> 'Cette catégorie n\'existe pas.',
-	'incorrect_token'			=> 'Le jeton est expiré ou incorrect.',
-	'incorrect_name'			=> '<span class="text-danger">Le nom est vide ou trop long.</p>',
-	'invalid_category_name'		=> 'Le nom de la catégorie est invalide.',
-	'error_occured'				=> 'Une erreur est survenue',
-	'errors_occurred'			=> 'Une ou plusieurs erreurs est/sont survenue(s) ',
-
-	// left menu and breadcrumb
-	'smilies'					=> 'Smileys',
-	'add_smilies'				=> 'Ajouter des smileys',
-	'manage_smilies'			=> 'Gestion des smileys',
-	'manage_forums'				=> 'Gestion des forums',
-
-	// form success messages
-	'category_success_added'	=> 'La catégorie a bien été ajoutée.',
+$lang['categories'] = array(
+	'page_description'			=> 'You can create categories to categorize and group your forums. ',
+	'categories'			=> 'Categories',
+	'add'			=> 'Add',
+	'new_category_name'			=> 'New category name',
+	'add_new_category'			=> 'Add a new category',
+	'no_category'			=> 'There are no categories to display.',
+	'name'			=> 'Name',
+	'order'			=> 'Order',
+	'action'			=> 'Stock',
+	'modify_title'			=> 'Edit title',
+	'enter_newforum_name'			=> 'Enter the name of the new forum here',
+	'enter_newcategory_name'			=> 'Enter the name of the new category here',
+	'manage_categories'			=> 'Category management',
+	'edit_category'			=> 'Edit category',
+	'delete_category'			=> 'Delete category',
+	'confirm_action'			=> 'Are you sure you want to perform this action on the selected items?',
+	'confirm_delete'			=> 'Are you sure you want to delete this item?',
+	'alert'			=> 'Alert',
+	'cancel'			=> 'Cancel',
+	'category_deleted'			=> 'The category has been successfully deleted.',
+	'invalid_form'			=> 'The form is invalid, please try again.',
+	'incorrect_id'			=> 'The id is incorrect.',
+	'incorrect_category_id'			=> 'The category id is incorrect.',
+	'category_not_exists'			=> 'This category does not exist.',
+	'incorrect_token'			=> 'The token is expired or invalid.',
+	'incorrect_name'			=> '<span class="text-danger">The name is empty or too long.</p>',
+	'invalid_category_name'			=> 'The category name is invalid.',
+	'error_occured'			=> 'An error has occurred',
+	'errors_occurred'			=> 'One or more errors occurred',
+	'smilies'			=> 'smilies',
+	'add_smilies'			=> 'Add smilies',
+	'manage_smilies'			=> 'Management of smileys',
+	'manage_forums'			=> 'Forum management',
+	'category_success_added'			=> 'The category has been added successfully.',
 );

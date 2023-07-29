@@ -3,14 +3,14 @@ if(empty($lang) || !is_array($lang))
 	$lang = array();
 
 /*
- * forums list
+ * forums.php
 */
-$lang['forums'] = array (
-	'forums_list'				=> 'Liste des forums',
-	'forums'					=> 'Forums',
-	'users_connected'			=> 'Utilisateurs connectés',
-	'topics'					=> 'Sujets',
-	'posts'						=> 'Messages',
-	'last_post'					=> 'Dernier message',
-	'no_forum'					=> 'Il n\'y a aucun forum à afficher.',
+$lang['forums'] = array(
+	'forums_list'			=> 'List of forums',
+	'forums'			=> 'Forums',
+	'users_connected'			=> 'Connected users',
+	'topics'			=> 'Topics',
+	'posts'			=> 'Posts',
+	'last_post'			=> 'Last message',
+	'no_forum'			=> 'There are no forums to display.',
 );

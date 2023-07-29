@@ -3,11 +3,11 @@ if(empty($lang) || !is_array($lang))
 	$lang = array();
 
 /*
- * footer
+ * footer.php
 */
-$lang['footer'] = array (
-	'developped_by'				=> 'Développé par %s.',
-	'script_licensed'			=> 'Script sous licence',
-	'contact'					=> 'Pour toute information relative au site, contacter le <a href="mailto:%s">webmaster</a>.',
-	'admin_cp'					=> 'Panneau d\'administration'
+$lang['footer'] = array(
+	'developped_by'			=> 'Developed by %s.',
+	'script_licensed'			=> 'Licensed script',
+	'contact'			=> 'For any information relating to the site, contact the <a href="mailto:%s">webmaster</a>.',
+	'admin_cp'			=> 'Administration panel',
 );

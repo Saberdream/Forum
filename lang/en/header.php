@@ -3,20 +3,20 @@ if(empty($lang) || !is_array($lang))
 	$lang = array();
 
 /*
- * top menu
+ * header.php
 */
-$lang['menu_top'] = array (
-	'home'						=> 'Accueil',
-	'forums'					=> 'Forums',
-	'articles'					=> 'Articles',
-	'notifications'				=> 'Notifications',
-	'welcome'					=> 'Bienvenue',
-	'modify_account'			=> 'Modifier votre compte',
-	'login'						=> 'Connexion',
-	'logout'					=> 'Déconnexion',
-	'register'					=> 'Inscription',
-	'forgotten_password'		=> 'Mot de passe oublié',
-	'session_time_left'			=> 'Votre session dure encore %d minute(s).',
-	'my_account'				=> 'Mon compte',
-	'private_messages'			=> 'Messages privés'
+$lang['menu_top'] = array(
+	'home'			=> 'Welcome',
+	'forums'			=> 'Forums',
+	'articles'			=> 'Items',
+	'notifications'			=> 'Notifications',
+	'welcome'			=> 'Welcome',
+	'modify_account'			=> 'Modify your account',
+	'login'			=> 'Login',
+	'logout'			=> 'Logout',
+	'register'			=> 'Registration',
+	'forgotten_password'			=> 'Forgot your password',
+	'session_time_left'			=> 'Your session still lasts %d minute(s).',
+	'my_account'			=> 'My account',
+	'private_messages'			=> 'Private messages',
 );

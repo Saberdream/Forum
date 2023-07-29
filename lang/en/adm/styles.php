@@ -3,40 +3,34 @@ if(empty($lang) || !is_array($lang))
 	$lang = array();
 
 /*
- * site errors logs
+ * styles.php
 */
-$lang['styles'] = array (
-	'site_styles'				=> 'Liste des styles du site',
-	'delete'					=> 'Supprimer',
-	'empty_styles_cache'		=> 'Vider le cache des styles',
-	'refresh_styles'			=> 'Rafraichir les styles',
-	'name'						=> 'Nom',
-	'directory'					=> 'Répertoire',
-	'version'					=> 'Version',
-	'parent_style'				=> 'Style parent',
-	'author'					=> 'Auteur',
-	'size'						=> 'Taille',
-	'cache_size'				=> 'Taille du cache ',
-	
-	// left menu
-	'site_configuration'		=> 'Configuration du site',
-	'styles'					=> 'Styles',
-	'styles_list'				=> 'Liste des styles',
-	'error_logs'				=> 'Logs des erreurs',
-	
-	// javascript
-	'confirm_action'			=> 'Êtes-vous sûr(e) de vouloir réaliser cette action ?',
-	'alert'						=> 'Alerte',
-	'cancel'					=> 'Annuler',
-	'action_success'			=> 'L\'action a bien été effectuée.',
-	
-	// errors and form messages
-	'invalid_form'				=> 'Le formulaire est invalide, veuillez retenter.',
-	'incorrect_ids'				=> 'Les ids sont incorrects.',
-	'incorrect_token'			=> 'Le jeton est expiré ou incorrect.',
-	'error_occurred'			=> 'Une erreur est survenue',
-	'files_not_deleted'			=> 'Les fichiers n\'ont pas pu être supprimés.',
-	'styles_not_updated'		=> 'Une erreur est survenue pendant la mise à jour des styles.',
-	'no_styles'					=> 'Il n\'y a aucun style.',
-	'files_not_exists'			=> 'Les fichiers n\'existent pas.',
+$lang['styles'] = array(
+	'site_styles'			=> 'List of site styles',
+	'delete'			=> 'DELETE',
+	'empty_styles_cache'			=> 'Clear style cache',
+	'refresh_styles'			=> 'Refresh Styles',
+	'name'			=> 'Name',
+	'directory'			=> 'Directory',
+	'version'			=> 'Version',
+	'parent_style'			=> 'parent style',
+	'author'			=> 'Author',
+	'size'			=> 'Size',
+	'cache_size'			=> 'Cache size',
+	'site_configuration'			=> 'Site Setup',
+	'styles'			=> 'styles',
+	'styles_list'			=> 'List of Styles',
+	'error_logs'			=> 'Error logs',
+	'confirm_action'			=> 'Are you sure you want to perform this action?',
+	'alert'			=> 'Alert',
+	'cancel'			=> 'Cancel',
+	'action_success'			=> 'The action has been performed.',
+	'invalid_form'			=> 'The form is invalid, please try again.',
+	'incorrect_ids'			=> 'The ids are incorrect.',
+	'incorrect_token'			=> 'The token is expired or invalid.',
+	'error_occurred'			=> 'An error has occurred',
+	'files_not_deleted'			=> 'The files could not be deleted.',
+	'styles_not_updated'			=> 'An error occurred while updating styles.',
+	'no_styles'			=> 'There is no style.',
+	'files_not_exists'			=> 'The files do not exist.',
 );

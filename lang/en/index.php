@@ -3,12 +3,10 @@ if(empty($lang) || !is_array($lang))
 	$lang = array();
 
 /*
- * index
+ * index.php
 */
-$lang['index'] = array (
-	'visitor'					=> 'visiteur',
-	'welcome_message'			=> 'Bienvenue sur %s, <b class="text-primary">%s</b>.',
-
-	// side menu
-	'users_connected'			=> 'Utilisateurs connectés',
+$lang['index'] = array(
+	'visitor'			=> 'visitor',
+	'welcome_message'			=> 'Welcome to %s, <b class="text-primary">%s</b>.',
+	'users_connected'			=> 'Connected users',
 );

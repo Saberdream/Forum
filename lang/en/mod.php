@@ -3,24 +3,24 @@ if(empty($lang) || !is_array($lang))
 	$lang = array();
 
 /*
- * errors messages
+ * mod.php
 */
-$lang['mod_errors'] = array (
-	'not_authorized_access'		=> 'Vous ne pouvez pas accéder à cette section.',
-	'incorrect_forum_id'		=> 'Id du forum incorrect.',
-	'forum_not_found'			=> 'Forum non trouvé.',
-	'not_moderator'				=> 'Vous n\'êtes pas modérateur de ce forum.',
-	'expired_token'				=> 'Le jeton est expiré ou incorrect.',
-	'no_topic_selected'			=> 'Aucun sujet n\'a été sélectionné.',
-	'incorrect_ids'				=> 'Les ID sont incorrects.',
-	'incorrect_action'			=> 'Cette action est incorrecte.',
-	'not_authorized_action'		=> 'Vous n\'avez pas l\'autorisation requise pour effectuer cette action.',
-	'max_sticky_reached'		=> 'Le nombre maximal de topics épinglés est atteint (%d).',
-	'topic_not_found'			=> 'Sujet effacé ou id incorrect.',
-	'no_topic_affected'			=> 'Aucun sujet/message n\'a été affecté par la requête.',
-	'action_success'			=> 'L\'action a bien été effectuée, %d messages/sujets affectés.',
-	'incorrect_topic_id'		=> 'Id du sujet incorrect.',
-	'incorrect_post_id'			=> 'Id du message incorrect.',
-	'incorrect_user_id'			=> 'Id de l\'utilisateur incorrect.',
-	'error_occurred'			=> 'Une erreur est survenue',
+$lang['mod_errors'] = array(
+	'not_authorized_access'			=> 'You cannot access this section.',
+	'incorrect_forum_id'			=> 'Invalid forum id.',
+	'forum_not_found'			=> 'Forum not found.',
+	'not_moderator'			=> 'You are not a moderator of this forum.',
+	'expired_token'			=> 'The token is expired or invalid.',
+	'no_topic_selected'			=> 'No topic has been selected.',
+	'incorrect_ids'			=> 'The IDs are incorrect.',
+	'incorrect_action'			=> 'This action is incorrect.',
+	'not_authorized_action'			=> 'You do not have the required permission to perform this action.',
+	'max_sticky_reached'			=> 'The maximum number of pinned topics has been reached (%d).',
+	'topic_not_found'			=> 'Subject deleted or incorrect id.',
+	'no_topic_affected'			=> 'No topics/posts were affected by the request.',
+	'action_success'			=> 'Action completed successfully, %d posts/topics affected.',
+	'incorrect_topic_id'			=> 'Invalid subject id.',
+	'incorrect_post_id'			=> 'Incorrect message id.',
+	'incorrect_user_id'			=> 'Incorrect user id.',
+	'error_occurred'			=> 'An error has occurred',
 );

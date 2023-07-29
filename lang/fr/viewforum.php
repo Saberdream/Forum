@@ -16,6 +16,7 @@ $lang['forum'] = array (
 	'search'					=> 'Rechercher',
 	'refresh'					=> 'Rafraichir',
 	'click_to_enlarge'			=> 'Cliquez sur l\'image pour l\'agrandir',
+	'access_last_page'			=> 'Accéder à la dernière page',
 	
 	// moderation actions
 	'action'					=> 'Action',

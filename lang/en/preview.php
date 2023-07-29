@@ -3,11 +3,11 @@ if(empty($lang) || !is_array($lang))
 	$lang = array();
 
 /*
- * preview
+ * preview.php
 */
-$lang['preview'] = array (
-	'not_logged_in'				=> 'Vous n\'êtes pas connecté.',
-	'message_not_filled'		=> 'Vous devez entrer un message.',
-	'message_too_long'			=> 'Votre message est trop long, il doit comporter %d caractères au maximum.',
-	'expired_form'				=> 'Le formulaire est expiré ou incorrect.',
+$lang['preview'] = array(
+	'not_logged_in'			=> 'You are not connected.',
+	'message_not_filled'			=> 'You must enter a message.',
+	'message_too_long'			=> 'Your message is too long, it must contain a maximum of %d characters.',
+	'expired_form'			=> 'The form is expired or incorrect.',
 );

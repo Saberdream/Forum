@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{if="!$error_invalid_user && !$error_user_not_exists && $ban == 0"}Profil de {$profile_user.user_name} - {/if}{$site_name|display}</title>
+<title>{if="!$error_invalid_user && !$error_user_not_exists && $ban == 0"}{$lang_profile.profile_of} {$profile_user.user_name} - {/if}{$site_name|display}</title>
 {if="!empty($site_description)"}<meta name="description" content="{$site_description|display}" />{/if}
 <link rel="icon" type="image/png" href="/favicon.ico" />
 <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
@@ -37,22 +37,22 @@
 							<table class="table profile_infos">
 							{if="!empty($profile_user.user_birthday)"}
 							<tr>
-							<td>Age</td>
-							<td>{function="age($profile_user.user_birthday)"} ans</td>
+							<td>{$lang_profile.age}</td>
+							<td>{function="age($profile_user.user_birthday)"} {$lang_profile.years_old}</td>
 							</tr>
 							{/if}
 							{if="!empty($profile_user.user_country)"}
 							<tr>
-							<td>Pays</td>
+							<td>{$lang_profile.country}</td>
 							<td>{$profile_user.user_country}</td>
 							</tr>
 							{/if}
 							<tr>
-							<td>Membre depuis</td>
+							<td>{$lang_profile.member_since}</td>
 							<td>{function="date('d/m/Y', $profile_user.user_time)"}</td>
 							</tr>
 							<tr>
-							<td>Dernier passage</td>
+							<td>{$lang_profile.last_visit}</td>
 							<td>{function="date('d/m/Y', $profile_user.user_last)"}</td>
 							</tr>
 							</table>
@@ -62,14 +62,14 @@
 						
 						{if="!empty($profile_user.user_desc)"}
 						<div class="profile_panel">
-						<b class="text-danger">Description personnelle</b>
+						<b class="text-danger">{$lang_profile.personal_description}</b>
 						<div class="profile_separator"></div>
 						<div class="profile_desc">{function="smileys(bbcode($profile_user.user_desc))"}</div>
 						</div>
 						{/if}
 						
 						<div class="profile_panel">
-							<b><span class="text-danger">Nombre de messages postés sur les forums :</span> {function="number_format($profile_user.user_posts, 0, ',', '.')"}</b>
+							<b><span class="text-danger">{$lang_profile.number_of_messages_posted}:</span> {function="number_format($profile_user.user_posts, 0, ',', '.')"}</b>
 							<div class="profile_separator"></div>
 							<div class="profile_posts_bar"><span style="width:{$posts_width}%;"></span></div>
 						</div>
@@ -85,13 +85,13 @@
 						});
 						</script>
 						{else}
-						<div class="alert alert-danger text-center">Cet utilisateur est banni.</div>
+						<div class="alert alert-danger text-center">{$lang_profile.user_banned}</div>
 						{/if}
 					{else}
-					<div class="alert alert-danger text-center">Cet utilisateur n'existe pas.</div>
+					<div class="alert alert-danger text-center">{$lang_profile.user_not_exists}</div>
 					{/if}
 				{else}
-				<div class="alert alert-danger text-center">Le nom d'utilisateur est invalide.</div>
+				<div class="alert alert-danger text-center">{$lang_profile.invalid_username}</div>
 				{/if}
 			</div>
 		</div>

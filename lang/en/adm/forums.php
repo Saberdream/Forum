@@ -3,53 +3,45 @@ if(empty($lang) || !is_array($lang))
 	$lang = array();
 
 /*
- * forums
+ * forums.php
 */
-$lang['forums'] = array (
-	'page_description'			=> 'Vous pouvez créer des forums sur cette page à l\'aide du formulaire. Par la suite vous pourrez paramétrer l\'ordre dans lequel les forums s\'afficheront.',
-	'category'					=> 'Catégorie',
-	'categories'				=> 'Catégories',
-	'add'						=> 'Ajouter',
-	'forum_name'				=> 'Nom du forum',
-	'add_new_forum'				=> 'Ajouter un forum',
-	'no_forum'					=> 'Il n\'y a aucun forum à afficher.',
-	'name'						=> 'Nom',
-	'order'						=> 'Ordre',
-	'action'					=> 'Action',
-	'topics'					=> 'Topics',
-	'posts'						=> 'Posts',
-	'modify_title'				=> 'Modifier le titre',
-	'sync_forum'				=> 'Synchroniser le forum',
-	'modify_parameters'			=> 'Modifier les paramètres du forum',
-	'delete_forum'				=> 'Supprimer le forum',
-	'enter_newforum_name'		=> 'Entrez le nom du nouveau forum ici',
-
-	// javascript
-	'confirm_action'			=> 'Êtes-vous sûr(e) de vouloir réaliser cette action ?',
-	'confirm_delete'			=> 'Êtes-vous sûr(e) de vouloir supprimer cet élément ?',
-	'alert'						=> 'Alerte',
-	'cancel'					=> 'Annuler',
-	'forum_deleted'				=> 'Le forum a bien été supprimé.',
-	'forum_synchronized'		=> 'Le forum a bien été synchronisé.',
-
-	// errors
-	'invalid_form'				=> 'Le formulaire est invalide, veuillez retenter.',
-	'incorrect_id'				=> 'L\'id est incorrect.',
-	'incorrect_category_id'		=> 'L\'id de la catégorie est incorrect.',
-	'category_not_exists'		=> 'Cette catégorie n\'existe pas.',
-	'forum_not_exists'			=> 'Ce forum n\'existe pas.',
-	'incorrect_token'			=> 'Le jeton est expiré ou incorrect.',
-	'incorrect_name'			=> '<span class="text-danger">Le nom est vide ou trop long.</p>',
-	'invalid_forum_name'		=> 'Le nom du forum est invalide.',
-	'error_occured'				=> 'Une erreur est survenue',
-	'errors_occurred'			=> 'Une ou plusieurs erreurs est/sont survenue(s) ',
-
-	// left menu and breadcrumb
-	'smilies'					=> 'Smileys',
-	'add_smilies'				=> 'Ajouter des smileys',
-	'manage_smilies'			=> 'Gestion des smileys',
-	'manage_forums'				=> 'Gestion des forums',
-
-	// form success messages
-	'forum_success_added'		=> 'Le forum a bien été ajouté.',
+$lang['forums'] = array(
+	'page_description'			=> 'You can create forums on this page using the form. ',
+	'category'			=> 'Category',
+	'categories'			=> 'Categories',
+	'add'			=> 'Add',
+	'forum_name'			=> 'Forum name',
+	'add_new_forum'			=> 'Add forum',
+	'no_forum'			=> 'There are no forums to display.',
+	'name'			=> 'Name',
+	'order'			=> 'Order',
+	'action'			=> 'Stock',
+	'topics'			=> 'Topics',
+	'posts'			=> 'Posts',
+	'modify_title'			=> 'Edit title',
+	'sync_forum'			=> 'Synchronize the forum',
+	'modify_parameters'			=> 'Edit forum settings',
+	'delete_forum'			=> 'Delete forum',
+	'enter_newforum_name'			=> 'Enter the name of the new forum here',
+	'confirm_action'			=> 'Are you sure you want to perform this action?',
+	'confirm_delete'			=> 'Are you sure you want to delete this item?',
+	'alert'			=> 'Alert',
+	'cancel'			=> 'Cancel',
+	'forum_deleted'			=> 'The forum has been deleted.',
+	'forum_synchronized'			=> 'The forum has been synchronized successfully.',
+	'invalid_form'			=> 'The form is invalid, please try again.',
+	'incorrect_id'			=> 'The id is incorrect.',
+	'incorrect_category_id'			=> 'The category id is incorrect.',
+	'category_not_exists'			=> 'This category does not exist.',
+	'forum_not_exists'			=> 'This forum does not exist.',
+	'incorrect_token'			=> 'The token is expired or invalid.',
+	'incorrect_name'			=> '<span class="text-danger">The name is empty or too long.</p>',
+	'invalid_forum_name'			=> 'The forum name is invalid.',
+	'error_occured'			=> 'An error has occurred',
+	'errors_occurred'			=> 'One or more errors occurred',
+	'smilies'			=> 'smilies',
+	'add_smilies'			=> 'Add smilies',
+	'manage_smilies'			=> 'Management of smileys',
+	'manage_forums'			=> 'Forum management',
+	'forum_success_added'			=> 'The forum has been added.',
 );

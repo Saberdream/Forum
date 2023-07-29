@@ -3,39 +3,34 @@ if(empty($lang) || !is_array($lang))
 	$lang = array();
 
 /*
- * overall template
+ * subscriptions.php
 */
-$lang['subscriptions'] = array (
-	'expired_form'				=> 'Le formulaire est expiré ou incorrect.',
-	'subscriptions_deleted'		=> 'Vos abonnements ont bien été supprimé.',
-	'error_occured'				=> 'Une erreur est survenue',
-	'login_required'			=> 'Vous devez être inscrit et connecté pour accéder à cette partie du site.',
-	'no_new_notification'		=> 'Vous n\'avez aucune nouvelle notification.',
-	'reset_notifications'		=> 'Réinitialiser les notifications',
-	'no_topic_followed'			=> 'Vous ne suivez aucun sujet.',
-	'date'						=> 'Date',
-	'rows'						=> 'Lignes',
-	'total'						=> 'Total',
-	'notification'				=> 'Notification',
-	'topic'						=> 'Sujet',
-	'delete'					=> 'Supprimer',
-	'delete_selection'			=> 'Supprimer la sélection',
-	'incorrect_ids'				=> 'Les ids sont invalides.',
-	'not_logged_in'				=> 'Vous devez être inscrit et connecté pour accéder à cette partie du site.',
-	
-	// side menu
-	'notifications'				=> 'Notifications',
-	'account'					=> 'Compte',
-	'subscriptions'				=> 'Abonnements',
-	'avatars'					=> 'Avatars',
-	
-	// javascript
-	'confirm_action'			=> 'Êtes-vous sûr(e) de vouloir réaliser cette action sur les éléments sélectionnés ?',
-	'select_action'				=> 'Vous devez sélectionner une action.',
-	'select_element'			=> 'Vous devez sélectionner au moins un élément.',
-	'alert'						=> 'Alerte',
-	'cancel'					=> 'Annuler',
-	'action_success'			=> 'L\'action a bien été effectuée sur les éléments sélectionnés.',
-	'confirm_delete'			=> 'Êtes-vous sûr(e) de vouloir supprimer cet élément ?',
-
+$lang['subscriptions'] = array(
+	'expired_form'			=> 'The form is expired or incorrect.',
+	'subscriptions_deleted'			=> 'Your subscriptions have been successfully deleted.',
+	'error_occured'			=> 'An error has occurred',
+	'login_required'			=> 'You must be registered and logged in to access this part of the site.',
+	'no_new_notification'			=> 'You have no new notifications.',
+	'reset_notifications'			=> 'Reset notifications',
+	'no_topic_followed'			=> 'You are not following any topics.',
+	'date'			=> 'Date',
+	'rows'			=> 'Lines',
+	'total'			=> 'Total',
+	'notification'			=> 'Notification',
+	'topic'			=> 'Subject',
+	'delete'			=> 'DELETE',
+	'delete_selection'			=> 'Delete selection',
+	'incorrect_ids'			=> 'The ids are invalid.',
+	'not_logged_in'			=> 'You must be registered and logged in to access this part of the site.',
+	'notifications'			=> 'Notifications',
+	'account'			=> 'Account',
+	'subscriptions'			=> 'Subscriptions',
+	'avatars'			=> 'Avatars',
+	'confirm_action'			=> 'Are you sure you want to perform this action on the selected items?',
+	'select_action'			=> 'You must select an action.',
+	'select_element'			=> 'You must select at least one item.',
+	'alert'			=> 'Alert',
+	'cancel'			=> 'Cancel',
+	'action_success'			=> 'The action has been performed on the selected elements.',
+	'confirm_delete'			=> 'Are you sure you want to delete this item?',
 );

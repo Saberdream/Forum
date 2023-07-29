@@ -3,81 +3,66 @@ if(empty($lang) || !is_array($lang))
 	$lang = array();
 
 /*
- * forum
+ * viewforum.php
 */
-$lang['forum'] = array (
-	// template interface
-	'page'						=> 'Page',
-	'forum'						=> 'Forum',
-	'forums'					=> 'Forums',
-	'back'						=> 'Retour',
-	'new'						=> 'Nouveau',
-	'exact'						=> 'Exact',
-	'search'					=> 'Rechercher',
-	'refresh'					=> 'Rafraichir',
-	'click_to_enlarge'			=> 'Cliquez sur l\'image pour l\'agrandir',
-	
-	// moderation actions
-	'action'					=> 'Action',
-	'delete'					=> 'Supprimer',
-	'lock'						=> 'Bloquer',
-	'unlock'					=> 'Débloquer',
-	'stick'						=> 'Marquer',
-	'unstick'					=> 'Démarquer',
-	'restore'					=> 'Restaurer',
-	'ban'						=> 'Bannir',
-	'ban_temporarily'			=> 'Bannir temporairement',
-	'validate'					=> 'Valider',
-	'alert'						=> 'Alerte',
-	'confirm_action'			=> 'Êtes-vous sûr(e) de vouloir réaliser cette action ?',
-	'select_action'				=> 'Vous devez sélectionner une action.',
-	'select_element'			=> 'Vous devez sélectionner au moins un élément.',
-	'cancel'					=> 'Annuler',
-	'show'						=> 'Afficher',
-	'hide'						=> 'Masquer',
-	'preview'					=> 'Aperçu',
-	
-	// topics list
-	'author'					=> 'Auteur',
-	'number'					=> 'Nb.',
-	'last'						=> 'Dernier',
-	
-	// moderation buttons
-	'restore_topic'				=> 'Restaurer ce sujet',
-	'delete_topic'				=> 'Supprimer ce sujet',
-	'ban_user'					=> 'Bannir cet utilisateur',
-	'ban_user_temporarily'		=> 'Bannir cet utilisateur temporairement',
-	
-	// posting form
-	'create_new_topic'			=> 'Créer un nouveau sujet',
-	'subject'					=> 'Sujet',
-	'message'					=> 'Message',
-	'type_subject'				=> 'Entrer le sujet',
-	'message_rules'				=> 'Ne postez pas d\'insultes, évitez les majuscules, faites une recherche avant de poster pour voir si la question n\'a pas déjà été posée... Tout message d\'incitation au piratage est strictement interdit et sera puni d\'un bannissement.',
-	'request_new_code'			=> 'Demander un nouveau code',
-	'copy_code'					=> 'Recopier le code',
-	'post'						=> 'Poster',
-	'smileys_list'				=> 'Liste des smileys',
-	'login_required'			=> 'Vous devez être inscrit et connecté pour pouvoir poster un nouveau sujet.',
-	'not_authorized_new_topic'	=> 'Vous ne pouvez pas poster un nouveau sujet sur ce forum.',
-	'not_authorized_access'		=> 'Vous n\'avez pas l\'autorisation nécéssaire pour accéder à ce forum.',
-	
-	// searching results
-	'search_results'			=> 'Résultats de la recherche pour « %s ».',
-	'search_nb_results'			=> '%d résultat(s) pour la recherche de « %s ».',
-	'search_no_results'			=> 'Aucun résultat pour la recherche de « %s ».',
-	'no_topic'					=> 'Il n\'y a aucun sujet sur ce forum.',
-	
-	// side menu
-	'users_connected'			=> 'Utilisateurs connectés',
-	'all_forums'				=> 'Tous les forums',
-	'followed_topics'			=> 'Sujets suivis',
+$lang['forum'] = array(
+	'page'			=> 'Page',
+	'forum'			=> 'Forum',
+	'forums'			=> 'Forums',
+	'back'			=> 'Feedback',
+	'new'			=> 'New',
+	'exact'			=> 'Exact',
+	'search'			=> 'To research',
+	'refresh'			=> 'Refresh',
+	'click_to_enlarge'			=> 'Click on the image to enlarge',
+	'access_last_page'			=> 'Access to the last page',
+	'action'			=> 'Stock',
+	'delete'			=> 'DELETE',
+	'lock'			=> 'To block',
+	'unlock'			=> 'Unlock',
+	'stick'			=> 'To mark',
+	'unstick'			=> 'Stand out',
+	'restore'			=> 'Restore',
+	'ban'			=> 'Ban',
+	'ban_temporarily'			=> 'Temporarily ban',
+	'validate'			=> 'To validate',
+	'alert'			=> 'Alert',
+	'confirm_action'			=> 'Are you sure you want to perform this action?',
+	'select_action'			=> 'You must select an action.',
+	'select_element'			=> 'You must select at least one item.',
+	'cancel'			=> 'Cancel',
+	'show'			=> 'Display',
+	'hide'			=> 'Hide',
+	'preview'			=> 'Insight',
+	'author'			=> 'Author',
+	'number'			=> 'No.',
+	'last'			=> 'Last',
+	'restore_topic'			=> 'Restore this topic',
+	'delete_topic'			=> 'Delete this topic',
+	'ban_user'			=> 'Ban this user',
+	'ban_user_temporarily'			=> 'Temporarily ban this user',
+	'create_new_topic'			=> 'Create a new topic',
+	'subject'			=> 'Subject',
+	'message'			=> 'Message',
+	'type_subject'			=> 'Enter subject',
+	'message_rules'			=> 'Do not post insults, avoid capital letters, do a search before posting to see if the question has not already been asked... Any message inciting piracy is strictly prohibited and will be punished by banishment.',
+	'request_new_code'			=> 'Request a new code',
+	'copy_code'			=> 'Copy the code',
+	'post'			=> 'To post',
+	'smileys_list'			=> 'List of smilies',
+	'login_required'			=> 'You must be registered and logged in to post a new topic.',
+	'not_authorized_new_topic'			=> 'You cannot post a new topic on this forum.',
+	'not_authorized_access'			=> 'You do not have permission to access this forum.',
+	'search_results'			=> 'Search results for "%s".',
+	'search_nb_results'			=> '%d result(s) for search "%s".',
+	'search_no_results'			=> 'No results found for search for "%s".',
+	'no_topic'			=> 'There are no topics on this forum.',
+	'users_connected'			=> 'Connected users',
+	'all_forums'			=> 'All Forums',
+	'followed_topics'			=> 'Followed topics',
 );
 
-/*
- * search options
-*/
-$lang['search_options'] = array (
-	'topic_name'				=> 'Topic',
-	'username'					=> 'Auteur'
+$lang['search_options'] = array(
+	'topic_name'			=> 'Topic',
+	'username'			=> 'Author',
 );

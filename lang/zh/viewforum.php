@@ -1,0 +1,68 @@
+<?php
+if(empty($lang) || !is_array($lang))
+	$lang = array();
+
+/*
+ * viewforum.php
+*/
+$lang['forum'] = array(
+	'page'	=> '页',
+	'forum'	=> '论坛',
+	'forums'	=> '论坛',
+	'back'	=> '反馈',
+	'new'	=> '新的',
+	'exact'	=> '精确的',
+	'search'	=> '研究',
+	'refresh'	=> '刷新',
+	'click_to_enlarge'	=> '点击图片放大',
+	'access_last_page'	=> '转到最后一页',
+	'action'	=> '库存',
+	'delete'	=> '删除',
+	'lock'	=> '阻止',
+	'unlock'	=> '开锁',
+	'stick'	=> '标记',
+	'unstick'	=> '脱颖而出',
+	'restore'	=> '恢复',
+	'ban'	=> '禁止',
+	'ban_temporarily'	=> '暂时禁止',
+	'validate'	=> '验证',
+	'alert'	=> '警报',
+	'confirm_action'	=> '您确定要执行此操作吗？',
+	'select_action'	=> '您必须选择一个操作。',
+	'select_element'	=> '您必须至少选择一项。',
+	'cancel'	=> '取消',
+	'show'	=> '展示',
+	'hide'	=> '隐藏',
+	'preview'	=> '洞察力',
+	'author'	=> '作者',
+	'number'	=> '不。',
+	'last'	=> '最后的',
+	'restore_topic'	=> '恢复这个主题',
+	'delete_topic'	=> '删除该主题',
+	'ban_user'	=> '禁止该用户',
+	'ban_user_temporarily'	=> '暂时禁止该用户',
+	'create_new_topic'	=> '创建一个新主题',
+	'subject'	=> '主题',
+	'message'	=> '信息',
+	'type_subject'	=> '输入主题',
+	'message_rules'	=> '不要发表侮辱性言论，避免使用大写字母，发帖前先搜索一下是否还没有被问过......任何煽动盗版的消息都是严格禁止的，否则将受到驱逐的处罚。',
+	'request_new_code'	=> '请求新代码',
+	'copy_code'	=> '复制代码',
+	'post'	=> '发布',
+	'smileys_list'	=> '表情符号列表',
+	'login_required'	=> '您必须注册并登录才能发布新主题。',
+	'not_authorized_new_topic'	=> '您不能在此论坛上发布新主题。',
+	'not_authorized_access'	=> '您没有访问该论坛的权限。',
+	'search_results'	=> '“%s”的搜索结果。',
+	'search_nb_results'	=> '搜索“%s”有 %d 个结果。',
+	'search_no_results'	=> '搜索“%s”未找到结果。',
+	'no_topic'	=> '该论坛没有主题。',
+	'users_connected'	=> '已连接用户',
+	'all_forums'	=> '所有论坛',
+	'followed_topics'	=> '关注的主题',
+);
+
+$lang['search_options'] = array(
+	'topic_name'	=> '话题',
+	'username'	=> '作者',
+);

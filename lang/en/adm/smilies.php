@@ -3,44 +3,38 @@ if(empty($lang) || !is_array($lang))
 	$lang = array();
 
 /*
- * config
+ * smilies.php
 */
-$lang['smilies'] = array (
-	'page_description'			=> 'Sur cette page vous pouvez supprimer des smileys et paramétrer l\'ordre dans lequel ils s\'afficheront.',
-	'smiley'					=> 'Smiley',
-	'code'						=> 'Code',
-	'name'						=> 'Nom',
-	'organise'					=> 'Organiser',
-	'order'						=> 'Ordre',
-	'edit_code'					=> 'Editer le code',
-	'action'					=> 'Action',
-	'validate'					=> 'Valider',
-	'modify_order'				=> 'Modifier l\'ordre',
-	'remove'					=> 'Supprimer',
-	'no_smiley'					=> 'Il n\'y a aucun smiley à afficher.',
-
-	// javascript
-	'confirm_action'			=> 'Êtes-vous sûr(e) de vouloir réaliser cette action sur les éléments sélectionnés ?',
-	'select_action'				=> 'Vous devez sélectionner une action.',
-	'select_element'			=> 'Vous devez sélectionner au moins un élément.',
-	'cancel'					=> 'Annuler',
-	'alert'						=> 'Alerte',
-	'smiley_deleted'			=> 'Le smiley a bien été supprimée.',
-	'action_success'			=> 'L\'action a bien été effectuée sur les éléments sélectionnés.',
-
-	// left menu and breadcrumb
-	'smilies'					=> 'Smileys',
-	'add_smilies'				=> 'Ajouter des smileys',
-	'manage_smilies'			=> 'Gestion des smileys',
-	'manage_forums'				=> 'Gestion des forums',
-
-	// errors
-	'invalid_form'				=> 'Le formulaire est invalide, veuillez retenter.',
-	'incorrect_id'				=> 'Id incorrect.',
-	'incorrect_ids'				=> 'Ids incorrects.',
-	'incorrect_ids_number'		=> 'Le nombre d\'ids est incorrect.',
-	'smiley_not_exists'			=> 'Ce smiley n\'existe pas',
-	'incorrect_name'			=> '<span class="text-danger">Le code est vide ou trop long</span>',
-	'cache_error'				=> 'Une erreur est survenue pendant la mise en cache des fichiers.',
-	'error_occured'				=> 'Une erreur est survenue',
+$lang['smilies'] = array(
+	'page_description'			=> 'On this page you can delete smileys and set the order in which they will be displayed.',
+	'smiley'			=> 'Smileys',
+	'code'			=> 'Coded',
+	'name'			=> 'Name',
+	'organise'			=> 'Arrange',
+	'order'			=> 'Order',
+	'edit_code'			=> 'Edit code',
+	'action'			=> 'Stock',
+	'validate'			=> 'To validate',
+	'modify_order'			=> 'Change order',
+	'remove'			=> 'DELETE',
+	'no_smiley'			=> 'There are no smileys to display.',
+	'confirm_action'			=> 'Are you sure you want to perform this action on the selected items?',
+	'select_action'			=> 'You must select an action.',
+	'select_element'			=> 'You must select at least one item.',
+	'cancel'			=> 'Cancel',
+	'alert'			=> 'Alert',
+	'smiley_deleted'			=> 'The smiley has been removed.',
+	'action_success'			=> 'The action has been performed on the selected elements.',
+	'smilies'			=> 'smilies',
+	'add_smilies'			=> 'Add smilies',
+	'manage_smilies'			=> 'Management of smileys',
+	'manage_forums'			=> 'Forum management',
+	'invalid_form'			=> 'The form is invalid, please try again.',
+	'incorrect_id'			=> 'Invalid ID.',
+	'incorrect_ids'			=> 'Incorrect IDs.',
+	'incorrect_ids_number'			=> 'The number of ids is incorrect.',
+	'smiley_not_exists'			=> 'This smiley does not exist',
+	'incorrect_name'			=> '<span class="text-danger">The code is empty or too long</span>',
+	'cache_error'			=> 'An error occurred while caching files.',
+	'error_occured'			=> 'An error has occurred',
 );

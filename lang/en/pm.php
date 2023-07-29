@@ -3,57 +3,50 @@ if(empty($lang) || !is_array($lang))
 	$lang = array();
 
 /*
- * users
+ * pm.php
 */
-$lang['pm'] = array (
-	'manage_users'				=> 'Gestion des utilisateurs',
-	'exact'						=> 'Exact',
-	'search'					=> 'Rechercher',
-	'back'						=> 'Retour',
-	'total'						=> 'Total ',
-	'rows'						=> 'Lignes',
-	'delete'					=> 'Supprimer',
-	'validate'					=> 'Valider',
-	'id'						=> 'Id',
-	'username'					=> 'Pseudo',
-	'date'						=> 'Date',
-	'last'						=> 'Dernier',
-	'action'					=> 'Action',
-	'edit_user_informations'	=> 'Editer les informations de l\'utilisateur',
-	'search_results'			=> '%d résultat(s) pour la recherche de « <strong>%s</strong> »',
-	'search_no_result'			=> 'Aucun résultat pour la recherche de « <strong>%s</strong> », essayez une nouvelle fois avec des mot-clés plus précis.',
-	'no_pm'						=> 'Vous n\'avez reçu aucun message, faites connaissance avec les autres utilisateurs !',
-	'messages_list'				=> 'Liste des messages',
-	'messages_received'			=> 'Messages reçus',
-	'blacklist'					=> 'Liste noire',
-	'participants'				=> 'Participants',
-	'mark_read'					=> 'Marquer comme lu',
-	'mark_unread'				=> 'Marquer comme non-lu',
-	'new_message'				=> 'Nouveau message',
-	'title'						=> 'Titre',
-	'mailbox'					=> 'Boite de réception',
-	'author'					=> 'Auteur',
-	'not_logged_in'				=> 'Vous devez être inscrit et connecté pour accéder à cette partie du site.',
-
-	// javascript
-	'confirm_action'			=> 'Êtes-vous sûr(e) de vouloir réaliser cette action sur les éléments sélectionnés ?',
-	'select_action'				=> 'Vous devez sélectionner une action.',
-	'select_element'			=> 'Vous devez sélectionner au moins un élément.',
-	'alert'						=> 'Alerte',
-	'cancel'					=> 'Annuler',
-	'action_success'			=> 'L\'action a bien été effectuée sur les éléments sélectionnés.',
-
-	// errors and form messages
-	'invalid_form'				=> 'Le formulaire est invalide, veuillez retenter.',
-	'incorrect_ids'				=> 'Les ids sont incorrects.',
-	'incorrect_token'			=> 'Le jeton est expiré ou incorrect.',
-	'error_occurred'			=> 'Une erreur est survenue',
+$lang['pm'] = array(
+	'manage_users'			=> 'User Management',
+	'exact'			=> 'Exact',
+	'search'			=> 'To research',
+	'back'			=> 'Feedback',
+	'total'			=> 'Total',
+	'rows'			=> 'Lines',
+	'delete'			=> 'DELETE',
+	'validate'			=> 'To validate',
+	'id'			=> 'ID',
+	'username'			=> 'Pseudo',
+	'date'			=> 'Date',
+	'last'			=> 'Last',
+	'action'			=> 'Stock',
+	'edit_user_informations'			=> 'Edit user information',
+	'search_results'			=> '%d result(s) for search for "<strong>%s</strong>"',
+	'search_no_result'			=> 'No results found for "<strong>%s</strong>", try again with more specific keywords.',
+	'no_pm'			=> 'You haven\'t received any messages, get to know the other users!',
+	'messages_list'			=> 'List of messages',
+	'messages_received'			=> 'Messages received',
+	'blacklist'			=> 'Blacklist',
+	'participants'			=> 'Attendees',
+	'mark_read'			=> 'Mark as read',
+	'mark_unread'			=> 'Mark as unread',
+	'new_message'			=> 'New message',
+	'title'			=> 'Title',
+	'mailbox'			=> 'Mailbox',
+	'author'			=> 'Author',
+	'not_logged_in'			=> 'You must be registered and logged in to access this part of the site.',
+	'confirm_action'			=> 'Are you sure you want to perform this action on the selected items?',
+	'select_action'			=> 'You must select an action.',
+	'select_element'			=> 'You must select at least one item.',
+	'alert'			=> 'Alert',
+	'cancel'			=> 'Cancel',
+	'action_success'			=> 'The action has been performed on the selected elements.',
+	'invalid_form'			=> 'The form is invalid, please try again.',
+	'incorrect_ids'			=> 'The ids are incorrect.',
+	'incorrect_token'			=> 'The token is expired or invalid.',
+	'error_occurred'			=> 'An error has occurred',
 );
 
-/*
- * search options
-*/
-$lang['search_options'] = array (
-	'title'						=> 'Titre',
-	'author'					=> 'Auteur',
+$lang['search_options'] = array(
+	'title'			=> 'Title',
+	'author'			=> 'Author',
 );

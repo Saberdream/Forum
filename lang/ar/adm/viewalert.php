@@ -1,0 +1,80 @@
+<?php
+if(empty($lang) || !is_array($lang))
+	$lang = array();
+
+/*
+ * viewalert.php
+*/
+$lang['viewalert'] = array(
+	'manage_alerts'	=> 'إدارة التنبيه',
+	'view_alert'	=> 'رؤية تنبيه',
+	'page_description'	=> 'في هذه الصفحة ، تكون جميع المعلومات الموجودة في التنبيه مركزية ، مثل عنوان الموضوع والمنتدى والرابط السياقي للرسالة والرسالة المبلغ عنها بالإضافة إلى المعلومات المتعلقة بها.',
+	'actions_description'	=> 'باستخدام الأزرار الموجودة في هذه الصفحة ، يمكنك اختيار إغلاق التنبيه أو تعيين عقوبة لمُرسل الرسالة أو ببساطة حذف الرسالة ، اعتمادًا على سبب التقرير.',
+	'validate'	=> 'للتحقق من صحة',
+	'reason'	=> 'نمط',
+	'no_alert'	=> 'لا توجد تنبيهات لعرضها!',
+	'view_message'	=> 'رأي آخر',
+	'do_nothing'	=> 'لا تفعل شيئا',
+	'delete_message'	=> 'حذف رسالة',
+	'ban_temporarily'	=> 'حظر مؤقت',
+	'ban_definitely'	=> 'حظر نهائى',
+	'alert_informations'	=> 'معلومات التنبيه',
+	'alert_forum'	=> 'منتدى التنبيه',
+	'alert_subject'	=> 'موضوع التنبيه',
+	'alert_reason'	=> 'سبب التنبيه',
+	'alert_author'	=> 'مؤلف التنبيه',
+	'alert_date'	=> 'تاريخ التنبيه',
+	'alert_author_ip'	=> 'التنبيه IP',
+	'alert_author_id'	=> 'معرف كاتب التنبيه',
+	'forum_id'	=> 'معرف المجلس',
+	'subject_id'	=> 'معرف الموضوع',
+	'message_id'	=> 'بعد معرف',
+	'poster_id'	=> 'معرف الملصق',
+	'alert_message'	=> 'رسالة تنبيه',
+	'modify_alert_reason'	=> 'تغيير سبب التنبيه',
+	'modify_reason_description'	=> 'إذا كنت تعتقد أن السبب الموضح في التنبيه ليس السبب الصحيح ، فيمكنك تعديله ، ولكن يجب عليك التأكد من الإشارة إلى سبب جديد يتوافق مع الرسالة المبلغ عنها.',
+	'alert_treated'	=> 'تمت معالجة هذا التنبيه.',
+	'show_ipadress_whois'	=> 'إظهار عنوان IP whois',
+	'confirm_action'	=> 'هل أنت متأكد أنك تريد تنفيذ هذا الإجراء؟',
+	'alert'	=> 'يُحذًِر',
+	'cancel'	=> 'يلغي',
+	'action_success'	=> 'تم تنفيذ الإجراء.',
+	'hide_message'	=> 'آخر اخفاء',
+	'show_message'	=> 'اظهر الرسالة',
+	'click_to_enlarge'	=> 'انقر على الصورة للتكبير',
+	'show'	=> 'عرض',
+	'hide'	=> 'يخفي',
+	'invalid_form'	=> 'النموذج غير صالح ، يرجى المحاولة مرة أخرى.',
+	'incorrect_ids'	=> 'المعرفات غير صحيحة.',
+	'incorrect_alert_id'	=> 'معرف التنبيه غير صحيح.',
+	'incorrect_category_id'	=> 'معرف الفئة غير صحيح.',
+	'incorrect_token'	=> 'الرمز المميز منتهي الصلاحية أو غير صحيح.',
+	'error_occurred'	=> 'حدث خطأ',
+	'errors_occurred'	=> 'حدث خطأ واحد أو أكثر',
+	'files_not_deleted'	=> 'لا يمكن حذف الملفات.',
+	'reason_updated'	=> 'تم تغيير سبب التنبيه.',
+	'identical_reason'	=> 'النمط الجديد مطابق للنمط السابق.',
+	'reason_not_exists'	=> 'هذا النمط غير موجود.',
+	'invalid_reason'	=> 'يجب عليك تقديم سبب وجيه.',
+	'alerts_treated'	=> 'تم التعامل مع التنبيهات',
+	'banlist'	=> 'يحظر',
+);
+
+$lang['date'] = array(
+	'format'	=> 'j F Y إلى H: i: s',
+);
+
+$lang['days'] = array(
+	'January'	=> 'يناير',
+	'February'	=> 'شهر فبراير',
+	'March'	=> 'المريخ',
+	'April'	=> 'أبريل',
+	'May'	=> 'مايو',
+	'June'	=> 'يونيو',
+	'July'	=> 'يوليو',
+	'August'	=> 'أغسطس',
+	'September'	=> 'سبتمبر',
+	'October'	=> 'اكتوبر',
+	'November'	=> 'شهر نوفمبر',
+	'December'	=> 'ديسمبر',
+);

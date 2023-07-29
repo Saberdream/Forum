@@ -3,50 +3,43 @@ if(empty($lang) || !is_array($lang))
 	$lang = array();
 
 /*
- * overall template
+ * recover.php
 */
-$lang['recover'] = array (
-	// side menu
-	'forgot_password'			=> 'Mot de passe oublié',
-	'account'					=> 'Compte',
-	'subscriptions'				=> 'Abonnements',
-	'avatars'					=> 'Avatars',
-	'registration'				=> 'Inscription',
-	'recover_info'				=> 'Entrez votre pseudo ainsi que l\'email associée au compte pour recevoir votre mot de passe par mail',
-	'users_connected'			=> 'Utilisateurs connectés',
-
-	// form errors
-	'error_occured'				=> 'Une erreur est survenue',
-	'errors_occured'			=> 'Une ou plusieurs erreurs doivent être corrigées ',
-	'informations_updated'		=> 'Vos informations ont bien été mises à jour.',
-	'incorrect_captcha'			=> 'Le code de confirmation n\'est pas correctement rempli/est incorrect.',
-	'invalid_form'				=> 'Le formulaire est invalide, veuillez retenter.',
-	'invalid_sex'				=> 'Le sexe est invalide.',
-	'invalid_username'			=> 'Le pseudo est invalide, il doit comporter de 3 à 15 caractères et se composer uniquement de chiffres, lettres et/ou tirets.',
-	'ip_banned'					=> 'Votre adresse IP est bannie.',
-	'email_banned'				=> 'Cette adresse email est bannie.',
-	'invalid_password'			=> 'Le mot de passe doit comporter au maximum 30 caractères.',
-	'invalid_email'				=> 'L\'email est invalide.',
-	'email_sent_success'		=> 'Vos informations de connexion vous ont été envoyées à l\'adresse email que vous avez renseignée lors de la création de votre compte.',
-	'username_not_exists'		=> 'Ce pseudo n\'existe pas.',
-	'cant_recover_password'		=> 'Vous ne pouvez pas récupérer le mot de passe de ce compte.',
-	'username_email_not_match'	=> 'Le pseudo et l\'adresse email du compte ne correspondent pas.',
-	'mail_not_sent'				=> 'Une erreur est survenue et l\'email n\'a pas pu être envoyé, veuillez retenter votre requête ultérieurement.',
-
-	// form fields
-	'username'					=> 'Pseudo',
-	'password'					=> 'Mot de passe',
-	'email'						=> 'Email',
-	'ask_new_code'				=> 'Demander un nouveau code',
-	'validate'					=> 'Valider',
-	'copy_code'					=> 'Recopier le code',
-	'enter_password'			=> 'Entrer le mot de passe',
-	'enter_email'				=> 'Entrer l\'adresse email',
-	'enter_username'			=> 'Entrer le pseudo',
-	'password_confirmation'		=> 'Confirmation du mot de passe',
-	'confirm_password'			=> 'Confirmez le mot de passe',
-	
-	// mail body
-	'password_recovery'			=> 'Récupération de votre mot de passe',
-	'mail_body'					=> 'Bonjour, vous avez demandé une récupération de votre mot de passe par mail sur le site <a href="%s">%s</a>, veuillez retenir ces informations et bien veiller à ne pas les perdre.<br /><br /><p>Votre pseudo : <span style="color:#C00;">%s</span></p><p>Votre mot de passe : <span style="color:#C00;">%s</span></p><br /><br />A bientôt sur %s',
+$lang['recover'] = array(
+	'forgot_password'			=> 'Forgot your password',
+	'account'			=> 'Account',
+	'subscriptions'			=> 'Subscriptions',
+	'avatars'			=> 'Avatars',
+	'registration'			=> 'Registration',
+	'recover_info'			=> 'Enter your nickname and the email associated with the account to receive your password by email',
+	'users_connected'			=> 'Connected users',
+	'error_occured'			=> 'An error has occurred',
+	'errors_occured'			=> 'One or more errors must be corrected',
+	'informations_updated'			=> 'Your information has been successfully updated.',
+	'incorrect_captcha'			=> 'The confirmation code is not filled in correctly/is incorrect.',
+	'invalid_form'			=> 'The form is invalid, please try again.',
+	'invalid_sex'			=> 'Gender is invalid.',
+	'invalid_username'			=> 'The nickname is invalid, it must have 3 to 15 characters and consist only of numbers, letters and/or dashes.',
+	'ip_banned'			=> 'Your IP address is banned.',
+	'email_banned'			=> 'This email address is banned.',
+	'invalid_password'			=> 'The password must have a maximum of 30 characters.',
+	'invalid_email'			=> 'Email is invalid.',
+	'email_sent_success'			=> 'Your login information has been sent to the email address you provided when creating your account.',
+	'username_not_exists'			=> 'This nickname does not exist.',
+	'cant_recover_password'			=> 'You cannot recover the password for this account.',
+	'username_email_not_match'			=> 'Account username and email address do not match.',
+	'mail_not_sent'			=> 'An error has occurred and the email could not be sent, please try your request again later.',
+	'username'			=> 'Pseudo',
+	'password'			=> 'Password',
+	'email'			=> 'E-mail',
+	'ask_new_code'			=> 'Request a new code',
+	'validate'			=> 'To validate',
+	'copy_code'			=> 'Copy the code',
+	'enter_password'			=> 'Enter Password',
+	'enter_email'			=> 'Enter email address',
+	'enter_username'			=> 'Enter nickname',
+	'password_confirmation'			=> 'Password Confirmation',
+	'confirm_password'			=> 'Confirm the password',
+	'password_recovery'			=> 'Recovering your password',
+	'mail_body'			=> 'Hello, you have requested a recovery of your password by email on the site <a href="%s">%s</a>, please remember this information and be careful not to lose it.<br /> ',
 );

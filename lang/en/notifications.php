@@ -3,22 +3,20 @@ if(empty($lang) || !is_array($lang))
 	$lang = array();
 
 /*
- * overall template
+ * notifications.php
 */
-$lang['notifications'] = array (
-	'not_logged_in'				=> 'Vous devez être inscrit et connecté pour accéder à cette partie du site.',
-	'no_new_notification'		=> 'Vous n\'avez aucune nouvelle notification.',
-	'reset_notifications'		=> 'Réinitialiser les notifications',
-	'no_notification'			=> 'Il n\'y a aucune notification à afficher.',
-	'date'						=> 'Date',
-	'rows'						=> 'Lignes',
-	'total'						=> 'Total',
-	'notification'				=> 'Notification',
-	'token_expired'				=> 'Le jeton est expiré ou incorrect.',
-	
-	// side menu
-	'notifications'				=> 'Notifications',
-	'account'					=> 'Compte',
-	'subscriptions'				=> 'Abonnements',
-	'avatars'					=> 'Avatars'
+$lang['notifications'] = array(
+	'not_logged_in'			=> 'You must be registered and logged in to access this part of the site.',
+	'no_new_notification'			=> 'You have no new notifications.',
+	'reset_notifications'			=> 'Reset notifications',
+	'no_notification'			=> 'There are no notifications to display.',
+	'date'			=> 'Date',
+	'rows'			=> 'Lines',
+	'total'			=> 'Total',
+	'notification'			=> 'Notification',
+	'token_expired'			=> 'The token is expired or invalid.',
+	'notifications'			=> 'Notifications',
+	'account'			=> 'Account',
+	'subscriptions'			=> 'Subscriptions',
+	'avatars'			=> 'Avatars',
 );

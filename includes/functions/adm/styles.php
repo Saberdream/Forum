@@ -22,7 +22,7 @@ function getFolderSize($dir) {
     $size = 0;
 
     foreach (glob(rtrim($dir, '/').'/*', GLOB_NOSORT) as $each)
-        $size += is_file($each) ? filesize($each) : getfolderSize($each);
+        $size += is_file($each) ? filesize($each) : getFolderSize($each);
 
 	unset($each);
 

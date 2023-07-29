@@ -68,8 +68,8 @@ footer {
 .list-topics {
 	border-collapse: separate;
 	border-spacing: 1px;
-	background-color: #fff;
-	border: solid 1px #ddd;
+	background-color: #585858;
+	border: solid 1px #151515;
 	table-layout: fixed;
 }
 .list-topics a:hover {
@@ -87,25 +87,25 @@ footer {
 	padding: 3px;
 }
 .list-topics th {
-	background-color: #b2b2b2;
+	background-color: #151515;
 	color: #fff;
 	line-height: normal;
 }
 .list-topics tr:nth-child(even) td {
-	background-color: #eef5fc;
+	background-color: #2E2F2F;
 }
 .list-topics tr:nth-child(odd) td {
-	background-color: #fefefe;
+	background-color: #424343;
 }
 .list-topics tr:hover td {
-	background-color: #fdfee8;
+	background-color: #6F6E6F;
 }
 .list-topics tr.topic_invisible td {
-	background-color: #a8b0be;
+	background-color: #1C1D1D;
 	color: #fff;
 }
 .list-topics tr.topic_invisible:hover td {
-	background-color: #b6bdc8;
+	background-color: #6F6E6F;
 }
 .list-topics tr.topic_invisible a {
 	color: #fff;
@@ -114,10 +114,10 @@ footer {
 	color: #ff1e00;
 }
 .list-topics tr.topic_unread td {
-	background-color: #ffefd5;
+	background-color: #848484;
 }
 .list-topics tr.topic_unread:hover td {
-	background-color: #fdfee8;
+	background-color: #6F6E6F;
 }
 .list-topics .topic-name {
 	padding: 3px 5px 3px 27px;
@@ -160,7 +160,7 @@ footer {
 	width: 18px;
 }
 .list-topics .moderator {
-	color: #d00;
+	color: #FE8001;
 }
 .list-topics .admin {
 	color: #d00;
@@ -177,16 +177,16 @@ footer {
 	padding: 10px;
 }
 .post1 {
-	background-color: #f9f9f9;
-	border: solid 1px #ddd;
+	background-color: #2E2F2F;
+	border: solid 1px #151515;
 }
 .post2 {
-	background-color: #eef5fc;
-	border: solid 1px #bcd2e9;
+	background-color: #424343;
+	border: solid 1px #1C1D1D;
 }
 .post_invisible {
-	background-color: #b6bdc8;
-	border: solid 1px #969daa;
+	background-color: #1C1D1D;
+	border: solid 1px #010001;
 }
 .post_alert {
 	background-color: #fff;
@@ -217,16 +217,22 @@ footer {
 	_vertical-align: 35px;
 }
 .post .username strong {
-	color: #000;
+	color: #fff;
+}
+.post .username a:hover strong {
+	color: #ff1e00;
 }
 .post .username strong.moderator {
-	color: #d00;
+	color: #FE8001;
 }
 .post .username strong.admin {
 	color: #d00;
 }
 .post .post_date {
 	text-align: right;
+}
+.post .post_date a:hover {
+	color: #ff1e00;
 }
 .post .post_edit {
 	background: url(../images/separator_grey.png) left top repeat-x;
@@ -236,17 +242,21 @@ footer {
 /* posts bbcode stylization */
 .post .post_body blockquote {
 	font: 13px Arial;
-	border: 1px solid #DDD;
-	background-color: #FBFBFB;
+	border: 1px solid #151515;
+	background-color: #6F6E6F;
 	padding: 10px;
+	color: #F2F3F3;
 }
 .post .post_body .spoiler {
-	border: 1px solid #DDD;
-	background-color: #FBFBFB;
+	border: 1px solid #151515;
+	background-color: #6F6E6F;
 	padding: 10px;
 }
 .post .post_body .spoiler-top {
 	font-weight: bold;
+}
+.post .post_body .spoiler-top a:hover {
+	color: #ff1e00;
 }
 .post .post_body .spoiler-box {
 	padding-top: 5px;
@@ -265,6 +275,7 @@ footer {
 	margin-bottom: 5px;
 	min-height: 5.5em;
 	max-height: 25em;
+	color: #000;
 }
 .post-edit button {
 	margin-right: 5px;
@@ -287,10 +298,16 @@ input[type=file]{
     margin-bottom: 10px;
 }
 .editor-buttons .btn {
-    cursor: pointer;   
+    cursor: pointer;
+}
+.editor-buttons .btn-dark {
+	background-color: #424343;
+}
+.editor-buttons .btn-dark:hover, .editor-buttons .btn-dark:focus {
+	background-color: #2E2F2F;
 }
 .editor-buttons button:hover .fa, .editor-buttons button:focus .fa {
-   color: #808080;
+   color: #FFF;
 }
 #message-preview {
 	display: none;
@@ -314,5 +331,5 @@ input[type=file]{
 	border: 1px solid #DEDEDE;
 }
 #terms h5 {
-	color: #0080ff;
+	color: #fff;
 }

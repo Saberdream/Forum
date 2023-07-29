@@ -3,10 +3,9 @@ if(empty($lang) || !is_array($lang))
 	$lang = array();
 
 /*
- * smileys list
+ * smileys.php
 */
-$lang['smileys'] = array (
-	'smileys_list'				=> 'Liste des smileys',
-	'smileys_info'				=> 'Ajoutez des smileys sympa à vos messages.',
-	
+$lang['smileys'] = array(
+	'smileys_list'			=> 'List of smilies',
+	'smileys_info'			=> 'Add cool smileys to your messages.',
 );

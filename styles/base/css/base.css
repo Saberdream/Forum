@@ -21,7 +21,6 @@ footer {
 	margin-bottom: 10px;
 	text-align: center;
 	font-size: 11px;
-	color: #333;
 }
 /* bootstrap rules supplements */
 .form-search {
@@ -220,8 +219,11 @@ footer {
 .post .username strong {
 	color: #000;
 }
+.post .username a:hover strong {
+	color: #ff1e00;
+}
 .post .username strong.moderator {
-	color: #d00;
+	color: #FE8001;
 }
 .post .username strong.admin {
 	color: #d00;

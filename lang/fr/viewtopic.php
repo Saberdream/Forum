@@ -96,7 +96,7 @@ $lang['topic'] = array (
  * date
 */
 $lang['date'] = array(
-	'format'					=> 'j F Y à H:i:s'
+	'format'					=> 'j F Y H:i:s'
 );
 
 $lang['days'] = array(

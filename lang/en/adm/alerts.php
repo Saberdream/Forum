@@ -3,63 +3,54 @@ if(empty($lang) || !is_array($lang))
 	$lang = array();
 
 /*
- * alerts
+ * alerts.php
 */
-$lang['alerts'] = array (
-	'manage_alerts'				=> 'Gestion des alertes',
-	'exact'						=> 'Exact',
-	'search'					=> 'Rechercher',
-	'back'						=> 'Retour',
-	'total'						=> 'Total ',
-	'rows'						=> 'Lignes',
-	'ban'						=> 'Bannir',
-	'unban'						=> 'Débannir',
-	'delete'					=> 'Supprimer',
-	'validate'					=> 'Valider',
-	'id'						=> 'Id',
-	'username'					=> 'Pseudo',
-	'ip'						=> 'IP',
-	'date'						=> 'Date',
-	'last'						=> 'Dernier',
-	'author'					=> 'Auteur',
-	'reason'					=> 'Motif',
-	'action'					=> 'Action',
-	'edit_user_informations'	=> 'Editer les informations de l\'utilisateur',
-	'search_results'			=> '%d résultat(s) pour la recherche de « <strong>%s</strong> »',
-	'search_no_result'			=> 'Aucun résultat pour la recherche de « <strong>%s</strong> », essayez une nouvelle fois avec des mot-clés plus précis.',
-	'no_data'					=> 'Il n\'y a aucune donnée à afficher !',
-	'mark_as_treated'			=> 'Marquer comme traitées',
-	'go_to_alert_page'			=> 'Aller sur la page de l\'alerte',
-	'view'						=> 'Voir',
-
-	// javascript
-	'confirm_action'			=> 'Êtes-vous sûr(e) de vouloir réaliser cette action sur les éléments sélectionnés ?',
-	'select_action'				=> 'Vous devez sélectionner une action.',
-	'select_element'			=> 'Vous devez sélectionner au moins un élément.',
-	'alert'						=> 'Alerte',
-	'cancel'					=> 'Annuler',
-	'user_deleted'				=> 'L\'utilisateur a bien été supprimé.',
-	'action_success'			=> 'L\'action a bien été effectuée sur les éléments sélectionnés.',
-
-	// errors and form messages
-	'invalid_form'				=> 'Le formulaire est invalide, veuillez retenter.',
-	'incorrect_ids'				=> 'Les ids sont incorrects.',
-	'incorrect_category_id'		=> 'L\'id de la catégorie est incorrect.',
-	'incorrect_token'			=> 'Le jeton est expiré ou incorrect.',
-	'error_occurred'			=> 'Une erreur est survenue',
-	'files_not_deleted'			=> 'Les fichiers n\'ont pas pu être supprimés.',
-
-	// left menu and breadcrumb
-	'alerts_treated'			=> 'Alertes traitées',
-	'banlist'					=> 'Bannissements',
+$lang['alerts'] = array(
+	'manage_alerts'			=> 'Alert management',
+	'exact'			=> 'Exact',
+	'search'			=> 'To research',
+	'back'			=> 'Feedback',
+	'total'			=> 'Total',
+	'rows'			=> 'Lines',
+	'ban'			=> 'Ban',
+	'unban'			=> 'Unban',
+	'delete'			=> 'DELETE',
+	'validate'			=> 'To validate',
+	'id'			=> 'ID',
+	'username'			=> 'Pseudo',
+	'ip'			=> 'IPs',
+	'date'			=> 'Date',
+	'last'			=> 'Last',
+	'author'			=> 'Author',
+	'reason'			=> 'Pattern',
+	'action'			=> 'Stock',
+	'edit_user_informations'			=> 'Edit user information',
+	'search_results'			=> '%d result(s) for search for "<strong>%s</strong>"',
+	'search_no_result'			=> 'No results found for "<strong>%s</strong>", try again with more specific keywords.',
+	'no_data'			=> 'There is no data to display!',
+	'mark_as_treated'			=> 'Mark as processed',
+	'go_to_alert_page'			=> 'Go to the alert page',
+	'view'			=> 'See',
+	'confirm_action'			=> 'Are you sure you want to perform this action on the selected items?',
+	'select_action'			=> 'You must select an action.',
+	'select_element'			=> 'You must select at least one item.',
+	'alert'			=> 'Alert',
+	'cancel'			=> 'Cancel',
+	'user_deleted'			=> 'The user has been successfully deleted.',
+	'action_success'			=> 'The action has been performed on the selected elements.',
+	'invalid_form'			=> 'The form is invalid, please try again.',
+	'incorrect_ids'			=> 'The ids are incorrect.',
+	'incorrect_category_id'			=> 'The category id is incorrect.',
+	'incorrect_token'			=> 'The token is expired or invalid.',
+	'error_occurred'			=> 'An error has occurred',
+	'files_not_deleted'			=> 'The files could not be deleted.',
+	'alerts_treated'			=> 'Alerts handled',
+	'banlist'			=> 'Bans',
 );
 
-/*
- * search options
-*/
-$lang['search_options'] = array (
-	'id'						=> 'Id',
-	'username'					=> 'Pseudo',
-	'ip'						=> 'IP',
-	'reason'					=> 'Motif'
+$lang['search_options'] = array(
+	'id'			=> 'ID',
+	'username'			=> 'Pseudo',
+	'ip'			=> 'IPs',
+	'reason'			=> 'Pattern',
 );
