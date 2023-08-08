@@ -68,8 +68,8 @@ footer {
 .list-topics {
 	border-collapse: separate;
 	border-spacing: 1px;
-	background-color: #585858;
-	border: solid 1px #151515;
+	background-color: #2e3338;
+	border: solid 1px #1c1e22;
 	table-layout: fixed;
 }
 .list-topics a:hover {
@@ -87,25 +87,25 @@ footer {
 	padding: 3px;
 }
 .list-topics th {
-	background-color: #151515;
+	background-color: #1b1e21;
 	color: #fff;
 	line-height: normal;
 }
 .list-topics tr:nth-child(even) td {
-	background-color: #2E2F2F;
+	background-color: #2e3338;
 }
 .list-topics tr:nth-child(odd) td {
-	background-color: #424343;
+	background-color: #353a41;
 }
 .list-topics tr:hover td {
-	background-color: #6F6E6F;
+	background-color: #49515a;
 }
 .list-topics tr.topic_invisible td {
-	background-color: #1C1D1D;
+	background-color: #253341;
 	color: #fff;
 }
 .list-topics tr.topic_invisible:hover td {
-	background-color: #6F6E6F;
+	background-color: #59636e;
 }
 .list-topics tr.topic_invisible a {
 	color: #fff;
@@ -114,10 +114,10 @@ footer {
 	color: #ff1e00;
 }
 .list-topics tr.topic_unread td {
-	background-color: #848484;
+	background-color: #253341;
 }
 .list-topics tr.topic_unread:hover td {
-	background-color: #6F6E6F;
+	background-color: #59636e;
 }
 .list-topics .topic-name {
 	padding: 3px 5px 3px 27px;
@@ -177,16 +177,16 @@ footer {
 	padding: 10px;
 }
 .post1 {
-	background-color: #2E2F2F;
-	border: solid 1px #151515;
+	background-color: #353a41;
+	border: solid 1px #1c1e22;
 }
 .post2 {
-	background-color: #424343;
-	border: solid 1px #1C1D1D;
+	background-color: #2e3338;
+	border: solid 1px #1c1e22;
 }
 .post_invisible {
-	background-color: #1C1D1D;
-	border: solid 1px #010001;
+	background-color: #253341;
+	border: solid 1px #1c1e22;
 }
 .post_alert {
 	background-color: #fff;
@@ -242,14 +242,14 @@ footer {
 /* posts bbcode stylization */
 .post .post_body blockquote {
 	font: 13px Arial;
-	border: 1px solid #151515;
-	background-color: #6F6E6F;
+	border: 1px solid #1e2024;
+	background-color: #464d56;
 	padding: 10px;
 	color: #F2F3F3;
 }
 .post .post_body .spoiler {
-	border: 1px solid #151515;
-	background-color: #6F6E6F;
+	border: 1px solid #1e2024;
+	background-color: #464d56;
 	padding: 10px;
 }
 .post .post_body .spoiler-top {
@@ -301,10 +301,10 @@ input[type=file]{
     cursor: pointer;
 }
 .editor-buttons .btn-dark {
-	background-color: #424343;
+	background-color: #1e2124;
 }
 .editor-buttons .btn-dark:hover, .editor-buttons .btn-dark:focus {
-	background-color: #2E2F2F;
+	background-color: #26292d;
 }
 .editor-buttons button:hover .fa, .editor-buttons button:focus .fa {
    color: #FFF;
