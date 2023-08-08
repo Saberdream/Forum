@@ -79,21 +79,11 @@ CREATE TABLE IF NOT EXISTS `forum_config` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `forum_config` (`config_name`, `config_value`, `config_type`, `config_form_type`, `config_catid`, `config_order`) VALUES
-('activate_articles', '1', 'b', '', 8, 1),
 ('activate_avatar', '1', 'b', '', 4, 1),
 ('activate_pm', '1', 'b', '', 7, 1),
 ('activate_sign', '1', 'b', '', 2, 5),
 ('activate_upload', '1', 'b', '', 5, 1),
 ('allow_register', '1', 'b', '', 2, 3),
-('articles_auth_delete', '3', 'd', 'select', 8, 10),
-('articles_auth_edit', '4', 'd', 'select', 8, 9),
-('articles_auth_new', '2', 'd', 'select', 8, 8),
-('articles_auth_read', '1', 'd', 'select', 8, 7),
-('articles_captcha', '0', 'b', '', 8, 3),
-('articles_flood_time', '60', 'd', '', 8, 2),
-('articles_text_max_size', '10000', 'd', '', 8, 6),
-('articles_text_min_size', '100', 'd', '', 8, 5),
-('articles_title_max_size', '100', 'd', '', 8, 4),
 ('attempt_wait_time', '3600', 'd', '', 1, 13),
 ('avatar_allowed_types', 'gif;jpeg;jpg;png', 's', 'tag', 4, 7),
 ('avatar_max_files', '5', 'd', '', 4, 5),

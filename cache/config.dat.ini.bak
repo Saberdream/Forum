@@ -72,14 +72,3 @@ pm_max_size=100
 pm_reply_max_size=5000
 pm_max_smilies=50
 pm_max_participants=30
-[articles_configuration]
-activate_articles=1
-articles_flood_time=60
-articles_captcha=0
-articles_title_max_size=100
-articles_text_min_size=100
-articles_text_max_size=10000
-articles_auth_read=1
-articles_auth_new=2
-articles_auth_edit=4
-articles_auth_delete=3
