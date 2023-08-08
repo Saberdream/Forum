@@ -20,10 +20,10 @@
 				  {/loop}
 				</select>
 			  </div>
-			  <div class="form-group">
+			  <div class="form-group text-center">
 				<label for="exact"><input type="checkbox" name="exact" id="exact" value="1" {if="!empty($search.keywords) && $search.exact"}checked {/if}/> {$lang_users.exact}</label>
+				<button class="btn btn-default btn-sm" type="submit"><span class="glyphicon glyphicon-search"></span></button>
 			  </div>
-			  <button class="btn btn-default btn-sm" type="submit"><span class="glyphicon glyphicon-search"></span></button>
 			  {if="!empty($search.keywords)"}<a class="btn btn-primary btn-sm pull-right hidden-xs" href="adm/users.php?page=1">{$lang_users.back}</a>{/if}
 			</form>
 

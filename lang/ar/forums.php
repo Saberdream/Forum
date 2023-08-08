@@ -13,4 +13,6 @@ $lang['forums'] = array(
 	'posts'	=> 'دعامات',
 	'last_post'	=> 'اخر رسالة',
 	'no_forum'	=> 'لا توجد منتديات لعرضها.',
+	'all_forums'	=> 'كل المنتديات',
+	'followed_topics'	=> 'المواضيع المتبعة',
 );

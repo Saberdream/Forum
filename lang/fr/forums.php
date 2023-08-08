@@ -13,4 +13,6 @@ $lang['forums'] = array (
 	'posts'						=> 'Messages',
 	'last_post'					=> 'Dernier message',
 	'no_forum'					=> 'Il n\'y a aucun forum à afficher.',
+	'all_forums'				=> 'Tous les forums',
+	'followed_topics'			=> 'Sujets suivis',
 );

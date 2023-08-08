@@ -15,8 +15,16 @@ This is an evolutive and web responsive PHP forum script, to be more precise it 
 # How to use
 1. Connect to the phpMyAdmin interface of your host (or of your local server)  and upload the structure.sql file to create the forum tables.
 2. Fill the config.php file at the root of the script with your SQL connection informations (db name, password...).
-3. Upload all the files from the root of the script to the root of your server via an FTP client such as FileZilla.
-4. Go to the root of your site via your web browser; if the script runs correctly, the home page should appear. Go to the login page via the menu on top and log to the admin account (see below for administrator account credentials).
+3. Rename the "config.dat.ini.bak" file (in cache/ directory) to "config.dat.ini", by don't forgetting to fill the following variables:
+	* site_name="Your site name (this is the name of your site which is displayed to the visitors)"
+	* domain_name="Your site domain name (www.yourdomain.xxx or www.yourdomain.xxx/forum), this is the root directory of your forum."
+	* talbe_prefix="The prefix of your tables if you want to change them (must be the same as the tables you created by uploading the structure.sql file)"
+	* site_mail="Email of your site (webmaster@yourdomain.xxx)"
+	* smtp_server="Your SMTP server if you have one (smtp.yourdomain.xxx)"
+	* sendmail_from="The mail which the SMTP server sends the mail from (name.surname@yourdomain.xxx)"
+	* All the other parameters can be modified until the site is installed so it's not necessary to fill them.
+4. Upload all the files from the root of the script to the root of your server via an FTP client such as FileZilla.
+5. Go to the root of your site via your web browser; if the script runs correctly, the home page should appear. Go to the login page via the menu on top and log to the admin account (see below for administrator account credentials).
 When you run the script for the first time, there should normally be 3 different users:
 * The founder account, which have the total access to the forum and can enter to the administrator panel.
 * The anonymous account, which every user that is not logged in and is visiting the site for the first time is connected to.
