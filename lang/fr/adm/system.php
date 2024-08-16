@@ -18,6 +18,7 @@ $lang['system'] = array (
 	'site_configuration'		=> 'Configuration du site',
 	'error_logs'				=> 'Logs des erreurs',
 	'styles'					=> 'Styles',
+	'langs'						=> 'Langues',
 );
 
 /*

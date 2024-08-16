@@ -19,6 +19,7 @@ $lang['logs'] = array (
 	// left menu
 	'site_configuration'		=> 'Configuration du site',
 	'styles'					=> 'Styles',
+	'langs'						=> 'Langues',
 	'error_logs'				=> 'Logs des erreurs',
 	
 	// javascript

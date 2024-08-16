@@ -25,34 +25,15 @@ function update_user($userid, $values) {
 	return true;
 }
 
-function get_langs() {
-	$root_dir = dirname(dirname(dirname(__DIR__))).'/lang/';
-
-	$rd = scandir($root_dir);
-	$langs = array();
-
-	foreach($rd as $dir) {
-		if(is_dir($root_dir.$dir) && $dir != '.' && $dir != '..')
-			$langs[] = $dir;
-	}
-
-	unset($dir);
-
-	return $langs;
-}
-
 function get_styles() {
 	$root_dir = dirname(dirname(dirname(__DIR__))).'/styles/';
 
-	$rd = scandir($root_dir);
-	$styles = array();
-
-	foreach($rd as $dir) {
-		if(is_dir($root_dir.$dir) && $dir != '.' && $dir != '..')
-			$styles[] = $dir;
-	}
-
-	unset($dir);
+	$styles = parse_ini_file($root_dir.'styles.cfg', true);
+	
+	foreach($styles as $key => $value)
+		$styles[$key] = !empty($value['name']) ? $value['name'] : $key;
+	
+	unset($key, $value);
 
 	return $styles;
 }

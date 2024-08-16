@@ -18,5 +18,7 @@ $lang['menu_top'] = array (
 	'forgotten_password'		=> 'Mot de passe oublié',
 	'session_time_left'			=> 'Votre session dure encore %d minute(s).',
 	'my_account'				=> 'Mon compte',
-	'private_messages'			=> 'Messages privés'
+	'private_messages'			=> 'Messages privés',
+	'lang'					=> 'Langue ',
+	'auto_detected'				=> 'auto-détecté'
 );

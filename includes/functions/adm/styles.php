@@ -6,10 +6,10 @@ function get_styles() {
 
 	foreach($rd as $dir) {
 		if(is_dir($root_dir.$dir) && $dir != '.' && $dir != '..') {
-			if(file_exists($root_dir.$dir.'/style.cfg')) {
+			if(file_exists($root_dir.$dir.'/style.cfg'))
 				$styles[$dir] = parse_ini_file($root_dir.$dir.'/style.cfg');
-				$styles[$dir]['size'] = getFolderSize($root_dir.$dir);
-			}
+			
+			$styles[$dir]['size'] = getFolderSize($root_dir.$dir);
 		}
 	}
 

@@ -42,8 +42,8 @@
 			<li><a href="index" tabindex="-1">{$lang_menu_top.home}</a></li>
 			<li><a href="forums" tabindex="-1">{$lang_menu_top.forums}</a></li>
 		  </ul>
-		  {if="$user.user_rank >= USER"}
 		  <ul class="nav navbar-nav navbar-right">
+		    {if="$user.user_rank >= USER"}
 			{if="$activate_pm == 1"}<li><a href="pm"><span class="glyphicon glyphicon-envelope"></span> {$lang_menu_top.private_messages}</a></li>{/if}
 			<li><a href="notifications"><span class="glyphicon glyphicon-bell"></span> {$lang_menu_top.notifications} <span class="badge">{$nb_notifications}</span></a></li>
 			<li class="dropdown">
@@ -55,9 +55,7 @@
 				<li><a href="logout?sid={$user.sessionid|encrypt}" tabindex="-1"><span class="glyphicon glyphicon-log-out"></span> {$lang_menu_top.logout}</a></li>
 			  </ul>
 			</li>
-		  </ul>
-		  {else}
-		  <ul class="nav navbar-nav navbar-right">
+		    {else}
 			<li class="dropdown">
 			  <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> {$lang_menu_top.my_account} <span class="caret"></span></a>
 			  <ul class="dropdown-menu">
@@ -67,8 +65,9 @@
 				<li><a href="recover" tabindex="-1"><span class="glyphicon glyphicon-question-sign"></span> {$lang_menu_top.forgotten_password}</a></li>
 			  </ul>
 			</li>
+		    {/if}
 		  </ul>
-		  {/if}
+		  {if="!empty($user.user_lang)"}<p class="navbar-text navbar-right"><img src="images/flags-icons/{$user.user_lang}.png" alt="Lang icon" title="{$lang_menu_top.lang}: {$user.user_lang}{if="$user.user_rank==GUEST"} ({$lang_menu_top.auto_detected}){/if}" /></p>{/if}
 		</div>
 		</div>
 		</div>

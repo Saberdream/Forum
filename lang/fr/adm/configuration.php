@@ -22,12 +22,13 @@ $lang['config'] = array (
 	// left menu
 	'error_logs'				=> 'Logs des erreurs',
 	'styles'					=> 'Styles',
+	'langs'						=> 'Langues',
 	
 	// auths
-	'visitors'					=> 'Visiteurs',
-	'members'					=> 'Membres',
-	'moderators'				=> 'Modérateurs',
-	'administrators'			=> 'Administrateur'
+	'guest'					=> 'Visiteur',
+	'user'						=> 'Utilisateur',
+	'moderator'				=> 'Modérateur',
+	'administrator'			=> 'Administrateur'
 );
 
 /*

@@ -282,3 +282,7 @@ function previous_page($url = false, $default_page = './') {
 
 	return $previous_page;
 }
+
+function get_langs() {
+	return unserialize(file_get_contents(dirname(__DIR__).'/lang/langs.dat'));
+}

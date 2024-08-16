@@ -3,6 +3,7 @@ $in_admin = true;
 include dirname(__DIR__).'/core.php';
 include dirname(__DIR__).'/includes/functions/adm/user-edit.php';
 include dirname(__DIR__).'/includes/timezones.php';
+include dirname(__DIR__).'/includes/languages.php';
 include dirname(__DIR__).'/'.$lang_path.'adm/user-edit.php';
 
 header('Content-Type: text/html; charset=utf-8');
@@ -14,10 +15,25 @@ $data = get_user((int) $_GET['id']);
 
 if(isset($data['user_id'])) {
 	$array_data = array('password', 'email', 'ip', 'time', 'last', 'rank', 'sex', 'birthday', 'sign', 'desc', 'posts', 'country', 'style', 'lang', 'timezone');
-	$ranks = array(USER => $lang['user_edit']['user'], MODERATOR => $lang['user_edit']['moderator'], ADMIN => $lang['user_edit']['administrator']);
-	$genders = array('m' => $lang['user_edit']['male'], 'f' => $lang['user_edit']['female']);
-	$langs = get_langs();
+	$ranks = array(USER => 'user', MODERATOR => 'moderator', ADMIN => 'administrator');
+	$sexes = array('m' => 'Male', 'f' => 'Female');
+	$langs = array();
 	$styles = get_styles();
+	
+	foreach($ranks as $key => $value)
+		$ranks[$key] = isset($lang['user_edit_ranks'][$key]) ? $lang['user_edit_ranks'][$key] : $value;
+	
+	unset($key, $value);
+	
+	foreach($sexes as $key => $value)
+		$sexes[$key] = isset($lang['user_edit_sexes'][$key]) ? $lang['user_edit_sexes'][$key] : $value;
+
+	unset($key, $value);
+
+	foreach($accepted_langs as $value)
+		$langs[$value] = isset($languages[$value]) ? $languages[$value] : $value;
+
+	unset($value);
 
 	if(!empty($_POST['data']) && is_array($_POST['data'])) {
 		$error = array();
@@ -57,14 +73,14 @@ if(isset($data['user_id'])) {
 					$error[] = $lang['user_edit']['invalid_last_connection'];
 
 				if(isset($_POST['data']['rank'])) {
-					if(!key_exists($_POST['data']['rank'], $ranks))
+					if(!isset($ranks[$_POST['data']['rank']]))
 						$error[] = $lang['user_edit']['invalid_rank'];
 
 					if($data['user_rank'] == FOUNDER || ($data['user_rank'] == ADMIN && $user->data['user_rank'] < FOUNDER))
 						$error[] = $lang['user_edit']['not_allowed_modify_rank'];
 				}
 
-				if(!empty($_POST['data']['sex']) && !in_array($_POST['data']['sex'], array_keys($genders)))
+				if(!empty($_POST['data']['sex']) && !isset($sexes[$_POST['data']['sex']]))
 					$error[] = $lang['user_edit']['incorrect_gender'];
 
 				if(!empty($_POST['data']['birthday']) && !preg_match('#^[0-9]{2}/[0-9]{2}/[0-9]{4}$#', $_POST['data']['birthday']))
@@ -73,10 +89,10 @@ if(isset($data['user_id'])) {
 				if(isset($_POST['data']['country']) && mb_strlen($_POST['data']['country'], 'UTF-8') > 50)
 					$error[] = $lang['user_edit']['invalid_country'];
 
-				if(isset($_POST['data']['style']) && !empty($_POST['data']['style']) && !in_array($_POST['data']['style'], $styles))
+				if(isset($_POST['data']['style']) && !empty($_POST['data']['style']) && !isset($styles[$_POST['data']['style']]))
 					$error[] = $lang['user_edit']['invalid_style'];
 
-				if(isset($_POST['data']['lang']) && !empty($_POST['data']['lang']) && !in_array($_POST['data']['lang'], $langs))
+				if(isset($_POST['data']['lang']) && !empty($_POST['data']['lang']) && !isset($langs[$_POST['data']['lang']]))
 					$error[] = $lang['user_edit']['invalid_lang'];
 				
 				if(isset($_POST['data']['timezone']) && !empty($_POST['data']['timezone']) && !isset($timezones[$_POST['data']['timezone']]))
@@ -105,7 +121,8 @@ if(isset($data['user_id'])) {
 		'ranks' => $ranks,
 		'langs' => $langs,
 		'styles' => $styles,
-		'timezones' => $timezones
+		'timezones' => $timezones,
+		'sexes' => $sexes
 	));
 
 	if(isset($post_data)) {

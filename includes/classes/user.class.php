@@ -17,7 +17,18 @@ class user {
 		'sessions_per_ip'			=> 10,					// number max of simultaneous sessions per ip
 		'cookies_expiration_time'	=> 365,					// number of days, default cookie time is valable a year
 		'cookies_name'				=> 'autologin_key',		// must be an alphanumeric string if specified (a-zA-Z0-9_)
-		'table_prefix'				=> ''					// must also be an alphanumeric string if specified
+		'cookies_secure'			=> false,				// boolean, defines if cookies should be transmitted by the ssl protocol
+		'table_prefix'				=> '',					// must also be an alphanumeric string if specified
+		'accepted_langs'			=> array('en'),			// accepted user local languages
+		'default_lang'				=> 'en'					// default visitors language if no one is detected
+	);
+
+	// this prop gives the possibility to configure the language of the class instance (e.g. depending on the user's location, language of its browser...)
+	private static $lang = array(
+		'user_banned_permanently' => 'You have been banned from this site for the reason « %s » permanently.',
+		'user_banned_temporarily' => 'You have been banned from this site for the reason « %s » for %d day(s).',
+		'too_many_sessions' => 'There are too many sessions connected from your network, please try again later.',
+		'site_unavailable_robot' => 'The site is temporarily unavailable, please try again later.'
 	);
 
     public static function set_dbh($dbh) {
@@ -161,7 +172,7 @@ class user {
 							else {
 								$this->session_kill(false);
 
-								die('You have been banned from this site for the reason « '.display($value['ban_reason']).' » '.($value['ban_end'] == 0 ? 'permanently.' : 'for '.round(($value['ban_end']-$this->time_now)/86400).' day(s).'));
+								die(($value['ban_end'] == 0) ? sprintf(self::$lang['user_banned_permanently'], display($value['ban_reason'])) : sprintf(self::$lang['user_banned_temporarily'], display($value['ban_reason']), round(($value['ban_end']-$this->time_now)/86400)));
 							}
 					}
 					elseif(!empty($value['ban_userid']) && $this->data['user_rank'] > GUEST) {
@@ -190,6 +201,7 @@ class user {
 					$this->data = array_merge($this->data, $data);
 					
 					if($this->time_now-$this->data['time'] > 60) {
+						// we limit the number of connections to one per minute for bots so they do not consume too much bandwidth (this does not protect against ddos)
 						$sth = self::$dbh->prepare('UPDATE '.self::$settings['table_prefix'].'connected SET connected_sessionid = ?, connected_time = ?, connected_last = ? WHERE connected_userid = ? AND connected_robot = ?');
 						$sth->execute(array($this->sessionid, $this->time_now, $this->time_now, $this->data['user_id'], $robot));
 						unset($sth);
@@ -204,7 +216,7 @@ class user {
 					else {
 						$this->session_kill(false);
 						
-						die('The site is temporarily unavailable, please try again later.');
+						die(self::$lang['site_unavailable_robot']);
 					}
 				}
 				else {
@@ -214,10 +226,43 @@ class user {
 				}
 			}
 		}
-		
+
+		// browser language check
+		if(($this->data['user_rank'] == GUEST || empty($this->data['user_lang'])) && !empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+			$browser_preferred_langs = explode(',', substr(trim($_SERVER['HTTP_ACCEPT_LANGUAGE']), 0, 100));
+			
+			if(count($browser_preferred_langs) > 0) {
+				$preferred_langs = array();
+				
+				// extracts languages and sorts them by preference order
+				foreach($browser_preferred_langs as $value) {
+					if(!empty($value) && preg_match('/(\*|[a-zA-Z0-9]{1,8}(?:-[a-zA-Z0-9]{1,8})*)(?:\s*;\s*q\s*=\s*(0(?:\.\d{0,3})|1(?:\.0{0,3})))?/', trim($value), $match))
+						$preferred_langs[!empty($match[2]) ? $match[2] : '1.0'] = strtolower($match[1]);
+				}
+
+				unset($value);
+				
+				krsort($preferred_langs);
+				
+				// check preferred languages
+				foreach($preferred_langs as $value) {
+					if(stripos($value, '-'))
+							$value = stristr($value, '-', true);
+					
+					if(in_array($value, self::$settings['accepted_langs'])) {
+						$this->data['user_lang'] = $value;
+						
+						break;
+					}
+				}
+				
+				unset($value);
+			}
+		}
+
 		$autologin = (($set_key == true || isset($this->cookie['key'])) && $this->data['user_rank'] > GUEST) ? true : false;
 		$admin = ($set_admin == true && $this->data['user_rank'] >= ADMIN) ? true : false;
-		
+
 		$sql_array = array(
 			'sessionid' => $this->sessionid,
 			'userid' => $this->data['user_id'],
@@ -230,7 +275,7 @@ class user {
 			'admin' => ($admin == true) ? 1:0
 		);
 		
-		// prevent session duplication
+		// prevents session duplication
 		$sth = self::$dbh->prepare('DELETE FROM '.self::$settings['table_prefix'].'connected WHERE connected_sessionid = ?');
 		$sth->execute(array($this->sessionid));
 		
@@ -247,7 +292,7 @@ class user {
 		if($count_sessions >= self::$settings['sessions_per_ip']) {
 			$this->session_kill(false);
 			
-			die('The site is temporarily unavailable, please try again later.');
+			die(self::$lang['too_many_sessions']);
 		}
 		
 		$sth = self::$dbh->prepare('INSERT INTO '.self::$settings['table_prefix'].'connected(connected_sessionid, connected_userid, connected_ip, connected_browser, connected_robot, connected_time, connected_last, connected_autologin, connected_admin) VALUES ('.implode(',', array_fill(0, 9, '?')).')');
@@ -336,6 +381,6 @@ class user {
 	}
 	
 	private function set_cookie($expiration = 1) {
-		setrawcookie(self::$settings['cookies_name'], !empty($this->cookie['key']) ? 'id:'.$this->data['user_id'].'|'.$this->cookie['key'] : '', $expiration, '/', '', (empty($_SERVER['HTTPS']) || (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'off')) ? false : true, true);
+		setrawcookie(self::$settings['cookies_name'], !empty($this->cookie['key']) ? 'id:'.$this->data['user_id'].'|'.$this->cookie['key'] : '', $expiration, '/', '', self::$settings['cookies_secure'], true);
 	}
 }

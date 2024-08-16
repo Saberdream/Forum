@@ -3,7 +3,7 @@ if(empty($lang) || !is_array($lang))
 	$lang = array();
 
 /*
- * site errors logs
+ * site styles
 */
 $lang['styles'] = array (
 	'site_styles'				=> 'Liste des styles du site',
@@ -21,8 +21,8 @@ $lang['styles'] = array (
 	// left menu
 	'site_configuration'		=> 'Configuration du site',
 	'styles'					=> 'Styles',
-	'styles_list'				=> 'Liste des styles',
 	'error_logs'				=> 'Logs des erreurs',
+	'langs'						=> 'Langues',
 	
 	// javascript
 	'confirm_action'			=> 'Êtes-vous sûr(e) de vouloir réaliser cette action ?',

@@ -15,11 +15,6 @@ $lang['user_edit'] = array (
 	'search_results'			=> '%d résultat(s) pour la recherche de « <strong>%s</strong> »',
 	'search_no_result'			=> 'Aucun résultat pour la recherche de « <strong>%s</strong> », essayez une nouvelle fois avec des mot-clés plus précis.',
 	'no_user'					=> 'Il n\'y a aucun utilisateur !',
-	'user'						=> 'Utilisateur',
-	'moderator'					=> 'Modérateur',
-	'administrator'				=> 'Administrateur',
-	'male'						=> 'Masculin',
-	'female'					=> 'Féminin',
 	'user_have_no_avatar'		=> 'L\'utilisateur n\'a pas choisi d\'avatar.',
 	'incorrect_user_id'			=> 'L\'id de l\'utilisateur est incorrect.',
 	'user_informations_updated'	=> 'Les informations du compte ont bien été mises à jour.',
@@ -93,4 +88,16 @@ $lang['user_edit'] = array (
 	'user_not_exists'			=> 'Cet utilisateur n\'existe pas ou est introuvable !',
 	'invalid_timezone'			=> 'Le fuseau horaire est invalide.',
 	'update_error'				=> 'Une erreur est survenue durant la mise à jour des informations.',
+	'not_specified'				=> 'Non spécifié',
+);
+
+$lang['user_edit_ranks'] = array(
+	'user'						=> 'Utilisateur',
+	'moderator'					=> 'Modérateur',
+	'administrator'				=> 'Administrateur',
+);
+
+$lang['user_edit_sexes'] = array (
+	'm'							=> 'Masculin',
+	'f'							=> 'Féminin',
 );

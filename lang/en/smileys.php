@@ -6,6 +6,6 @@ if(empty($lang) || !is_array($lang))
  * smileys.php
 */
 $lang['smileys'] = array(
-	'smileys_list'			=> 'List of smilies',
-	'smileys_info'			=> 'Add cool smileys to your messages.',
+	'smileys_list'	=> 'List of smileys',
+	'smileys_info'	=> 'Add cool smileys to your messages.',
 );

@@ -3,17 +3,23 @@ $in_admin = true;
 include dirname(__DIR__).'/core.php';
 include dirname(__DIR__).'/includes/functions/adm/configuration.php';
 include dirname(__DIR__).'/includes/timezones.php';
+include dirname(__DIR__).'/includes/languages.php';
 include dirname(__DIR__).'/'.$lang_path.'adm/configuration.php';
 
 $styles = get_styles();
-$langs = get_langs();
+$langs = array();
 
 $auth_ranks = array(
-	GUEST => !empty($lang['config']['visitors']) ? $lang['config']['visitors'] : 'Visitors',
-	USER => !empty($lang['config']['members']) ? $lang['config']['members'] : 'Members',
-	MODERATOR => !empty($lang['config']['moderators']) ? $lang['config']['moderators'] : 'Moderators',
-	ADMIN => !empty($lang['config']['administrators']) ? $lang['config']['administrators'] : 'Administrators'
+	GUEST => !empty($lang['config']['guest']) ? $lang['config']['guest'] : 'Guest',
+	USER => !empty($lang['config']['user']) ? $lang['config']['user'] : 'User',
+	MODERATOR => !empty($lang['config']['moderator']) ? $lang['config']['moderator'] : 'Moderator',
+	ADMIN => !empty($lang['config']['administrator']) ? $lang['config']['administrator'] : 'Administrator'
 );
+
+foreach($accepted_langs as $value)
+	$langs[$value] = isset($languages[$value]) ? $languages[$value] : $value;
+
+unset($value);
 
 $options = array(
 	'default_style'	=> $styles,
@@ -94,10 +100,10 @@ if(!empty($_POST['config']) && is_array($_POST['config'])) {
 			if(isset($_POST['config']['domain_name']) && (empty($_POST['config']['domain_name']) || !preg_match('/^[a-z0-9\/\.-]{1,100}\.[a-z]{2,15}$/', $_POST['config']['domain_name'])))
 				$error[] = $lang['config_errors']['domain_name'];
 			
-			if(isset($_POST['config']['default_style']) && (empty($_POST['config']['default_style']) || !in_array($_POST['config']['default_style'], $styles)))
+			if(isset($_POST['config']['default_style']) && (empty($_POST['config']['default_style']) || !isset($styles[$_POST['config']['default_style']])))
 				$error[] = $lang['config_errors']['default_style'];
 			
-			if(isset($_POST['config']['default_lang']) && (empty($_POST['config']['default_lang']) || !in_array($_POST['config']['default_lang'], $langs)))
+			if(isset($_POST['config']['default_lang']) && (empty($_POST['config']['default_lang']) || !isset($langs[$_POST['config']['default_lang']])))
 				$error[] = $lang['config_errors']['default_lang'];
 			
 			if(isset($_POST['config']['default_timezone']) && !isset($timezones[$_POST['config']['default_timezone']]))

@@ -83,7 +83,12 @@
 				<div class="form-group">
 				<div class="col-xs-12 col-sm-8 col-md-6 col-lg-6">
 				<label for="sex">{$lang_user_edit.sex}</label>
-				<input type="text" class="form-control input-sm" name="data[sex]" id="sex" value="{$data.user_sex|display}" />
+				<select class="form-control input-sm" name="data[sex]" id="sex">
+				<option value="">{$lang_user_edit.not_specified}</option>
+				{loop="form.sexes"}
+				<option value="{$key}"{if="$key == $data.user_sex"} selected{/if}>{$value}</option>
+				{/loop}
+				</select>
 				</div>
 				</div>
 				
@@ -136,7 +141,7 @@
 				<div class="col-xs-12 col-sm-8 col-md-6 col-lg-6">
 				<label for="country">{$lang_user_edit.country}</label>
 				<input type="text" class="form-control input-sm" name="data[country]" id="country" value="{$data.user_country|display}" />
-				<span class="help-block">{$lang_user_edit.country}</span>
+				<span class="help-block">{$lang_user_edit.country_desc}</span>
 				</div>
 				</div>
 
@@ -146,7 +151,7 @@
 				<select class="form-control input-sm" name="data[style]" id="style">
 				<option value=""></option>
 				{loop="form.styles"}
-				<option value="{$value}"{if="$data.user_style == $value"} selected="selected"{/if}>{$value}</option>
+				<option value="{$key}"{if="$data.user_style == $key"} selected="selected"{/if}>{$value}</option>
 				{/loop}
 				</select>
 				</div>
@@ -158,7 +163,7 @@
 				<select class="form-control input-sm" name="data[lang]" id="lang">
 				<option value=""></option>
 				{loop="form.langs"}
-				<option value="{$value}"{if="$data.user_lang == $value"} selected="selected"{/if}>{$value}</option>
+				<option value="{$key}"{if="$data.user_lang == $key"} selected="selected"{/if}>{$value}</option>
 				{/loop}
 				</select>
 				</div>
