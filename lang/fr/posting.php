@@ -59,6 +59,7 @@ $lang['posting'] = array (
 	'topic_not_posted'			=> 'Une erreur est survenue, le sujet n\'a pas été envoyé.',
 	'message_not_posted'		=> 'Une erreur est survenue, le message n\'a pas été envoyé.',
 	'poster_banned'				=> 'Vous ne pouvez pas envoyer de message car vous êtes banni.',
+	'forum_closed'				=> 'Ce forum est fermé.',
 	
 	// side menu
 	'users_connected'			=> 'Utilisateurs connectés',

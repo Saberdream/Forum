@@ -26,10 +26,15 @@ $dbh = $db->getConnection();
 if($dbh == null)
 	die('Error while trying to establish connection to the database, please contact the administrator for more information.');
 
+// defines a bool variable which tells us whether the server uses secure or standard protocol
+$ssl = ((empty($_SERVER['HTTPS']) || (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'off')) && $_SERVER['SERVER_PORT'] != 443) ? false : true;
+
 session::$table_prefix = $config['table_prefix'];
 session::set_dbh($dbh);
 $session = new session();
-$session->start_session('sid', (empty($_SERVER['HTTPS']) || (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'off')) ? false : true);
+$session->start_session('sid', $ssl);
+
+$accepted_langs = get_langs();
 
 user::set_settings(array(
 	'session_gc_probability' => (int) $config['session_gc_probability'],
@@ -38,7 +43,10 @@ user::set_settings(array(
 	'sessions_per_ip' => (int) $config['sessions_per_ip'],
 	'cookies_expiration_time' => (int) $config['cookies_expiration_time'],
 	'cookies_name' => $config['cookies_name'],
-	'table_prefix' => $config['table_prefix']
+	'cookies_secure' => $ssl,
+	'table_prefix' => $config['table_prefix'],
+	'accepted_langs' => $accepted_langs,
+	'default_lang' => $config['default_lang']
 ));
 
 if(!isset($in_admin))
@@ -76,7 +84,8 @@ RainTPL::configure(array(
 	'parent_tpl_dir' => !empty($style_config['parent']) ? 'styles/'.$style_config['parent'].'/template/' : null,
 	'cache_dir' => 'cache/tpl/',
 	'root_dir' => __DIR__.'/',
-	'path_replace_list' => array('a', 'img', 'link', 'script', 'input', 'form')
+	'path_replace_list' => array('a', 'img', 'link', 'script', 'input', 'form'),
+	// 'debug' => true
 ));
 
 $tpl = new RainTPL;

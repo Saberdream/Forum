@@ -21,6 +21,7 @@ $lang['forum'] = array (
 	// moderation actions
 	'action'					=> 'Action',
 	'delete'					=> 'Supprimer',
+	'delete_definitely'			=> 'Supprimer définitivement',
 	'lock'						=> 'Bloquer',
 	'unlock'					=> 'Débloquer',
 	'stick'						=> 'Marquer',
@@ -62,6 +63,7 @@ $lang['forum'] = array (
 	'login_required'			=> 'Vous devez être inscrit et connecté pour pouvoir poster un nouveau sujet.',
 	'not_authorized_new_topic'	=> 'Vous ne pouvez pas poster un nouveau sujet sur ce forum.',
 	'not_authorized_access'		=> 'Vous n\'avez pas l\'autorisation nécéssaire pour accéder à ce forum.',
+	'forum_closed'				=> 'Ce forum est fermé.',
 	
 	// searching results
 	'search_results'			=> 'Résultats de la recherche pour « %s ».',

@@ -28,10 +28,11 @@ function get_rows($offset, $limit) {
 	return $rows;
 }
 
-function reset_notifications() {
+function update_notifications($read) {
 	global $dbh, $user, $config;
 
-	$sth = $dbh->prepare('UPDATE '.$config['table_prefix'].'notifications SET notif_viewed = 1 WHERE notif_userid = :userid');
+	$sth = $dbh->prepare('UPDATE '.$config['table_prefix'].'notifications SET notif_viewed = :read WHERE notif_userid = :userid');
+	$sth->bindValue(':read', (int) $read, PDO::PARAM_INT);
 	$sth->bindValue(':userid', (int) $user->data['user_id'], PDO::PARAM_INT);
 	$sth->execute();
 	unset($sth);

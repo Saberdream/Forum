@@ -992,8 +992,10 @@ class RainTPL{
                             else
                                     $php_var = $php_left_delimiter . ( !$is_init_variable && $echo ? 'echo ' : null ) . $php_var . $extra_var . $php_right_delimiter;
                             
-                            $html = str_replace( $tag, $php_var, $html );
+                            // $html = str_replace( $tag, $php_var, $html );
 
+							$html = preg_replace( '/'.preg_quote($tag).'(?!\w+)/', $php_var, $html );
+							
 
                     }
                 }

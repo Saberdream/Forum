@@ -147,7 +147,7 @@ $(function(){
 					$(this).dialog('close');
 					$.get(url, function(data){
 						$('#dialog-confirm').text(data).dialog({ buttons: [] }).dialog('open');
-						setTimeout(function(){$('#dialog-confirm').dialog('close');}, 1500);
+						// setTimeout(function(){$('#dialog-confirm').dialog('close');}, 1500);
 					});
 				},
 				Cancel: {

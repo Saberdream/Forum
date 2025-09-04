@@ -2,7 +2,7 @@
 function get_forum($id) {
 	global $dbh, $config;
 	
-	$sth = $dbh->prepare('SELECT forum_id, forum_catid, forum_name, forum_slug, forum_auth_view, forum_auth_topic, forum_auth_reply, forum_auth_edit, forum_auth_restore_post, forum_moderators, cat_name
+	$sth = $dbh->prepare('SELECT forum_id, forum_catid, forum_name, forum_slug, forum_auth_view, forum_auth_topic, forum_auth_reply, forum_auth_edit, forum_auth_edit_own, forum_auth_restore_post, forum_moderators, forum_closed, cat_name
 	FROM '.$config['table_prefix'].'forums
 	LEFT JOIN '.$config['table_prefix'].'categories ON '.$config['table_prefix'].'categories.cat_id = '.$config['table_prefix'].'forums.forum_catid
 	WHERE forum_id = ?');

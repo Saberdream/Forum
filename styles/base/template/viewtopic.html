@@ -69,6 +69,7 @@
 				{if="$user.user_rank >= $topic.forum_auth_restore_post"}<option value="restore">{$lang_topic.restore}</option>{/if}
 				{if="$user.user_rank >= $topic.forum_auth_ban"}<option value="ban">{$lang_topic.ban}</option>
 				<option value="ban-tempo">{$lang_topic.ban_temporarily}</option>{/if}
+				{if="$user.user_rank >= $topic.forum_auth_remove_post"}<option value="remove">{$lang_topic.delete_definitely}</option>{/if}
 				</select>
 			</div>
 			<div class="form-group">
@@ -94,10 +95,15 @@
 					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 post_date">
 					<a href="{$current_url}#post_{$value.post_id}#">{$value.post_time|date_formatted} #{$value.post_id}</a>
 					{if="$moderator"}
+					{if="$topic.topic_postid == $value.post_id && $user.user_rank >= $topic.forum_auth_remove_topic"}
+					<a class="bt-forum" title="{$lang_topic.delete_definitely_topic}" href="mod.php?forum={$topic.topic_forumid}&amp;topic={$topic.topic_id}&amp;action=remove-topic&amp;token={$token}"><img src="images/forum/bt_remove.gif" alt="{$lang_topic.delete_definitely_topic}" /></a>
+					{elseif="$topic.topic_postid != $value.post_id && $user.user_rank >= $topic.forum_auth_remove_post"}
+					<a class="bt-forum" title="{$lang_topic.delete_definitely_message}" href="mod.php?forum={$topic.topic_forumid}&amp;topic={$topic.topic_id}&amp;post={$value.post_id}&amp;action=remove-post&amp;token={$token}"><img src="images/forum/bt_remove.gif" alt="{$lang_topic.delete_definitely_message}" /></a>
+					{/if}
 					{if="$topic.topic_invisible == 1 || $value.post_invisible == 1"}
 					{if="$topic.topic_invisible == 1 && $topic.topic_postid == $value.post_id"}
 					{if="$user.user_rank >= $topic.forum_auth_restore_topic"}<a class="bt-forum" title="{$lang_topic.restore_topic}" href="mod.php?forum={$topic.topic_forumid}&amp;topic={$topic.topic_id}&amp;action=restore-topic&amp;token={$token}"><img src="images/forum/bt_visible.gif" alt="{$lang_topic.restore}" /></a>{/if}
-					{else}
+					{elseif="$topic.topic_invisible == 0"}
 					{if="$user.user_rank >= $topic.forum_auth_restore_post"}<a class="bt-topic" title="{$lang_topic.restore_message}" href="mod.php?forum={$topic.topic_forumid}&amp;topic={$topic.topic_id}&amp;post={$value.post_id}&amp;action=restore-post&amp;token={$token}"><img src="images/forum/bt_visible.gif" alt="{$lang_topic.restore}" /></a>{/if}
 					{/if}
 					{else}
@@ -114,8 +120,8 @@
 					</span>
 					{/if}
 					{/if}
-					{if="$user.user_rank >= USER"}
-					{if="$user.user_rank >= $topic.forum_auth_edit && ($value.post_userid == $user.user_id || $user.user_rank >= ADMIN)"}<a data-toggle="tooltip" class="bt-edit-post" title="{$lang_topic.modify_message}" href="posting?mode=edit&amp;forum={$topic.topic_forumid}&amp;topic={$topic.topic_id}&amp;id={$value.post_id}&amp;token={$edit_token}"><img src="images/forum/bt_modify.gif" alt="{$lang_topic.modify}" /></a>{/if}
+					{if="$user.user_rank >= USER && $topic.topic_invisible == 0"}
+					{if="($user.user_rank >= $topic.forum_auth_edit_own && $value.post_userid == $user.user_id) || ($moderator && $user.user_rank >= $topic.forum_auth_edit)"}<a data-toggle="tooltip" class="bt-edit-post" title="{$lang_topic.modify_message}" href="posting?mode=edit&amp;forum={$topic.topic_forumid}&amp;topic={$topic.topic_id}&amp;id={$value.post_id}&amp;token={$edit_token}"><img src="images/forum/bt_modify.gif" alt="{$lang_topic.modify}" /></a>{/if}
 					{if="$user.user_rank >= $topic.forum_auth_alert"}<a data-toggle="tooltip" class="bt-alert-post" title="{$lang_topic.alert_admin}" href="alert?postid={$value.post_id}"><img src="images/forum/bt_alert.gif" alt="{$lang_topic.alert}" /></a>{/if}
 					{/if}
 					</div>
@@ -129,7 +135,7 @@
 			{if="$moderator"}
 			</form>
 			{/if}
-			{if="$user.user_rank >= $topic.forum_auth_edit"}<input type="hidden" name="get_post_token" value="{$get_post_token}" />{/if}
+			{if="$user.user_rank >= $topic.forum_auth_edit || $user.user_rank >= $topic.forum_auth_edit_own"}<input type="hidden" name="get_post_token" value="{$get_post_token}" />{/if}
 			<div id="dialog-confirm" title="{$lang_topic.alert}"></div>
 			<script>
 			var text_enlarge_image = '{$lang_topic.click_to_enlarge|escape_quotes}';
@@ -183,7 +189,7 @@
 			</div>
 			<div class="forum-separator"></div>
 			
-			{if="$topic.topic_invisible == 0 && $user.user_rank >= $topic.forum_auth_reply && ($topic.topic_lock == 0 || $moderator == true)"}
+			{if="$topic.topic_invisible == 0 && $user.user_rank >= $topic.forum_auth_reply && ($topic.topic_lock == 0 || $moderator) && ($topic.forum_closed == 0 || $user.user_rank >= ADMIN)"}
 			<div id="message-preview" class="post post1">
 			  <div class="post_header"><h4>{$lang_topic.preview}</h4></div>
 			  <div class="post_body"></div>
@@ -194,56 +200,60 @@
 			<div class="panel panel-default">
 			<div class="panel-heading"><b>{$lang_topic.reply_to_subject}</b></div>
 			<div class="panel-body">
-			{if="$topic.topic_invisible == 0"}
-			{if="$user.user_rank >= $topic.forum_auth_reply"}
-			{if="$topic.topic_lock == 0 || $moderator == true"}
-			<form class="form-horizontal" id="form_post" method="post" action="posting">
-			<div class="form-group">
-			<div class="col-sm-12 col-md-12 col-lg-12">
-			<label for="message" class="text-danger">{$lang_topic.message}</label>
-			{include="bbcode"}
-			<textarea class="form-control" rows="4" name="message" id="message" placeholder="{$lang_topic.message_rules}"></textarea>
-			</div>
-			</div>
-			{if="$form.captcha"}
-			<div class="form-group">
-			<div class="col-sm-12 col-md-6 col-lg-4">
-			<a class="btn btn-info btn-xs" onclick="document.getElementById('captcha').src=document.getElementById('captcha').src+'?'+Math.random();return false">{$lang_topic.request_new_code}</a>
-			</div>
-			</div>
-			<div class="form-group">
-			<div class="col-sm-12 col-md-6 col-lg-4">
-			<img src="/captcha.php" alt="Captcha" id="captcha" />
-			</div>
-			</div>
-			<div class="form-group">
-			<div class="col-sm-12 col-md-6 col-lg-4">
-			<input type="text" class="form-control" name="captcha" placeholder="{$lang_topic.copy_code}" autocomplete="off" />
-			</div>
-			</div>
-			{/if}
-			<div class="form-group">
-			<div class="col-sm-12 col-md-6 col-lg-4">
-			<button type="submit" class="btn btn-warning">{$lang_topic.post}</button>
-			<button type="button" class="btn btn-primary" id="button-preview"><i class="fa fa-eye"></i> {$lang_topic.preview}</button>
-			</div>
-			</div>
-			<input type="hidden" name="token" value="{$form.token}" />
-			<input type="hidden" name="forum" value="{$topic.topic_forumid}" />
-			<input type="hidden" name="topic" value="{$topic.topic_id}" />
-			<input type="hidden" name="page" value="{$page}" />
-			<input type="hidden" name="mode" value="reply" />
-			</form>
+			{if="$topic.forum_closed == 0 || $user.user_rank >= ADMIN"}
+				{if="$topic.topic_invisible == 0"}
+				{if="$user.user_rank >= $topic.forum_auth_reply"}
+				{if="$topic.topic_lock == 0 || $moderator == true"}
+				<form class="form-horizontal" id="form_post" method="post" action="posting">
+				<div class="form-group">
+				<div class="col-sm-12 col-md-12 col-lg-12">
+				<label for="message" class="text-danger">{$lang_topic.message}</label>
+				{include="bbcode"}
+				<textarea class="form-control" rows="4" name="message" id="message" placeholder="{$lang_topic.message_rules}"></textarea>
+				</div>
+				</div>
+				{if="$form.captcha"}
+				<div class="form-group">
+				<div class="col-sm-12 col-md-6 col-lg-4">
+				<a class="btn btn-info btn-xs" onclick="document.getElementById('captcha').src=document.getElementById('captcha').src+'?'+Math.random();return false">{$lang_topic.request_new_code}</a>
+				</div>
+				</div>
+				<div class="form-group">
+				<div class="col-sm-12 col-md-6 col-lg-4">
+				<img src="/captcha.php" alt="Captcha" id="captcha" />
+				</div>
+				</div>
+				<div class="form-group">
+				<div class="col-sm-12 col-md-6 col-lg-4">
+				<input type="text" class="form-control" name="captcha" placeholder="{$lang_topic.copy_code}" autocomplete="off" />
+				</div>
+				</div>
+				{/if}
+				<div class="form-group">
+				<div class="col-sm-12 col-md-6 col-lg-4">
+				<button type="submit" class="btn btn-warning">{$lang_topic.post}</button>
+				<button type="button" class="btn btn-primary" id="button-preview"><i class="fa fa-eye"></i> {$lang_topic.preview}</button>
+				</div>
+				</div>
+				<input type="hidden" name="token" value="{$form.token}" />
+				<input type="hidden" name="forum" value="{$topic.topic_forumid}" />
+				<input type="hidden" name="topic" value="{$topic.topic_id}" />
+				<input type="hidden" name="page" value="{$page}" />
+				<input type="hidden" name="mode" value="reply" />
+				</form>
+				{else}
+				<div class="alert alert-warning text-center">{$lang_topic.subject_locked}</div>
+				{/if}
+				{elseif="$user.user_rank == GUEST"}
+				<div class="alert alert-warning text-center">{$lang_topic.login_required}</div>
+				{else}
+				<div class="alert alert-warning text-center">{$lang_topic.not_authorized_reply}</div>
+				{/if}
+				{else}
+				<div class="alert alert-warning text-center">{$lang_topic.subject_deleted}</div>
+				{/if}
 			{else}
-			<div class="alert alert-warning text-center">{$lang_topic.subject_locked}</div>
-			{/if}
-			{elseif="$user.user_rank == GUEST"}
-			<div class="alert alert-warning text-center">{$lang_topic.login_required}</div>
-			{else}
-			<div class="alert alert-warning text-center">{$lang_topic.not_authorized_reply}</div>
-			{/if}
-			{else}
-			<div class="alert alert-warning text-center">{$lang_topic.subject_deleted}</div>
+			<div class="alert alert-warning text-center">{$lang_topic.forum_closed}</div>
 			{/if}
 			</div>
 			</div>

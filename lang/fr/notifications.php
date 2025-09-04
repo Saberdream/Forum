@@ -15,6 +15,15 @@ $lang['notifications'] = array (
 	'total'						=> 'Total',
 	'notification'				=> 'Notification',
 	'token_expired'				=> 'Le jeton est expiré ou incorrect.',
+	'notifications_resetted'	=> 'Notifications réinitialisées',
+	'mark_read'					=> 'Marquer les notifications comme lues',
+	'notifications_marked_read'	=> 'Notifications marquées comme lues',
+	'error'						=> 'Erreur',
+	
+	// dialog
+	'alert'						=> 'Alerte',
+	'confirm_action'			=> 'Êtes-vous sûr(e) de vouloir réaliser cette action sur les éléments sélectionnés ?',
+	'cancel'					=> 'Annuler',
 	
 	// side menu
 	'notifications'				=> 'Notifications',

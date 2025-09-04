@@ -16,7 +16,7 @@ if(isset($_GET['mode']) && $_GET['mode'] == 'admin') {
 
 if($user->data['user_rank'] < USER || ($connect_adm && !$user->data['admin'])) {
 	if(!$connect_adm)
-		$previous_page = previous_page(!empty($_POST['previous']) ? $_POST['previous'] : false, $config['server_protocol'].$config['domain_name'].'/index.htm');
+		$previous_page = previous_page(!empty($_POST['previous']) ? $_POST['previous'] : false, $config['server_protocol'].$config['domain_name'].'/index');
 	else
 		$previous_page = './adm/index.php';
 

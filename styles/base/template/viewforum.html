@@ -64,6 +64,7 @@
 					{if="$user.user_rank >= $forum.forum_auth_stick_topic"}<option value="stick">{$lang_forum.stick}</option>
 					<option value="unstick">{$lang_forum.unstick}</option>{/if}
 					{if="$user.user_rank >= $forum.forum_auth_restore_topic"}<option value="restore">{$lang_forum.restore}</option>{/if}
+					{if="$user.user_rank >= $forum.forum_auth_remove_topic"}<option value="remove">{$lang_forum.delete_definitely}</option>{/if}
 					{if="$user.user_rank >= $forum.forum_auth_ban"}<option value="ban">{$lang_forum.ban}</option>{/if}
 					</select>
 				</div>
@@ -116,7 +117,7 @@
 			<div class="alert alert-warning text-center">{$lang_forum.no_topic}</div>
 			{/if}
 
-			{if="$user.user_rank >= $forum.forum_auth_topic"}
+			{if="$user.user_rank >= $forum.forum_auth_topic && ($forum.forum_closed == 0 || $user.user_rank >= ADMIN)"}
 			<div id="message-preview" class="post post1">
 			  <div class="post_header"><h4>{$lang_forum.preview}</h4></div>
 			  <div class="post_body"></div>
@@ -127,52 +128,56 @@
 			<div class="panel panel-default">
 			<div class="panel-heading"><b>{$lang_forum.create_new_topic}</b></div>
 			<div class="panel-body">
-			{if="$user.user_rank >= $forum.forum_auth_topic"}
-			<form class="form-horizontal" id="form_post" method="post" action="posting">
-			<div class="form-group">
-			<div class="col-sm-12 col-md-12 col-lg-12">
-			<label for="subject" class="sr-only">{$lang_forum.subject}</label>
-			<input class="form-control" type="text" name="subject" id="subject" placeholder="{$lang_forum.type_subject}" />
-			</div>
-			</div>
-			<div class="form-group">
-			<div class="col-sm-12 col-md-12 col-lg-12">
-			<label for="message" class="text-danger">{$lang_forum.message}</label>
-			{include="bbcode"}
-			<textarea class="form-control" rows="4" name="message" id="message" placeholder="{$lang_forum.message_rules}"></textarea>
-			</div>
-			</div>
-			{if="$form.captcha"}
-			<div class="form-group">
-			<div class="col-sm-12 col-md-6 col-lg-4">
-			<a class="btn btn-info btn-xs" onclick="document.getElementById('captcha').src=document.getElementById('captcha').src+'?'+Math.random(); return false">{$lang_forum.request_new_code}</a>
-			</div>
-			</div>
-			<div class="form-group">
-			<div class="col-sm-12 col-md-6 col-lg-4">
-			<img src="/captcha.php" alt="Captcha" id="captcha" />
-			</div>
-			</div>
-			<div class="form-group">
-			<div class="col-sm-12 col-md-6 col-lg-4">
-			<input type="text" class="form-control" name="captcha" placeholder="{$lang_forum.copy_code}" autocomplete="off" />
-			</div>
-			</div>
-			{/if}
-			<div class="form-group">
-			<div class="col-sm-12 col-md-6 col-lg-4">
-			<button type="submit" class="btn btn-warning">{$lang_forum.post}</button>
-			<button type="button" class="btn btn-primary" id="button-preview"><i class="fa fa-eye"></i> {$lang_forum.preview}</button>
-			</div>
-			</div>
-			<input type="hidden" name="token" value="{$form.token}" />
-			<input type="hidden" name="forum" value="{$forum.forum_id}" />
-			<input type="hidden" name="mode" value="new" />
-			</form>
-			{elseif="$user.user_rank == GUEST"}
-			<div class="alert alert-warning text-center">{$lang_forum.login_required}</div>
+			{if="$forum.forum_closed == 0 || $user.user_rank >= ADMIN"}
+				{if="$user.user_rank >= $forum.forum_auth_topic"}
+				<form class="form-horizontal" id="form_post" method="post" action="posting">
+				<div class="form-group">
+				<div class="col-sm-12 col-md-12 col-lg-12">
+				<label for="subject" class="sr-only">{$lang_forum.subject}</label>
+				<input class="form-control" type="text" name="subject" id="subject" placeholder="{$lang_forum.type_subject}" />
+				</div>
+				</div>
+				<div class="form-group">
+				<div class="col-sm-12 col-md-12 col-lg-12">
+				<label for="message" class="text-danger">{$lang_forum.message}</label>
+				{include="bbcode"}
+				<textarea class="form-control" rows="4" name="message" id="message" placeholder="{$lang_forum.message_rules}"></textarea>
+				</div>
+				</div>
+				{if="$form.captcha"}
+				<div class="form-group">
+				<div class="col-sm-12 col-md-6 col-lg-4">
+				<a class="btn btn-info btn-xs" onclick="document.getElementById('captcha').src=document.getElementById('captcha').src+'?'+Math.random(); return false">{$lang_forum.request_new_code}</a>
+				</div>
+				</div>
+				<div class="form-group">
+				<div class="col-sm-12 col-md-6 col-lg-4">
+				<img src="/captcha.php" alt="Captcha" id="captcha" />
+				</div>
+				</div>
+				<div class="form-group">
+				<div class="col-sm-12 col-md-6 col-lg-4">
+				<input type="text" class="form-control" name="captcha" placeholder="{$lang_forum.copy_code}" autocomplete="off" />
+				</div>
+				</div>
+				{/if}
+				<div class="form-group">
+				<div class="col-sm-12 col-md-6 col-lg-4">
+				<button type="submit" class="btn btn-warning">{$lang_forum.post}</button>
+				<button type="button" class="btn btn-primary" id="button-preview"><i class="fa fa-eye"></i> {$lang_forum.preview}</button>
+				</div>
+				</div>
+				<input type="hidden" name="token" value="{$form.token}" />
+				<input type="hidden" name="forum" value="{$forum.forum_id}" />
+				<input type="hidden" name="mode" value="new" />
+				</form>
+				{elseif="$user.user_rank == GUEST"}
+				<div class="alert alert-warning text-center">{$lang_forum.login_required}</div>
+				{else}
+				<div class="alert alert-warning text-center">{$lang_forum.not_authorized_new_topic}</div>
+				{/if}
 			{else}
-			<div class="alert alert-warning text-center">{$lang_forum.not_authorized_new_topic}</div>
+			<div class="alert alert-warning text-center">{$lang_forum.forum_closed}</div>
 			{/if}
 			</div>
 			</div>

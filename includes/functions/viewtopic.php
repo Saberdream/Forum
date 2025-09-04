@@ -3,7 +3,7 @@ function get_topic($topic) {
 	global $dbh, $config;
 
 	$sth = $dbh->prepare('SELECT topic_id, topic_forumid, topic_postid, topic_userid, topic_username, topic_name, topic_slug, topic_posts, topic_posts_visible, topic_lock, topic_sticky, topic_sticky_order, topic_invisible,
-	forum_name, forum_slug, forum_alerts, forum_auth_view, forum_auth_topic, forum_auth_reply, forum_auth_edit, forum_auth_alert, forum_auth_lock_topic, forum_auth_stick_topic, forum_auth_delete_topic, forum_auth_delete_post, forum_auth_restore_topic, forum_auth_restore_post, forum_auth_ban, forum_moderators, forum_closed, cat_name
+	forum_name, forum_slug, forum_alerts, forum_auth_view, forum_auth_topic, forum_auth_reply, forum_auth_edit, forum_auth_edit_own, forum_auth_alert, forum_auth_lock_topic, forum_auth_stick_topic, forum_auth_delete_topic, forum_auth_delete_post, forum_auth_restore_topic, forum_auth_restore_post, forum_auth_remove_topic, forum_auth_remove_post, forum_auth_ban, forum_moderators, forum_closed, cat_name
 	FROM '.$config['table_prefix'].'topics
 	LEFT JOIN '.$config['table_prefix'].'forums ON '.$config['table_prefix'].'forums.forum_id = '.$config['table_prefix'].'topics.topic_forumid
 	LEFT JOIN '.$config['table_prefix'].'categories ON '.$config['table_prefix'].'categories.cat_id = '.$config['table_prefix'].'topics.topic_catid

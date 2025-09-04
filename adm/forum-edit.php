@@ -12,21 +12,24 @@ if(!isset($_GET['id']) || !ctype_digit($_GET['id']))
 $data = get_forum((int) $_GET['id']);
 
 if($data) {
-	$array_data = array('name', 'catid', 'desc', 'icon', 'rules', 'alerts', 'auth_view', 'auth_topic', 'auth_reply', 'auth_edit', 'auth_alert', 'auth_lock_topic', 'auth_stick_topic', 'auth_delete_topic', 'auth_delete_post', 'auth_restore_topic', 'auth_restore_post', 'auth_ban', 'moderators', 'closed');
+	$array_data = array('name', 'catid', 'desc', 'icon', 'rules', 'alerts', 'auth_view', 'auth_topic', 'auth_reply', 'auth_edit', 'auth_edit_own', 'auth_alert', 'auth_lock_topic', 'auth_stick_topic', 'auth_delete_topic', 'auth_delete_post', 'auth_restore_topic', 'auth_restore_post', 'auth_remove_topic', 'auth_remove_post', 'auth_ban', 'moderators', 'closed');
 
 	$forum_auth_min = array(
 		'auth_view' => GUEST,
 		'auth_topic' => USER,
 		'auth_reply' => USER,
-		'auth_edit' => USER,
+		'auth_edit_own' => USER,
 		'auth_alert' => USER,
+		'auth_edit' => MODERATOR,
 		'auth_lock_topic' => MODERATOR,
 		'auth_stick_topic' => MODERATOR,
 		'auth_delete_topic' => MODERATOR,
 		'auth_delete_post' => MODERATOR,
 		'auth_restore_topic' => MODERATOR,
 		'auth_restore_post' => MODERATOR,
-		'auth_ban' => MODERATOR
+		'auth_ban' => MODERATOR,
+		'auth_remove_topic' => MODERATOR,
+		'auth_remove_post' => MODERATOR
 	);
 
 	$forum_auth = array();

@@ -111,7 +111,7 @@ if($user->data['user_rank'] >= $forum['forum_auth_view']) {
 		'title' => $title
 	));
 
-	if($user->data['user_rank'] >= $forum['forum_auth_topic']) {
+	if($user->data['user_rank'] >= $forum['forum_auth_topic'] && ($forum['forum_closed'] == 0 || $user->data['user_rank'] >= ADMIN)) {
 		$token_new = new token('posting_new');
 		$token_preview = new token('preview');
 

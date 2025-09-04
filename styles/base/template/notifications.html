@@ -11,7 +11,8 @@
 			<div class="panel panel-default">
 			<div class="panel-body">
 				{if="$nb > 0"}
-				<p><a class="bt-forum btn btn-success btn-sm" href="notifications?reset=1&amp;token={$token}">{$lang_notifications.reset_notifications}</a></p>
+				<p><a class="bt-forum btn btn-success btn-sm" href="notifications?update_notifications=0&amp;token={$token}">{$lang_notifications.reset_notifications}</a>
+				<a class="bt-forum btn btn-danger btn-sm" href="notifications?update_notifications=1&amp;token={$token}">{$lang_notifications.mark_read}</a></p>
 				
 				<div class="row">
 					<div class="col-sm-9 col-md-9 col-lg-9"><ul class="pagination">{$pagination}</ul></div>
@@ -46,6 +47,11 @@
 				{/if}
 			</div>
 			</div>
+			<div id="dialog-confirm" title="{$lang_notifications.alert}"></div>
+			<script>
+			var text_action_confirmation = '{$lang_notifications.confirm_action|escape_quotes}';
+			var text_cancel = '{$lang_notifications.cancel|escape_quotes}';
+			</script>
 			{else}
 			<div class="alert alert-warning text-center">{$lang_notifications.not_logged_in}</div>
 			{/if}

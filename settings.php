@@ -2,6 +2,7 @@
 include __DIR__.'/core.php';
 include __DIR__.'/includes/functions/settings.php';
 include __DIR__.'/includes/timezones.php';
+include __DIR__.'/includes/languages.php';
 include __DIR__.'/'.$lang_path.'settings.php';
 
 header('Content-Type: text/html; charset=utf-8');
@@ -12,7 +13,7 @@ if($user->data['user_rank'] < USER)
 $data = get_user($user->data['user_id']);
 $sexes = array('m' => 'Male', 'f' => 'Female');
 $styles = get_styles();
-$langs = get_langs();
+$langs = array();
 
 $days = $months = $years = array();
 for($i = 1; $i <= 31; $i++) $days[] = $i<10 ? (string) '0'.$i : $i;
@@ -23,6 +24,11 @@ foreach($sexes as $key => $value)
 	$sexes[$key] = isset($lang['settings_sexes'][$key]) ? $lang['settings_sexes'][$key] : $value;
 
 unset($key, $value);
+
+foreach($accepted_langs as $value)
+	$langs[$value] = isset($languages[$value]) ? $languages[$value] : $value;
+
+unset($value);
 
 $lang['settings']['invalid_signature'] = sprintf($lang['settings']['invalid_signature'], (int) $config['sign_max_size']);
 $lang['settings']['invalid_description'] = sprintf($lang['settings']['invalid_description'], (int) $config['desc_max_size']);
@@ -79,7 +85,7 @@ if(!empty($_POST['data']) && is_array($_POST['data'])) {
 				}
 			}
 			
-			if(!empty($_POST['data']['sex']) && !in_array($_POST['data']['sex'], array_keys($sexes)))
+			if(!empty($_POST['data']['sex']) && !isset($sexes[$_POST['data']['sex']]))
 				$error[] = $lang['settings']['invalid_sex'];
 			
 			if(!empty($_POST['data']['password']) && mb_strlen($_POST['data']['password'], 'UTF-8') > 30)
@@ -99,10 +105,10 @@ if(!empty($_POST['data']) && is_array($_POST['data'])) {
 			if(isset($_POST['data']['country']) && mb_strlen($_POST['data']['country'], 'UTF-8') > 50)
 				$error[] = $lang['settings']['invalid_country'];
 
-			if(isset($_POST['data']['style']) && !empty($_POST['data']['style']) && !in_array($_POST['data']['style'], $styles))
+			if(isset($_POST['data']['style']) && !empty($_POST['data']['style']) && !isset($styles[$_POST['data']['style']]))
 				$error[] = $lang['settings']['invalid_style'];
 
-			if(isset($_POST['data']['lang']) && !empty($_POST['data']['lang']) && !in_array($_POST['data']['lang'], $langs))
+			if(isset($_POST['data']['lang']) && !empty($_POST['data']['lang']) && !isset($langs[$_POST['data']['lang']]))
 				$error[] = $lang['settings']['invalid_lang'];
 			
 			if(isset($_POST['data']['timezone']) && !empty($_POST['data']['timezone']) && !isset($timezones[$_POST['data']['timezone']]))

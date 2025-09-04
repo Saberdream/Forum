@@ -18,7 +18,6 @@ $lang['topic'] = array (
 	'reply'						=> 'Répondre',
 	'new_topic'					=> 'Nouveau sujet',
 	'list_topics'				=> 'Liste des sujets',
-	'alert'						=> 'Signaler',
 	'alert_admin'				=> 'Avertir un administrateur',
 	'modify_message'			=> 'Modifier ce message',
 	'modify'					=> 'Modifier',
@@ -42,6 +41,9 @@ $lang['topic'] = array (
 	// moderation actions
 	'action'					=> 'Action',
 	'delete'					=> 'Supprimer',
+	'delete_definitely'			=> 'Supprimer définitivement',
+	'delete_definitely_topic'	=> 'Supprimer définitivement ce sujet',
+	'delete_definitely_message'	=> 'Supprimer définitivement ce message',
 	'lock'						=> 'Bloquer',
 	'unlock'					=> 'Débloquer',
 	'stick'						=> 'Marquer',
@@ -80,6 +82,7 @@ $lang['topic'] = array (
 	'login_required'			=> 'Vous devez être inscrit et connecté pour répondre aux sujets.',
 	'not_authorized_reply'		=> 'Vous ne pouvez pas répondre aux sujets sur ce forum.',
 	'not_authorized_access'		=> 'Vous n\'avez pas l\'autorisation nécéssaire pour accéder à ce forum.',
+	'forum_closed'				=> 'Ce forum est fermé.',
 
 	// subscriptions
 	'already_subscribed'		=> 'Vous êtes déjà abonné à ce sujet.',

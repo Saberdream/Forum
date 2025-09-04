@@ -38,7 +38,7 @@ if(isset($_POST['topic'])) {
 	if(count($ids) == 0 || count($ids) > $limit)
 		die($lang['mod_errors']['incorrect_ids']);
 	
-	$actions = array('delete', 'stick', 'unstick', 'lock', 'unlock', 'restore', 'ban');
+	$actions = array('delete', 'remove', 'stick', 'unstick', 'lock', 'unlock', 'restore', 'ban');
 	
 	if(empty($_POST['action']) || !in_array($_POST['action'], $actions))
 		die($lang['mod_errors']['incorrect_action']);
@@ -51,6 +51,13 @@ if(isset($_POST['topic'])) {
 				die($lang['mod_errors']['not_authorized_action']);
 			
 			$results = delete_restore_topics($ids, $forum['forum_id'], 1);
+			break;
+			
+		case 'remove':
+			if($user->data['user_rank'] < $forum['forum_auth_remove_topic'])
+				die($lang['mod_errors']['not_authorized_action']);
+			
+			$results = delete_topics($ids, $forum['forum_id']);
 			break;
 		
 		case 'restore':
@@ -128,7 +135,7 @@ elseif(isset($_POST['post'])) {
 	if(count($ids) == 0 || count($ids) > $limit)
 		die($lang['mod_errors']['incorrect_ids']);
 	
-	$actions = array('delete', 'restore', 'ban', 'ban-tempo');
+	$actions = array('delete', 'remove', 'restore', 'ban', 'ban-tempo');
 	
 	if(empty($_POST['action']) || !in_array($_POST['action'], $actions))
 		die($lang['mod_errors']['incorrect_action']);
@@ -138,19 +145,26 @@ elseif(isset($_POST['post'])) {
 	
 	$topic = get_topic($_GET['topic'], $forum['forum_id']);
 	
-	if(!$topic || $topic['topic_invisible'] == 1)
+	if(!$topic || ($topic['topic_invisible'] == 1 && $user->data['user_rank'] < $forum['forum_auth_restore_topic']))
 		die($lang['mod_errors']['topic_not_found']);
 	
 	switch($_POST['action']) {
 		case 'delete':
-			if($user->data['user_rank'] < $forum['forum_auth_delete_post'])
+			if($topic['topic_invisible'] == 1 || $user->data['user_rank'] < $forum['forum_auth_delete_post'])
 				die($lang['mod_errors']['not_authorized_action']);
 		
 			$results = delete_restore_posts($ids, $topic['topic_id'], $forum['forum_id'], $topic['topic_postid'], 1);
 			break;
+			
+		case 'remove':
+			if($user->data['user_rank'] < $forum['forum_auth_remove_post'])
+				die($lang['mod_errors']['not_authorized_action']);
+		
+			$results = delete_posts($ids, $topic['topic_id'], $forum['forum_id'], $topic['topic_postid']);
+			break;
 	
 		case 'restore':
-			if($user->data['user_rank'] < $forum['forum_auth_restore_post'])
+			if($topic['topic_invisible'] == 1 || $user->data['user_rank'] < $forum['forum_auth_restore_post'])
 				die($lang['mod_errors']['not_authorized_action']);
 			
 			$results = delete_restore_posts($ids, $topic['topic_id'], $forum['forum_id'], $topic['topic_postid'], 0);
@@ -194,7 +208,7 @@ elseif(!empty($_GET['action'])) {
 	if(!isset($_GET['topic']) || !ctype_digit($_GET['topic']))
 		die('Id du topic incorrect');
 	
-	$actions = array('delete-topic', 'restore-topic', 'delete-post', 'restore-post', 'stick-topic', 'unstick-topic', 'lock-topic', 'unlock-topic', 'ban-user', 'ban-user-tempo');
+	$actions = array('delete-topic', 'remove-topic', 'restore-topic', 'delete-post', 'remove-post', 'restore-post', 'stick-topic', 'unstick-topic', 'lock-topic', 'unlock-topic', 'ban-user', 'ban-user-tempo');
 	
 	if(!in_array($_GET['action'], $actions))
 		die($lang['mod_errors']['incorrect_action']);
@@ -212,6 +226,13 @@ elseif(!empty($_GET['action'])) {
 				die($lang['mod_errors']['not_authorized_action']);
 		
 			$results = delete_restore_topics(array($_GET['topic']), $forum['forum_id'], 0);
+			break;
+			
+		case 'remove-topic':
+			if($user->data['user_rank'] < $forum['forum_auth_remove_topic'])
+				die($lang['mod_errors']['not_authorized_action']);
+		
+			$results = delete_topics(array($_GET['topic']), $forum['forum_id']);
 			break;
 		
 		case 'stick-topic':
@@ -262,6 +283,21 @@ elseif(!empty($_GET['action'])) {
 			$results = delete_restore_posts(array($_GET['post']), $topic['topic_id'], $forum['forum_id'], $topic['topic_postid'], 1);
 			break;
 		
+		case 'remove-post':
+			if($user->data['user_rank'] < $forum['forum_auth_remove_post'])
+				die($lang['mod_errors']['not_authorized_action']);
+		
+			if(!isset($_GET['post']) || !ctype_digit($_GET['post']))
+				die($lang['mod_errors']['incorrect_post_id']);
+			
+			$topic = get_topic($_GET['topic'], $forum['forum_id']);
+			
+			if(!$topic)
+				die($lang['mod_errors']['topic_not_found']);
+			
+			$results = delete_posts(array($_GET['post']), $topic['topic_id'], $forum['forum_id'], $topic['topic_postid']);
+			break;
+		
 		case 'restore-post':
 			if($user->data['user_rank'] < $forum['forum_auth_restore_post'])
 				die($lang['mod_errors']['not_authorized_action']);
@@ -298,7 +334,7 @@ elseif(!empty($_GET['action'])) {
 	}
 
 	if($results > 0) {
-		token::destroy('forum_mod');
+		// token::destroy('forum_mod');
 		
 		die(sprintf($lang['mod_errors']['action_success'], $results));
 	}

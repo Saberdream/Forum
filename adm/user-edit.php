@@ -21,7 +21,7 @@ if(isset($data['user_id'])) {
 	$styles = get_styles();
 	
 	foreach($ranks as $key => $value)
-		$ranks[$key] = isset($lang['user_edit_ranks'][$key]) ? $lang['user_edit_ranks'][$key] : $value;
+		$ranks[$key] = isset($lang['user_edit_ranks'][$value]) ? $lang['user_edit_ranks'][$value] : $value;
 	
 	unset($key, $value);
 	

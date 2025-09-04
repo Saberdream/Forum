@@ -21,6 +21,9 @@ $forum = get_forum($_POST['forum']);
 if(!$forum)
 	die($lang['posting']['forum_not_found']);
 
+if($forum['forum_closed'] == 1 && $user->data['user_rank'] < ADMIN)
+	die($lang['posting']['forum_closed']);
+
 if($user->data['user_rank'] >= USER && $user->data['user_rank'] >= $forum['forum_auth_view']) {
 	$moderators = explode(';', $forum['forum_moderators']);
 	$moderator = ($user->data['user_rank'] >= ADMIN || ($user->data['user_rank'] == MODERATOR && in_array(strtolower($user->data['user_name']), array_map('strtolower', $moderators)))) ? true : false;
@@ -139,7 +142,7 @@ if($user->data['user_rank'] >= USER && $user->data['user_rank'] >= $forum['forum
 		$error = null;
 		$time = time();
 		
-		if($user->data['user_rank'] < $forum['forum_auth_edit'])
+		if($user->data['user_rank'] < $forum['forum_auth_edit'] && $user->data['user_rank'] < $forum['forum_auth_edit_own'])
 			$error = $lang['posting']['not_authorized_edit'];
 		else {
 			if(!isset($_POST['postid']) || !ctype_digit($_POST['postid'])) {
@@ -159,8 +162,12 @@ if($user->data['user_rank'] >= USER && $user->data['user_rank'] >= $forum['forum
 						$error = $lang['posting']['topic_deleted'];
 					elseif(get_nb_ban($user->data['user_id']) > 0 && $user->data['user_rank'] < FOUNDER)
 						$error = $lang['posting']['poster_banned'];
-					elseif($post['post_userid'] != $user->data['user_id'] && $user->data['user_rank'] < ADMIN)
-						$error = $lang['posting']['edit_own_message'];
+					elseif( $user->data['user_rank'] < $forum['forum_auth_edit'] || !$moderator ) {
+						if($post['post_userid'] != $user->data['user_id'])
+							$error = $lang['posting']['edit_own_message'];
+						elseif($user->data['user_rank'] < $forum['forum_auth_edit_own'])
+							$error = $lang['posting']['not_authorized_edit'];
+					}
 					elseif($post['topic_lock'] == 1 && !$moderator)
 						$error = $lang['posting']['topic_locked'];
 					else {
@@ -170,8 +177,8 @@ if($user->data['user_rank'] >= USER && $user->data['user_rank'] >= $forum['forum
 							$error = sprintf($lang['posting']['message_too_long'], intval($config['post_max_size']));
 					}
 
-					if($user->data['user_rank'] < ADMIN && ($config['post_flood_time'] > 0 && $post['post_time_edit']+$config['post_flood_time'] > $time))
-						$error = sprintf($lang['posting']['flood_time_edit'], intval($config['post_flood_time']));
+					if($user->data['user_rank'] < ADMIN && ($config['post_edit_flood_time'] > 0 && $post['post_time_edit']+$config['post_edit_flood_time'] > $time))
+						$error = sprintf($lang['posting']['flood_time_edit'], intval($config['post_edit_flood_time']));
 				}
 			}
 		}

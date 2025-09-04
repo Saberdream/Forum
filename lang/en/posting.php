@@ -51,6 +51,7 @@ $lang['posting'] = array(
 	'topic_not_posted'	=> 'An error occurred, the subject was not sent.',
 	'message_not_posted'	=> 'An error occurred, the message was not sent.',
 	'poster_banned'	=> 'You cannot send messages because you are banned.',
+	'forum_closed'	=> 'This forum is closed.',
 	'users_connected'	=> 'Logged in users',
 	'all_forums'	=> 'All forums',
 	'followed_topics'	=> 'Topics followed',

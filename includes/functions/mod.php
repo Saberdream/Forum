@@ -6,7 +6,7 @@
 function get_forum($id) {
 	global $dbh, $config;
 	
-	$sth = $dbh->prepare('SELECT forum_id, forum_slug, forum_auth_view, forum_auth_topic, forum_auth_reply, forum_auth_edit, forum_auth_alert, forum_auth_lock_topic, forum_auth_stick_topic, forum_auth_delete_topic, forum_auth_delete_post, forum_auth_restore_topic, forum_auth_restore_post, forum_auth_ban, forum_moderators, forum_closed
+	$sth = $dbh->prepare('SELECT forum_id, forum_slug, forum_auth_view, forum_auth_topic, forum_auth_reply, forum_auth_edit, forum_auth_edit_own, forum_auth_alert, forum_auth_lock_topic, forum_auth_stick_topic, forum_auth_delete_topic, forum_auth_delete_post, forum_auth_restore_topic, forum_auth_restore_post, forum_auth_remove_topic, forum_auth_remove_post, forum_auth_ban, forum_moderators, forum_closed
 	FROM '.$config['table_prefix'].'forums
 	WHERE forum_id = ? LIMIT 1');
 	$sth->execute(array($id));
@@ -38,6 +38,9 @@ function get_nb_posts($ids, $forumid, $invisible) {
 	$sth->execute(array_values($values));
 	$nb = $sth->fetchColumn();
 	unset($sth);
+	
+	// if($nb == null)
+		// return 0;
 
 	return $nb;
 }
@@ -82,6 +85,73 @@ function delete_restore_topics($ids, $forumid, $invisible) {
 	}
 
 	return $results;
+}
+
+// this function DELETES DEFINITELY topics from db (no possibility to restore them after removal)
+function delete_topics($ids, $forumid) {
+	global $dbh, $config, $lang;
+
+	$values = array($forumid);
+	$values = array_merge($values, $ids);
+	$nb_posts_visible = get_nb_posts($ids, $forumid, 0);
+
+	$dbh->beginTransaction();
+
+	// we have to do two separate requests to get the number of visible/invisible topics deleted that should be subtracted from the forum
+	try {
+		$sth = $dbh->prepare('DELETE FROM '.$config['table_prefix'].'topics WHERE topic_invisible = 1 AND topic_forumid = ? AND topic_id IN('.placeholders('?', sizeof($ids)).')');
+		$sth->execute(array_values($values));
+		$results_invisible = $sth->rowCount();
+	}
+	catch(Exception $e) {
+		$dbh->rollBack();
+		
+		die($lang['mod_errors']['error_occurred'].' (001): '.$e->getMessage());
+	}
+	unset($sth);
+	
+	try {
+		$sth = $dbh->prepare('DELETE FROM '.$config['table_prefix'].'topics WHERE topic_invisible = 0 AND topic_forumid = ? AND topic_id IN('.placeholders('?', sizeof($ids)).')');
+		$sth->execute(array_values($values));
+		$results_visible = $sth->rowCount();
+	}
+	catch(Exception $e) {
+		$dbh->rollBack();
+		
+		die($lang['mod_errors']['error_occurred'].' (002): '.$e->getMessage());
+	}
+	unset($sth);
+
+	if($results_invisible+$results_visible > 0) {
+	// let's delete all posts that match the topics ids
+		try {
+			$sth = $dbh->prepare('DELETE FROM '.$config['table_prefix'].'posts WHERE post_forumid = ? AND post_topicid IN('.placeholders('?', sizeof($ids)).')');
+			$sth->execute(array_values($values));
+			$results_posts = $sth->rowCount();
+		}
+		catch(Exception $e) {
+			$dbh->rollBack();
+			
+			die($lang['mod_errors']['error_occurred'].' (003): '.$e->getMessage());
+		}
+		unset($sth);
+
+	// let's update the forum topics/posts counts
+		try {
+			$sth = $dbh->prepare('UPDATE '.$config['table_prefix'].'forums SET forum_topics = forum_topics-?, forum_topics_visible = forum_topics_visible-?, forum_posts = forum_posts-?, forum_posts_visible = forum_posts_visible-? WHERE forum_id = ?');
+			$sth->execute(array($results_visible+$results_invisible, $results_visible, $results_posts, (int) $nb_posts_visible, $forumid));
+		}
+		catch(Exception $e) {
+			$dbh->rollBack();
+			
+			die($lang['mod_errors']['error_occurred'].' (004): '.$e->getMessage());
+		}
+		unset($sth);
+
+		$dbh->commit();
+	}
+
+	return $results_visible+$results_invisible;
 }
 
 function lock_unlock_topics($ids, $forumid, $lock) {
@@ -218,6 +288,69 @@ function delete_restore_posts($ids, $topicid, $forumid, $topic_postid, $invisibl
 	}
 	
 	return $results;
+}
+
+// this function DELETES DEFINITELY posts from db (no possibility to restore them after their removal)
+function delete_posts($ids, $topicid, $forumid, $topic_postid) {
+	global $dbh, $config, $lang;
+
+	$values = array($forumid, $topicid, $topic_postid);
+	$values = array_merge($values, $ids);
+
+	$dbh->beginTransaction();
+
+	try {
+		$sth = $dbh->prepare('DELETE FROM '.$config['table_prefix'].'posts WHERE post_invisible = 1 AND post_forumid = ? AND post_topicid = ? AND post_id <> ? AND post_id IN('.placeholders('?', sizeof($ids)).')');
+		$sth->execute(array_values($values));
+		$results_invisible = $sth->rowCount();
+	}
+	catch(Exception $e) {
+		$dbh->rollBack();
+
+		die($lang['mod_errors']['error_occurred'].' (001): '.$e->getMessage());
+	}
+	unset($sth);
+
+	try {
+		$sth = $dbh->prepare('DELETE FROM '.$config['table_prefix'].'posts WHERE post_invisible = 0 AND post_forumid = ? AND post_topicid = ? AND post_id <> ? AND post_id IN('.placeholders('?', sizeof($ids)).')');
+		$sth->execute(array_values($values));
+		$results_visible = $sth->rowCount();
+	}
+	catch(Exception $e) {
+		$dbh->rollBack();
+
+		die($lang['mod_errors']['error_occurred'].' (002): '.$e->getMessage());
+	}
+	unset($sth);
+
+	if($results_invisible+$results_visible > 0) {
+		// note: passing results variables as integers in this request is mandatory because we do not check if the count of removed visibles/invisibles posts is not null, so the request may fail
+		try {
+			$sth = $dbh->prepare('UPDATE '.$config['table_prefix'].'topics SET topic_posts = topic_posts-?, topic_posts_visible = topic_posts_visible-? WHERE topic_id = ?');
+			$sth->execute(array((int) $results_visible+$results_invisible, (int) $results_visible, $topicid));
+		}
+		catch(Exception $e) {
+			$dbh->rollBack();
+
+			die($lang['mod_errors']['error_occurred'].' (003): '.$e->getMessage());
+		}
+		unset($sth);
+
+		try {
+			$sth = $dbh->prepare('UPDATE '.$config['table_prefix'].'forums SET forum_posts = forum_posts-?, forum_posts_visible = forum_posts_visible-? WHERE forum_id = ?');
+			$sth->execute(array((int) $results_visible+$results_invisible, (int) $results_visible, $forumid));
+		}
+		catch(Exception $e) {
+			$dbh->rollBack();
+
+			die($lang['mod_errors']['error_occurred'].' (004): '.$e->getMessage());
+		}
+		unset($sth);
+		
+		$dbh->commit();
+	}
+
+	return $results_visible+$results_invisible;
 }
 
 function get_post_users($ids, $topicid, $forumid) {
