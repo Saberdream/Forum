@@ -18,7 +18,7 @@ This is an evolutive and web responsive PHP forum script, to be more precise it 
 3. Rename the "config.dat.ini.bak" file (in cache/ directory) to "config.dat.ini", by don't forgetting to fill the following variables:
 	* site_name="Your site name (this is the name of your site which is displayed to the visitors)"
 	* domain_name="Your site domain name (www.yourdomain.xxx or www.yourdomain.xxx/forum), this is the root directory of your forum."
-	* talbe_prefix="The prefix of your tables if you want to change them (must be the same as the tables you created by uploading the structure.sql file)"
+	* table_prefix="The prefix of your tables if you want to change them (must be the same as the tables you created by uploading the structure.sql file)"
 	* site_mail="Email of your site (webmaster@yourdomain.xxx)"
 	* smtp_server="Your SMTP server if you have one (smtp.yourdomain.xxx)"
 	* sendmail_from="The mail which the SMTP server sends the mail from (name.surname@yourdomain.xxx)"
