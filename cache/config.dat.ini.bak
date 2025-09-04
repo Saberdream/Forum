@@ -37,6 +37,7 @@ post_max_size=16000
 max_sticky_topics=3
 post_max_smilies=50
 post_redirection_time=5
+post_edit_flood_time=5
 [avatars_configuration]
 activate_avatar=1
 avatar_max_height=5000
